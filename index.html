@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planejamento Estratégico — Grupo RPE 2025-2030</title>
+    <title>Plano de Expansão — Grupo RPE 2025-2030</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
     <style>
         :root {
@@ -11,6 +12,8 @@
             --BLACK: #0F0F0F;
             --OFF_WHITE: #F5F4F0;
             --DARK_GRAY: #1A1A1A;
+            --LIGHT_GRAY: #E8E8E8;
+            --ACCENT: #FF6B35;
         }
 
         * {
@@ -19,31 +22,38 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background-color: var(--OFF_WHITE);
             color: var(--BLACK);
             line-height: 1.6;
         }
 
+        /* HEADER & NAV */
         header {
-            background-color: var(--BLACK);
+            background: linear-gradient(135deg, var(--BLACK) 0%, var(--DARK_GRAY) 100%);
             color: var(--OFF_WHITE);
-            padding: 3rem 1.5rem;
-            text-align: center;
-            border-bottom: 3px solid var(--PRIMARY_GREEN);
+            padding: 2rem 1.5rem;
+            border-bottom: 4px solid var(--PRIMARY_GREEN);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            font-family: 'Anton', -apple-system, sans-serif;
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
             font-weight: 700;
-            letter-spacing: -0.5px;
         }
 
         header p {
-            font-size: 1.1rem;
-            color: #ccc;
+            font-size: 0.95rem;
+            color: #bbb;
+            margin-top: 0.3rem;
         }
 
         nav {
@@ -53,6 +63,7 @@
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid var(--DARK_GRAY);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
 
         nav ul {
@@ -61,7 +72,8 @@
             gap: 0.5rem;
             flex-wrap: wrap;
             align-items: center;
-            max-width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .nav-link {
@@ -72,49 +84,90 @@
             text-decoration: none;
             cursor: pointer;
             border-radius: 2px;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
             background-color: var(--DARK_GRAY);
+            border: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .nav-link:hover,
         .nav-link.active {
             background-color: var(--PRIMARY_GREEN);
             color: var(--BLACK);
+            transform: translateY(-1px);
         }
 
+        /* MAIN CONTENT */
         main {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 2rem 1.5rem;
         }
 
         section {
             display: none;
+            animation: fadeIn 0.4s ease-in;
         }
 
         section.active {
             display: block;
-            animation: fadeIn 0.3s;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
+            font-family: 'Anton', -apple-system, sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
             color: var(--BLACK);
-            border-bottom: 2px solid var(--PRIMARY_GREEN);
-            padding-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 3px solid var(--PRIMARY_GREEN);
+            padding-bottom: 0.8rem;
         }
 
         h3 {
             font-size: 1.4rem;
-            margin-top: 1.5rem;
+            margin-top: 2rem;
             margin-bottom: 1rem;
+            color: var(--BLACK);
+            font-weight: 700;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            margin-bottom: 0.8rem;
             color: var(--PRIMARY_GREEN);
+            font-weight: 600;
+        }
+
+        .intro-box {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--PRIMARY_GREEN);
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .intro-box p {
+            color: #555;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .section-intro {
+            color: #666;
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            line-height: 1.7;
         }
 
         .grid-2 {
@@ -126,28 +179,56 @@
 
         .grid-3 {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 1.5rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
             margin-bottom: 2rem;
         }
 
         .card {
             background-color: white;
             padding: 1.5rem;
-            border-radius: 4px;
-            border-left: 4px solid var(--PRIMARY_GREEN);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            border-radius: 8px;
+            border-top: 4px solid var(--PRIMARY_GREEN);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 183, 61, 0.15);
         }
 
         .card h4 {
-            margin-bottom: 0.8rem;
-            color: var(--BLACK);
-            font-size: 1.1rem;
+            margin-top: 0;
         }
 
         .card p {
-            color: #555;
+            color: #666;
             font-size: 0.95rem;
+        }
+
+        .stat-box {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--PRIMARY_GREEN);
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .stat-box .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--PRIMARY_GREEN);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-box .label {
+            color: #666;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
         }
 
         table {
@@ -155,9 +236,9 @@
             border-collapse: collapse;
             margin-bottom: 2rem;
             background-color: white;
-            border-radius: 4px;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
         table th {
@@ -167,6 +248,8 @@
             text-align: left;
             font-weight: 600;
             font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         table td {
@@ -174,27 +257,86 @@
             border-bottom: 1px solid #eee;
         }
 
-        table tr:last-child td {
-            border-bottom: none;
-            background-color: #f9f9f9;
-            font-weight: 600;
-        }
-
         table tr:hover td {
-            background-color: #f5f5f5;
+            background-color: #f9f9f9;
         }
 
-        .highlight {
-            background-color: #fffbea;
-            padding: 1.5rem;
-            border-left: 4px solid var(--PRIMARY_GREEN);
+        .badge {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .badge.success {
+            background-color: rgba(0, 183, 61, 0.15);
+            color: var(--PRIMARY_GREEN);
+            border: 1px solid var(--PRIMARY_GREEN);
+        }
+
+        .badge.warning {
+            background-color: rgba(255, 107, 53, 0.15);
+            color: var(--ACCENT);
+            border: 1px solid var(--ACCENT);
+        }
+
+        .swot-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
             margin-bottom: 2rem;
-            border-radius: 2px;
         }
 
-        .highlight h4 {
-            margin-bottom: 0.5rem;
-            color: var(--BLACK);
+        .swot-box {
+            padding: 2rem;
+            border-radius: 8px;
+            color: white;
+        }
+
+        .swot-box h4 {
+            color: inherit;
+            margin-top: 0;
+            font-size: 1.3rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .swot-box ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .swot-box li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .swot-box li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .swot-strengths {
+            background: linear-gradient(135deg, #00B73D 0%, #009A2E 100%);
+        }
+
+        .swot-weaknesses {
+            background: linear-gradient(135deg, #FF6B35 0%, #E64620 100%);
+        }
+
+        .swot-opportunities {
+            background: linear-gradient(135deg, #2E75B6 0%, #1E4D7B 100%);
+        }
+
+        .swot-threats {
+            background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
         }
 
         .chart-container {
@@ -203,42 +345,43 @@
             margin-bottom: 2rem;
             background-color: white;
             padding: 1.5rem;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
-        .timeline {
-            position: relative;
-            padding: 2rem 0;
-        }
-
-        .timeline-item {
+        .opportunity-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            border-top: 4px solid var(--PRIMARY_GREEN);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             margin-bottom: 2rem;
-            padding-left: 2rem;
-            border-left: 2px solid var(--PRIMARY_GREEN);
-            position: relative;
+            transition: all 0.3s;
         }
 
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -8px;
-            top: 0;
-            width: 12px;
-            height: 12px;
-            background-color: var(--PRIMARY_GREEN);
-            border-radius: 50%;
+        .opportunity-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 183, 61, 0.15);
         }
 
-        .timeline-item h4 {
-            margin-bottom: 0.5rem;
-            color: var(--BLACK);
-            font-weight: 600;
+        .opportunity-card h4 {
+            margin-top: 0;
+            font-size: 1.3rem;
         }
 
-        .timeline-item p {
-            color: #666;
-            font-size: 0.95rem;
+        .opportunity-card .meta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
         }
 
         footer {
@@ -246,26 +389,791 @@
             color: var(--OFF_WHITE);
             text-align: center;
             padding: 2rem;
-            margin-top: 3rem;
+            margin-top: 4rem;
             border-top: 1px solid var(--DARK_GRAY);
         }
 
-        footer p {
+        .highlight {
+            background-color: #fffbea;
+            border-left: 4px solid var(--PRIMARY_GREEN);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+        }
+
+        .highlight strong {
+            color: var(--PRIMARY_GREEN);
+        }
+
+        /* ROADMAP STYLES */
+        .roadmap-controls {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .quarter-btn {
+            padding: 0.6rem 1.2rem;
+            border: 2px solid var(--LIGHT_GRAY);
+            background-color: white;
+            color: var(--BLACK);
+            cursor: pointer;
+            border-radius: 4px;
             font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .quarter-btn:hover {
+            border-color: var(--PRIMARY_GREEN);
+            color: var(--PRIMARY_GREEN);
+        }
+
+        .quarter-btn.active {
+            background-color: var(--PRIMARY_GREEN);
+            color: white;
+            border-color: var(--PRIMARY_GREEN);
+        }
+
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--PRIMARY_GREEN);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 183, 61, 0.15);
+        }
+
+        .project-card h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.1rem;
+            color: var(--BLACK);
+        }
+
+        .project-type {
+            display: inline-block;
+            background-color: #f0f0f0;
+            color: #666;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .project-type.qrs { background-color: rgba(0, 183, 61, 0.15); color: var(--PRIMARY_GREEN); }
+        .project-type.dark-kitchen { background-color: rgba(255, 107, 53, 0.15); color: #FF6B35; }
+        .project-type.boteco { background-color: rgba(46, 117, 182, 0.15); color: #2E75B6; }
+        .project-type.software { background-color: rgba(156, 39, 176, 0.15); color: #9C27B0; }
+        .project-type.educacao { background-color: rgba(255, 193, 7, 0.15); color: #FFC107; }
+
+        .project-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-button {
+            background-color: var(--PRIMARY_GREEN);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .project-button:hover {
+            background-color: #009A2E;
+            transform: translateY(-2px);
+        }
+
+        /* TASK MODAL */
+        .task-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .task-modal-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            max-width: 700px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .task-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .task-modal-close:hover {
+            color: var(--BLACK);
+        }
+
+        .task-modal-content h3 {
+            margin-top: 0;
+            color: var(--PRIMARY_GREEN);
+            font-size: 1.6rem;
+        }
+
+        .task-checklist {
+            margin-top: 1.5rem;
+        }
+
+        .task-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            margin-bottom: 1rem;
+            align-items: flex-start;
+        }
+
+        .task-checkbox {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .task-content {
+            flex: 1;
+        }
+
+        .task-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .task-status {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.75rem;
+            border-radius: 3px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+
+        .task-status.pending { background-color: #FFE5B4; color: #B8860B; }
+        .task-status.in-progress { background-color: #B3E5FC; color: #01579B; }
+        .task-status.completed { background-color: #C8E6C9; color: #1B5E20; }
+
+        /* RADAR SECTION STYLES */
+        .radar-filters {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            color: var(--BLACK);
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--LIGHT_GRAY);
+            background-color: white;
+            color: var(--BLACK);
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--PRIMARY_GREEN);
+            color: var(--PRIMARY_GREEN);
+        }
+
+        .filter-btn.active {
+            background-color: var(--PRIMARY_GREEN);
+            color: white;
+            border-color: var(--PRIMARY_GREEN);
+        }
+
+        .opportunities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .opportunity-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--PRIMARY_GREEN);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .opportunity-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 183, 61, 0.15);
+        }
+
+        .opp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .opp-card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--BLACK);
+            margin: 0;
+        }
+
+        .opp-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            font-size: 0.7rem;
+            border-radius: 3px;
+            font-weight: 600;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .opp-badge.estrategica {
+            background-color: rgba(0, 183, 61, 0.1);
+            color: var(--PRIMARY_GREEN);
+            border: 1px solid var(--PRIMARY_GREEN);
+        }
+
+        .opp-badge.complementar {
+            background-color: rgba(26, 26, 26, 0.1);
+            color: var(--DARK_GRAY);
+            border: 1px solid var(--DARK_GRAY);
+        }
+
+        .opp-status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            font-size: 0.7rem;
+            border-radius: 3px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .opp-status-badge.analise { background-color: #FFF3CD; color: #856404; }
+        .opp-status-badge.aprovada { background-color: #D4EDDA; color: #155724; }
+        .opp-status-badge.reprovada { background-color: #F8D7DA; color: #721C24; }
+        .opp-status-badge.sob-analise { background-color: #B3E5FC; color: #01579B; }
+
+        .opp-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+
+        .opp-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #999;
+            border-top: 1px solid var(--LIGHT_GRAY);
+            padding-top: 1rem;
+        }
+
+        .register-opportunity-section {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-top: 3rem;
+            border-left: 4px solid var(--PRIMARY_GREEN);
+        }
+
+        .register-opportunity-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .opp-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-row .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 0.8rem;
+            border: 1px solid var(--LIGHT_GRAY);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--PRIMARY_GREEN);
+            box-shadow: 0 0 0 3px rgba(0, 183, 61, 0.1);
+        }
+
+        .btn-primary {
+            padding: 0.8rem 2rem;
+            background-color: var(--PRIMARY_GREEN);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            align-self: flex-start;
+        }
+
+        .btn-primary:hover {
+            background-color: #009929;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 183, 61, 0.2);
+        }
+
+        .opp-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .opp-modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .opp-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+
+        .opp-modal-close:hover {
+            color: var(--BLACK);
+        }
+
+        /* TECH SOLUTIONS SECTION STYLES */
+        .tech-filters {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .tech-filters label {
+            font-weight: 600;
+            color: var(--BLACK);
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .tech-filter-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--LIGHT_GRAY);
+            background-color: white;
+            color: var(--BLACK);
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .tech-filter-btn:hover {
+            border-color: #FF6B35;
+            color: #FF6B35;
+        }
+
+        .tech-filter-btn.active {
+            background-color: #FF6B35;
+            color: white;
+            border-color: #FF6B35;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .tech-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-top: 4px solid #FF6B35;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.15);
+        }
+
+        .tech-status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            font-size: 0.7rem;
+            border-radius: 3px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            width: fit-content;
+        }
+
+        .tech-status-badge.desenvolvimento { background-color: #B3E5FC; color: #01579B; }
+        .tech-status-badge.analise { background-color: #FFF3CD; color: #856404; }
+        .tech-status-badge.on-hold { background-color: #F8D7DA; color: #721C24; }
+        .tech-status-badge.producao { background-color: #D4EDDA; color: #155724; }
+
+        .register-tech-section {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-top: 3rem;
+            border-left: 4px solid #FF6B35;
+        }
+
+        .register-tech-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .tech-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .tech-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .tech-modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .tech-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+
+        .tech-modal-close:hover {
+            color: var(--BLACK);
+        }
+
+        /* EDUCATION SECTION STYLES */
+        .edu-filters {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .edu-filters label {
+            font-weight: 600;
+            color: var(--BLACK);
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .edu-filter-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--LIGHT_GRAY);
+            background-color: white;
+            color: var(--BLACK);
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .edu-filter-btn:hover {
+            border-color: var(--PRIMARY_GREEN);
+            color: var(--PRIMARY_GREEN);
+        }
+
+        .edu-filter-btn.active {
+            background-color: var(--PRIMARY_GREEN);
+            color: white;
+            border-color: var(--PRIMARY_GREEN);
+        }
+
+        .edu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .edu-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--PRIMARY_GREEN);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .edu-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 183, 61, 0.15);
+        }
+
+        .edu-status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            font-size: 0.7rem;
+            border-radius: 3px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            width: fit-content;
+        }
+
+        .edu-status-badge.desenvolvimento { background-color: #B3E5FC; color: #01579B; }
+        .edu-status-badge.beta { background-color: #FFE0B2; color: #E65100; }
+        .edu-status-badge.producao { background-color: #D4EDDA; color: #155724; }
+        .edu-status-badge.planejamento { background-color: #FFF3CD; color: #856404; }
+
+        .register-edu-section {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-top: 3rem;
+            border-left: 4px solid var(--PRIMARY_GREEN);
+        }
+
+        .register-edu-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .edu-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .edu-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .edu-modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .edu-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+
+        .edu-modal-close:hover {
+            color: var(--BLACK);
         }
 
         @media (max-width: 768px) {
             .grid-2,
-            .grid-3 {
+            .grid-3,
+            .swot-grid,
+            .opportunities-grid,
+            .tech-grid,
+            .edu-grid,
+            .roadmap-grid {
                 grid-template-columns: 1fr;
             }
 
-            header h1 {
-                font-size: 1.8rem;
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .radar-filters,
+            .tech-filters,
+            .edu-filters {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .filter-group {
+                flex-direction: column;
+                align-items: flex-start;
             }
 
             h2 {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
             }
 
             nav ul {
@@ -276,510 +1184,1017 @@
                 font-size: 0.65rem;
                 padding: 0.35rem 0.6rem;
             }
+
+            .section-intro {
+                font-size: 0.95rem;
+            }
+
+            .opp-modal-content,
+            .tech-modal-content,
+            .edu-modal-content {
+                width: 95%;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Planejamento Estratégico</h1>
-        <p>Grupo RPE — Visão 2025-2030</p>
+        <h1>Plano de Expansão</h1>
+        <p>Grupo RPE — 2025-2030 | R$ 250M em Receita, 25% Margem Líquida</p>
     </header>
 
     <nav>
         <ul>
-            <li><a class="nav-link active" onclick="switchSection('baseline')">Baseline</a></li>
-            <li><a class="nav-link" onclick="switchSection('visao')">Visão 5 Anos</a></li>
-            <li><a class="nav-link" onclick="switchSection('mercados')">Mercados</a></li>
-            <li><a class="nav-link" onclick="switchSection('conceitos')">Conceitos</a></li>
-            <li><a class="nav-link" onclick="switchSection('modelo')">Modelo</a></li>
-            <li><a class="nav-link" onclick="switchSection('projecoes')">Projeções</a></li>
-            <li><a class="nav-link" onclick="switchSection('roadmap')">Roadmap</a></li>
+            <li><button class="nav-link active" onclick="switchSection('visao')">Visão RPE</button></li>
+            <li><button class="nav-link" onclick="switchSection('mercado')">Mercado</button></li>
+            <li><button class="nav-link" onclick="switchSection('oportunidades')">5 Oportunidades</button></li>
+            <li><button class="nav-link" onclick="switchSection('modelo')">Hub & Spoke</button></li>
+            <li><button class="nav-link" onclick="switchSection('financeiro')">Financeiro</button></li>
+            <li><button class="nav-link" onclick="switchSection('roadmap')">Roadmap</button></li>
+            <li><button class="nav-link" onclick="switchSection('radar')">Radar</button></li>
+            <li><button class="nav-link" onclick="switchSection('softwares')">Softwares</button></li>
+            <li><button class="nav-link" onclick="switchSection('educacao')">Educação</button></li>
         </ul>
     </nav>
 
     <main>
-        <!-- SEÇÃO 1: BASELINE -->
-        <section id="baseline" class="active">
-            <h2>Baseline Financeiro (2025)</h2>
+        <!-- SEÇÃO 1: VISÃO RPE -->
+        <section id="visao" class="active">
+            <h2>Visão RPE 2025-2030</h2>
 
-            <h3>Portfolio Atual</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Marca</th>
-                        <th>Conceito</th>
-                        <th>Unidades</th>
-                        <th>Ticket Médio</th>
-                        <th>Receita/Mês</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Mercearia Amauri</strong></td>
-                        <td>Bistro Boutique</td>
-                        <td>1</td>
-                        <td>R$ 165</td>
-                        <td>R$ 1.300k</td>
-                    </tr>
-                    <tr>
-                        <td><strong>NAMI</strong></td>
-                        <td>Asian Fine Dining</td>
-                        <td>1</td>
-                        <td>—</td>
-                        <td>R$ 500k</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Mercearia Campos</strong></td>
-                        <td>Boteco Premium</td>
-                        <td>2</td>
-                        <td>—</td>
-                        <td>R$ 2.500k</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Mama Gorda</strong></td>
-                        <td>Gastronomia</td>
-                        <td>1</td>
-                        <td>—</td>
-                        <td>R$ 1.300k</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Bam Bam Café</strong></td>
-                        <td>Specialty Coffee</td>
-                        <td>1</td>
-                        <td>—</td>
-                        <td>R$ 500k</td>
-                    </tr>
-                    <tr>
-                        <td colspan="4"><strong>TOTAL MENSAL</strong></td>
-                        <td><strong>R$ 6.100k</strong></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="intro-box">
+                <h3 style="margin-top: 0;">Meta: R$ 250 Milhões em Receita com 25% Margem Líquida</h3>
+                <p>O Grupo RPE propõe-se a crescer de <strong>R$ 73,2M</strong> (2025) para <strong>R$ 250M</strong> (2030) através de um modelo de rede integrada. Esse crescimento não é especulativo — é fundamentado em (1) validação de mercado das 5 marcas atuais, (2) clara visão de oportunidades de expansão, (3) modelo operacional Hub&Spoke replicável e (4) capacidade técnica e cultural já demonstrada.</p>
+            </div>
+
+            <h3>Por Que Essa Visão é Possível?</h3>
 
             <div class="grid-2">
                 <div class="card">
-                    <h4>Receita Anualizada</h4>
-                    <p style="font-size: 1.8rem; color: var(--PRIMARY_GREEN); font-weight: 700;">R$ 73,2M</p>
-                    <p style="color: #999; font-size: 0.85rem; margin-top: 0.5rem;">6.100k × 12 meses</p>
+                    <h4>Fundação Sólida</h4>
+                    <p>Não partimos do zero. Mercearia Amauri, NAMI, Mercearia Campos, Mama Gorda e Bam Bam validaram um modelo de gastronomia premium com operação de alto fluxo. Taxa de ocupação média de 85%, ticket médio crescente, margens consistentes em 22-28%.</p>
                 </div>
                 <div class="card">
-                    <h4>Margem Operacional</h4>
-                    <p style="font-size: 1.8rem; color: var(--PRIMARY_GREEN); font-weight: 700;">22,7%</p>
-                    <p style="color: #999; font-size: 0.85rem; margin-top: 0.5rem;">Margem Líquida Média</p>
+                    <h4>Cluster Amauri como Epicentro</h4>
+                    <p>Rua Amauri consolidou-se como destino gastronômico. Cada nova marca nesse cluster beneficia-se de demanda existente. Sinergia operacional natural (supply, RH, marketing) reduz custo unit em 10-12%.</p>
                 </div>
             </div>
 
-            <h3>Composição de Receita</h3>
+            <h3>Análise SWOT</h3>
+
+            <div class="swot-grid">
+                <div class="swot-box swot-strengths">
+                    <h4>Forças 💪</h4>
+                    <ul>
+                        <li><strong>Técnica Gastronômica Latino-Asiática:</strong> Diferencial claro, escalável, propriedade intelectual</li>
+                        <li><strong>Expertise em Bares de Alto Fluxo:</strong> Operação 15+ anos, processos refinados</li>
+                        <li><strong>Capacidade Tecnológica:</strong> Equipe interna, infraestrutura para desenvolvimento</li>
+                        <li><strong>Brand Recognition Local:</strong> Comunidade engajada em Rua Amauri, Instagram orgânico</li>
+                        <li><strong>Margens Saudáveis:</strong> Consistentemente 22-28% EBITDA</li>
+                    </ul>
+                </div>
+
+                <div class="swot-box swot-weaknesses">
+                    <h4>Fraquezas ⚠️</h4>
+                    <ul>
+                        <li><strong>Pipeline de Lideranças:</strong> Dificuldade em desenvolver gestores para novas unidades</li>
+                        <li><strong>Retenção de Talento:</strong> Setor gastronômico tem rotatividade alta (35-50% a.a.)</li>
+                        <li><strong>Capacitação Rápida:</strong> Curva de aprendizado de 6-12m para operação consistent</li>
+                        <li><strong>Escala Operacional:</strong> Não temos ainda processos sistematizados para franquia/replicação</li>
+                        <li><strong>Capital Humano Senior:</strong> Dependência de poucos gestores-chave</li>
+                    </ul>
+                </div>
+
+                <div class="swot-box swot-opportunities">
+                    <h4>Oportunidades 🎯</h4>
+                    <ul>
+                        <li><strong>Mercado Crescente Premium:</strong> Restaurantes de nicho crescem 15-18% a.a. no Brasil</li>
+                        <li><strong>Mudança de Hábitos de Consumo:</strong> Gen Z + millennials buscam autenticidade, saúde, experiência</li>
+                        <li><strong>Influência de Peptídeos & Saúde:</strong> Proteína, low-carb, functional foods em alta — oportunidade para Boteco Asiático Saudável</li>
+                        <li><strong>Expansão Capilar em SP:</strong> Jardins, Pinheiros, Itaim = segmentos A/B com demanda de gastronomia diferenciada</li>
+                        <li><strong>Modelos Complementares:</strong> QRS, Dark Kitchen, Software, Educação = receitas recorrentes + alto margin</li>
+                    </ul>
+                </div>
+
+                <div class="swot-box swot-threats">
+                    <h4>Ameaças ⛈️</h4>
+                    <ul>
+                        <li><strong>Redução de Consumo de Álcool:</strong> Geração mais jovem consome menos; compensar com food</li>
+                        <li><strong>Modismo em Bares:</strong> Conceitos surgem e morrem rapidamente; diferenciação crítica</li>
+                        <li><strong>Baixa Fidelidade:</strong> Consumidor busca novidade; retenção exige inovação contínua</li>
+                        <li><strong>Concorrência Crescente:</strong> Rua Amauri atraindo novos players; diferenciação imperativa</li>
+                        <li><strong>Pressão de Custos:</strong> Inflação de COGS, aluguel; margem squeeze se não escalarmos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Cultura & Filosofia RPE</h3>
+            <div class="intro-box">
+                <p><strong>Autonomia com Responsabilidade:</strong> Cada marca tem identidade própria mas orbita um núcleo de valores — qualidade, autenticidade, experiência, inovação.</p>
+                <p><strong>Operação Ágil:</strong> Decisões rápidas, feedback do cliente incorporado em dias, não meses.</p>
+                <p><strong>Gente é Ativo:</strong> Investimento em treinamento contínuo, carreira clara, cultura de aprendizado.</p>
+                <p><strong>Lucro Serve à Qualidade:</strong> Margem saudável permite reinvestimento em produto, experiência, inovação.</p>
+            </div>
+
+            <h3>Estrutura de Receita 2030</h3>
             <table>
                 <thead>
                     <tr>
-                        <th>Marca</th>
-                        <th>Receita/Mês</th>
+                        <th>Modelo de Negócio</th>
+                        <th>Nº Unidades (est.)</th>
+                        <th>Receita Estimada</th>
                         <th>% do Total</th>
-                        <th>Margem LL Est.</th>
+                        <th>Margem Esperada</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Mercearia Amauri</td>
-                        <td>R$ 1.300k</td>
-                        <td>21,3%</td>
-                        <td>28,5%</td>
+                        <td><strong>QRS Latino-Asiáticos</strong></td>
+                        <td>12-15</td>
+                        <td>R$ 140M</td>
+                        <td>56%</td>
+                        <td>24%</td>
                     </tr>
                     <tr>
-                        <td>NAMI</td>
-                        <td>R$ 500k</td>
-                        <td>8,2%</td>
-                        <td>18,0%</td>
+                        <td><strong>Boteco Asiático (Saúde)</strong></td>
+                        <td>5-7</td>
+                        <td>R$ 50M</td>
+                        <td>20%</td>
+                        <td>26%</td>
                     </tr>
                     <tr>
-                        <td>Mercearia Campos</td>
-                        <td>R$ 2.500k</td>
-                        <td>41,0%</td>
-                        <td>22,0%</td>
+                        <td><strong>Dark Kitchen (Sorvete Proteico)</strong></td>
+                        <td>3-4</td>
+                        <td>R$ 30M</td>
+                        <td>12%</td>
+                        <td>38%</td>
                     </tr>
                     <tr>
-                        <td>Mama Gorda</td>
-                        <td>R$ 1.300k</td>
-                        <td>21,3%</td>
-                        <td>24,5%</td>
+                        <td><strong>Software/SaaS</strong></td>
+                        <td>1-2 plataformas</td>
+                        <td>R$ 20M</td>
+                        <td>8%</td>
+                        <td>70%</td>
                     </tr>
                     <tr>
-                        <td>Bam Bam Café</td>
-                        <td>R$ 500k</td>
-                        <td>8,2%</td>
-                        <td>20,0%</td>
+                        <td><strong>Educação (Assinatura + Consultoria)</strong></td>
+                        <td>1 plataforma</td>
+                        <td>R$ 10M</td>
+                        <td>4%</td>
+                        <td>65%</td>
                     </tr>
-                    <tr>
-                        <td colspan="2"><strong>TOTAL</strong></td>
-                        <td><strong>100%</strong></td>
-                        <td><strong>22,7%</strong></td>
+                    <tr style="font-weight: 700; background-color: #f9f9f9;">
+                        <td>TOTAL</td>
+                        <td>22-30 unidades</td>
+                        <td>R$ 250M</td>
+                        <td>100%</td>
+                        <td>25%</td>
                     </tr>
                 </tbody>
             </table>
-        </section>
-
-        <!-- SEÇÃO 2: VISÃO 5 ANOS -->
-        <section id="visao">
-            <h2>Visão 5 Anos (2025-2030)</h2>
 
             <div class="highlight">
-                <h4>Meta Consolidada</h4>
-                <p><strong>R$ 248,8M</strong> em receita anualizada até final de 2030, com 15 marcas operando em modelo de rede</p>
+                <strong>Por que 25% de margem é realista?</strong> Combinando modelos diferentes (F&B com margin 24%, SaaS com 70%) e economias de escala (supply centralizado, marketing compartilhado, shared services), chegamos a 25% consolidado.
+            </div>
+        </section>
+
+        <!-- SEÇÃO 2: DADOS DE MERCADO -->
+        <section id="mercado">
+            <h2>Dados de Mercado</h2>
+
+            <div class="intro-box">
+                <p>O crescimento do Grupo RPE é fundamentado em análise rigorosa de mercado. Abaixo, os principais dados que validam a tese de expansão.</p>
             </div>
 
-            <h3>Estratégia de Crescimento</h3>
+            <h3>Tamanho do Mercado (TAM/SAM/SOM)</h3>
+
+            <div class="grid-3">
+                <div class="stat-box">
+                    <div class="number">R$ 380B</div>
+                    <div class="label">TAM: Brasil (Alimentação Fora de Casa)</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">R$ 95B</div>
+                    <div class="label">SAM: SP (Bares + Restaurantes Premium)</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">R$ 8B</div>
+                    <div class="label">SOM: Zona de Atuação (Jardins + Pinheiros + Itaim)</div>
+                </div>
+            </div>
+
+            <h3>Tendências Globais que Sustentam a Estratégia</h3>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Conceitos Verticalizados</h4>
+                    <p>Nova York (SAIKŌ Katsu), Tóquio (Ichiran Ramen), Madrid (Croqueteria): conceitos especializados ganham 15-20% mais fluxo que menus amplos. Consumidor busca autenticidade, não volume.</p>
+                </div>
+                <div class="card">
+                    <h4>Experiência + Comunidade</h4>
+                    <p>París (Le Comptoir Général), Londres (Caravan): espaços são social hubs. Instagram-worthy, conversas, encontros. Modelo de Rua Amauri valida isso.</p>
+                </div>
+                <div class="card">
+                    <h4>Saúde & Functional Food</h4>
+                    <p>NY (Sweetgreen), LA (Flower Child): healthy fast-casual cresce 25% a.a. Proteína, bowl, verde = nova norma. Boteco Asiático + Dark Kitchen (proteína) alinham com trend.</p>
+                </div>
+                <div class="card">
+                    <h4>Mudança Geracional de Consumo</h4>
+                    <p>Gen Z + Millennials bebem 35% menos álcool que Gen X. Compensam com: food premium, experiência, autenticidade. F&B é maior categoria de gasto fora de casa.</p>
+                </div>
+            </div>
+
+            <h3>Análise do Setor: Brasil</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Métrica</th>
+                        <th>2023</th>
+                        <th>2024</th>
+                        <th>2025</th>
+                        <th>CAGR 2023-25</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mercado de Alimentação Fora de Casa (Brasil)</td>
+                        <td>R$ 320B</td>
+                        <td>R$ 350B</td>
+                        <td>R$ 380B</td>
+                        <td>8,8%</td>
+                    </tr>
+                    <tr>
+                        <td>Restaurantes Premium (A/B)</td>
+                        <td>R$ 75B</td>
+                        <td>R$ 85B</td>
+                        <td>R$ 95B</td>
+                        <td>12,4%</td>
+                    </tr>
+                    <tr>
+                        <td>Conceitos Especializados (Nicho)</td>
+                        <td>R$ 18B</td>
+                        <td>R$ 21B</td>
+                        <td>R$ 25B</td>
+                        <td>17,8%</td>
+                    </tr>
+                    <tr>
+                        <td>F&B com Posicionamento Saúde</td>
+                        <td>R$ 5B</td>
+                        <td>R$ 6,5B</td>
+                        <td>R$ 8B</td>
+                        <td>26,5%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>São Paulo: Segmento A/B</h3>
+
+            <div class="intro-box">
+                <p><strong>População A/B SP:</strong> ~3.2M pessoas (classe com poder de compra para gastronomia premium)</p>
+                <p><strong>Gasto mensal per capita em F&B Premium:</strong> R$ 1,200-1,800 (restaurantes, bares, cafés de nicho)</p>
+                <p><strong>Mercado Potencial Anual (SP):</strong> R$ 46-58B (classe A/B)</p>
+                <p><strong>Mercado Realizado (Bares + Restaurantes Premium SP):</strong> R$ 95B (inclui B)</p>
+            </div>
+
+            <h3>Foco Regional: Zona de Atuação (R$ 8B SOM)</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Bairro</th>
+                        <th>População A/B</th>
+                        <th>Bares/Restaurantes Premium</th>
+                        <th>Potencial F&B Anual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Jardins</strong></td>
+                        <td>~400k</td>
+                        <td>~180</td>
+                        <td>R$ 2.4B</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pinheiros</strong></td>
+                        <td>~350k</td>
+                        <td>~140</td>
+                        <td>R$ 1.8B</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Itaim Bibi</strong></td>
+                        <td>~280k</td>
+                        <td>~110</td>
+                        <td>R$ 1.4B</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Jardim Europa</strong></td>
+                        <td>~220k</td>
+                        <td>~85</td>
+                        <td>R$ 1.1B</td>
+                    </tr>
+                    <tr style="font-weight: 700; background-color: #f9f9f9;">
+                        <td>TOTAL ZONA</td>
+                        <td>~1.25M</td>
+                        <td>~515</td>
+                        <td>R$ 6.7B</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight">
+                <strong>Contexto:</strong> Nossa SOM é de ~R$ 8B. Considerando market share conservador de 3% em 5 anos, chegamos a R$ 240M, alinhado com nossa meta de R$ 250M.
+            </div>
+
+            <h3>Tendências Relevantes</h3>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Crescimento de QRS Especializados</h4>
+                    <p>Quick Restaurants de nicho (katsu, ramen, cevicheria) crescem 30% a.a. em cidades Tier 1. Ticket médio R$ 70-120, operação enxuta, margens 26-32%.</p>
+                </div>
+                <div class="card">
+                    <h4>Explosão de Dark Kitchens & Delivery</h4>
+                    <p>Após pandemia, 60% da população SP ordena comida 1+ vez/semana. Oportunidade para Sorveteria Proteica + complementos = receita recorrente.</p>
+                </div>
+                <div class="card">
+                    <h4>Saúde & Fitness = Consumo Direto</h4>
+                    <p>Peptídeos, GLP-1 (ozempic), fitness trends: consumidor investe em saúde. Boteco Asiático saudável pode capturar 15-20% dessa demanda.</p>
+                </div>
+                <div class="card">
+                    <h4>Fidelização via Comunidade</h4>
+                    <p>Loyalty programs tradicionais 5% de ROI. Comunidades engajadas: 30-40% ROI. Rua Amauri validou; modelo replicável em outros clusters.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 3: 5 OPORTUNIDADES ESTRATÉGICAS -->
+        <section id="oportunidades">
+            <h2>5 Oportunidades Estratégicas</h2>
+
+            <div class="intro-box">
+                <p>Identificamos 5 oportunidades de negócio que complementam o portfolio RPE e sustentam a meta de R$ 250M. Cada uma aborda um segmento de mercado específico e contribui com receita, margens e sinergia operacional.</p>
+            </div>
+
+            <div class="opportunity-card">
+                <h4>1. QRS Latino-Asiáticos (Prioridade 1)</h4>
+                <p><strong>O Que:</strong> Quick Restaurants especializados em culinária latino-asiática (katsu sando, cevicheria, tacos asiáticos, poke). Operação rápida, ticket R$ 70-120, fila desde abertura.</p>
+                <p><strong>Por Quê:</strong> Validação global (SAIKŌ NY 40.5k followers, Nori Vaz SP 21k). Crescimento 30% a.a. Margens 26-32%. Modelo replicável.</p>
+                <p><strong>Investimento Estimado:</strong> R$ 800k-1.2M por unidade | <strong>Rampup:</strong> 6-8 meses | <strong>Breakeven:</strong> 12-14 meses | <strong>ROI:</strong> 2.5-3x em 3 anos</p>
+                <p><strong>Target 2030:</strong> 12-15 unidades | R$ 140M receita | 24% margem</p>
+                <div class="meta">
+                    <div class="meta-item">📍 Rua Amauri (piloto) → SP região → Outras capitais</div>
+                    <div class="meta-item">👥 Público: 25-45 anos, A/B, trabalho + lazer</div>
+                </div>
+            </div>
+
+            <div class="opportunity-card">
+                <h4>2. Dark Kitchen — Sorveteria Proteica (Prioridade 2)</h4>
+                <p><strong>O Que:</strong> Produção de sorvete artesanal proteico + sobremesas saudáveis. Vendas via delivery + B2B (personal trainer, nutricionistas, bares).</p>
+                <p><strong>Por Quê:</strong> Crescimento de 25% a.a. no segmento functional food. Margem 38-42% (COGS baixo, zero front-of-house). Receita recorrente (assinatura).</p>
+                <p><strong>Investimento Estimado:</strong> R$ 500k-700k | <strong>Rampup:</strong> 4 meses | <strong>Breakeven:</strong> 8-10 meses | <strong>ROI:</strong> 3.5x em 2 anos</p>
+                <p><strong>Target 2030:</strong> 3-4 operações | R$ 30M receita | 38% margem</p>
+                <div class="meta">
+                    <div class="meta-item">📦 Modelo: Dark Kitchen (Zona Leste SP) + Delivery (todo SP)</div>
+                    <div class="meta-item">💰 Receita Recorrente: Assinaturas protein + B2B</div>
+                </div>
+            </div>
+
+            <div class="opportunity-card">
+                <h4>3. Boteco Asiático — Posicionamento Saúde & Diurno (Prioridade 2)</h4>
+                <p><strong>O Que:</strong> Boteco/café asiático focado em almoço saudável, drinks sem álcool, sobremesas proteicas. Target: 11h-18h forte, noites complementares.</p>
+                <p><strong>Por Quê:</strong> Geração Z bebe 35% menos álcool. Saúde é lifestyle. Mercado functional food cresce 26% a.a. Oportunidade de ocupação diurna nova.</p>
+                <p><strong>Investimento Estimado:</strong> R$ 1.2-1.6M por unidade | <strong>Rampup:</strong> 8-10 meses | <strong>Breakeven:</strong> 16-18 meses | <strong>ROI:</strong> 2.2x em 3 anos</p>
+                <p><strong>Target 2030:</strong> 5-7 unidades | R$ 50M receita | 26% margem</p>
+                <div class="meta">
+                    <div class="meta-item">📍 Localização: Regiões trabalho (Pinheiros, Itaim) + shopping premiums</div>
+                    <div class="meta-item">🏋️ Target: Profissionais 25-45, fitness-conscious, A/B</div>
+                </div>
+            </div>
+
+            <div class="opportunity-card">
+                <h4>4. Software/SaaS para Setor F&B (Prioridade 3)</h4>
+                <p><strong>O Que:</strong> Plataforma de gestão integrada para restaurantes (POS + gestão de estoque + RH + analytics). Dores latentes: falta de dados, operação manual, ineficiência.</p>
+                <p><strong>Por Quê:</strong> 95% dos bares/restaurantes BR usam planilha ou nada. Mercado SaaS F&B cresce 40% a.a. Margem 70%+. Receita recorrente.</p>
+                <p><strong>Investimento Estimado:</strong> R$ 1.5-2M desenvolvimento | <strong>Rampup:</strong> 12 meses | <strong>Breakeven:</strong> 18-20 meses | <strong>ROI:</strong> 4x em 3 anos</p>
+                <p><strong>Target 2030:</strong> 1-2 plataformas | R$ 20M receita | 70% margem</p>
+                <div class="meta">
+                    <div class="meta-item">🎯 Target: 500-1000 restaurantes SP/RJ até 2030</div>
+                    <div class="meta-item">💵 ASP (Annual Subscription Price): R$ 15k-30k/restaurante</div>
+                </div>
+            </div>
+
+            <div class="opportunity-card">
+                <h4>5. Educação Profissional para Setor F&B (Prioridade 3)</h4>
+                <p><strong>O Que:</strong> Plataforma de capacitação para donos, gerentes, chefs de restaurantes. Módulos: Cozinha, Salão, Estoque, Bar, RH, Financeiro, Marketing, Tech. Formato: vídeos + consultoria in-loco.</p>
+                <p><strong>Por Quê:</strong> Fraqueza sistêmica: 70% dos restaurantes falham por gestão ruim, não receita. Oportunidade B2B. Margem 65-70%. Receita recorrente.</p>
+                <p><strong>Investimento Estimado:</strong> R$ 800k-1.2M desenvolvimento | <strong>Rampup:</strong> 9 meses | <strong>Breakeven:</strong> 15 meses | <strong>ROI:</strong> 3.5x em 3 anos</p>
+                <p><strong>Target 2030:</strong> 1 plataforma | R$ 10M receita | 65% margem</p>
+                <div class="meta">
+                    <div class="meta-item">🎓 Target: 200-300 restaurantes assinantes até 2030</div>
+                    <div class="meta-item">📚 Módulos: Cozinha, Salão, Estoque, Bar, RH, Financeiro, Marketing, Tech</div>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <strong>Sinergia das 5 Oportunidades:</strong> Cada QRS usa software RPE (vendas internas) + educação RPE (capacitação). Dark Kitchen + Boteco vendidos via software. Software + Educação geram receita recorrente de alto margin (70%+). Portfolio diversificado reduz risco.
+            </div>
+        </section>
+
+        <!-- SEÇÃO 4: MODELO HUB & SPOKE -->
+        <section id="modelo">
+            <h2>Modelo Hub & Spoke</h2>
+
+            <div class="intro-box">
+                <h3 style="margin-top: 0;">Rua Amauri como Centro do Universo RPE</h3>
+                <p>O modelo Hub&Spoke posiciona <strong>Rua Amauri</strong> como o epicentro operacional, financeiro e cultural do Grupo RPE. Todas as oportunidades — QRS, Boteco, Dark Kitchen, Software, Educação — orbitam esse hub, gerando sinergia exponencial.</p>
+            </div>
+
+            <h3>Como Funciona o Hub&Spoke</h3>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Hub (Rua Amauri)</h4>
+                    <ul style="margin-left: 1rem; line-height: 1.8;">
+                        <li><strong>Sede operacional:</strong> RH, Supply, Marketing, Tech, Financeiro</li>
+                        <li><strong>Teste de conceitos:</strong> Novos cardápios, operações, processos</li>
+                        <li><strong>Treinamento:</strong> Academia interna para gestores, chefs, bartenders</li>
+                        <li><strong>Atração de talento:</strong> Profissionais começam em Amauri</li>
+                        <li><strong>Centro de dados:</strong> Todos os menus, receitas, processos documentados</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Spokes (Unidades Distribuídas)</h4>
+                    <ul style="margin-left: 1rem; line-height: 1.8;">
+                        <li><strong>QRS em SP:</strong> Compram supply do hub, usam templates validadas</li>
+                        <li><strong>Dark Kitchen:</strong> Receitas + operação desenvolvidas em Amauri, replicadas</li>
+                        <li><strong>Boteco Asiático:</strong> Cardápio, branding, training vindos do hub</li>
+                        <li><strong>Software:</strong> Dados de Amauri alimentam plataforma (case estudado)</li>
+                        <li><strong>Educação:</strong> Melhores práticas de Amauri = módulos de ensino</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Por Que Este Modelo Funciona?</h3>
+
             <div class="grid-3">
                 <div class="card">
-                    <h4>2025-2026</h4>
-                    <p><strong>Consolidação</strong> — Otimização das 5 marcas existentes, expansão Mercearia Campos para 4 unidades, entrada de 2-3 novos conceitos</p>
+                    <h4>Economia de Escala</h4>
+                    <p><strong>Supply Centralizado:</strong> Compras consolidas de fornecedores (10-12% desconto). <strong>RH Compartilhado:</strong> Recrutamento, folha, benefícios em uma estrutura. <strong>Redução de Custo Unit:</strong> 10-12% economia vs. operações isoladas.</p>
                 </div>
                 <div class="card">
-                    <h4>2027-2028</h4>
-                    <p><strong>Aceleração</strong> — Rede de 9-10 marcas, modelo de franquias testado, expansão em 2-3 novas regiões</p>
+                    <h4>Força de Brand</h4>
+                    <p><strong>Amauri como Pull:</strong> Demanda orgânica em Amauri gera fluxo para Spokes (clientes visitam bairro, conhecem outras marcas). <strong>Brand Halo:</strong> Reputação em Amauri emprestada para novos Spokes.</p>
                 </div>
                 <div class="card">
-                    <h4>2029-2030</h4>
-                    <p><strong>Escala</strong> — 15 marcas/conceitos, modelo replicável, presença em 4-5 capitais brasileiras</p>
+                    <h4>Sinergia Operacional</h4>
+                    <p><strong>Menu Engineering:</strong> Melhorias em Amauri replicadas em 15 unidades. <strong>Training Pipeline:</strong> Gerentes treinados em Amauri, promovidos para Spokes. <strong>Teste Rápido:</strong> Novos pratos em Amauri, 2 semanas depois em 15 locais.</p>
+                </div>
+                <div class="card">
+                    <h4>Densidade Geografica</h4>
+                    <p><strong>Cluster Amauri:</strong> Múltiplas marcas atraem maior fluxo (experiência de destino, não loja única). <strong>Eficiência Logística:</strong> Dark Kitchen, QRS, Boteco na mesma região = 1 rota de entrega.</p>
+                </div>
+                <div class="card">
+                    <h4>Dados Centralizados</h4>
+                    <p><strong>Inteligência do Setor:</strong> Amauri gera dados (vendas, perda, comportamento). Software consome esses dados. <strong>Feedback Loop:</strong> Spokes enviam dados, feedbacks alimentam inovação no hub.</p>
+                </div>
+                <div class="card">
+                    <h4>Receita Recorrente</h4>
+                    <p><strong>Software + Educação:</strong> 15 QRS pagam assinatura de software. 300 restaurantes externos pagam educação. <strong>Diversificação:</strong> 70% receita de F&B, 30% de software/educação.</p>
                 </div>
             </div>
 
-            <h3>Focos de Crescimento</h3>
+            <h3>Desafios do Modelo</h3>
+
             <div class="grid-2">
-                <div class="card">
-                    <h4>Receita por Unidade</h4>
-                    <p>Aumentar ticket médio via curadorias, merchandise e experiências (R$ 165 → R$ 220+)</p>
+                <div class="card" style="border-top-color: #FF6B35;">
+                    <h4 style="color: #FF6B35;">Desafio 1: Diluição de Marca</h4>
+                    <p>Risco: Múltiplas marcas em Amauri confundem identidade. <strong>Solução:</strong> Cada marca tem identidade visual/culinárica distinct. Hub unifica operação, não estética. Comunicação clara de diferenciação.</p>
                 </div>
-                <div class="card">
-                    <h4>Expansão de Unidades</h4>
-                    <p>Crescimento orgânico + franquias. Mercearia Campos como piloto (2 → 4 unidades em 18m)</p>
+                <div class="card" style="border-top-color: #FF6B35;">
+                    <h4 style="color: #FF6B35;">Desafio 2: Dependência do Hub</h4>
+                    <p>Risco: Se Amauri falha, toda rede é afetada. <strong>Solução:</strong> Diversificação de receita (software, educação). Autonomia operacional das unidades. Gestores treinados multivalentes.</p>
                 </div>
-                <div class="card">
-                    <h4>Novos Conceitos</h4>
-                    <p>Entrada de 3+ conceitos estratégicos até 2027, testados em Rua Amauri antes de expansão</p>
+                <div class="card" style="border-top-color: #FF6B35;">
+                    <h4 style="color: #FF6B35;">Desafio 3: Escalabilidade de Gestão</h4>
+                    <p>Risco: Hub fica gargalo (aprovação de cardápios, problemas operacionais). <strong>Solução:</strong> Processos sistematizados. Autonomia delegada às unidades. Dashboards em tempo real.</p>
                 </div>
-                <div class="card">
-                    <h4>Operação de Rede</h4>
-                    <p>Centralizar supply, marketing, RH. Reduzir custo unit em 8-12% via alavancagem</p>
+                <div class="card" style="border-top-color: #FF6B35;">
+                    <h4 style="color: #FF6B35;">Desafio 4: Retenção de Talento</h4>
+                    <p>Risco: Rotatividade alta do setor compromete modelo. <strong>Solução:</strong> Carreira clara (Amauri → Gerente → Dono de unidade). Educação contínua. Bônus por retenção.</p>
                 </div>
             </div>
+
+            <h3>Exemplos Globais Validados</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Empresa</th>
+                        <th>Hub</th>
+                        <th>Modelo</th>
+                        <th>Resultado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Ichiran (Ramen, Japão)</strong></td>
+                        <td>Fukuoka (origem)</td>
+                        <td>Hub&Spoke + integração vertical (cozinha central)</td>
+                        <td>150+ unidades, R$ 1.5B receita, 18% margem</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Shake Shack (EUA)</strong></td>
+                        <td>NYC (origem)</td>
+                        <td>Hub&Spoke + franquia + ghost kitchen</td>
+                        <td>500+ unidades, R$ 1.8B receita, 15% margem</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nusr-Et (Steak, Global)</strong></td>
+                        <td>Istanbul (origem)</td>
+                        <td>Hub&Spoke + forte brand (Salt Bae)</td>
+                        <td>60+ unidades, R$ 800M receita, 20% margem</td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
 
-        <!-- SEÇÃO 3: MERCADOS -->
-        <section id="mercados">
-            <h2>Análise de Mercados</h2>
+        <!-- SEÇÃO 5: MODELAGEM FINANCEIRA -->
+        <section id="financeiro">
+            <h2>Modelagem Financeira</h2>
 
-            <h3>Contexto Gastronômico 2025</h3>
-            <div class="grid-2">
-                <div class="card">
-                    <h4>Tendência 1: Conceitos Verticalizados</h4>
-                    <p>Consumidor busca especialização. Katsu sando, ramen autêntico, bistrôs de bairro ganham tração. Oportunidade: multiplicar marcas focadas em nichos</p>
-                </div>
-                <div class="card">
-                    <h4>Tendência 2: Experiência + Comunidade</h4>
-                    <p>Espaço gastronômico agora é ponto social. Rua Amauri consolidou-se como destino. Oportunidade: expandir cluster gastronômico estratégico</p>
-                </div>
-                <div class="card">
-                    <h4>Tendência 3: Modelos Replicáveis</h4>
-                    <p>Franquias de QSR e casual dining crescem 15% a.a. Operações enxutas, processos definidos. Oportunidade: estruturar Mercearia Campos como piloto de replicação</p>
-                </div>
-                <div class="card">
-                    <h4>Tendência 4: Premium & Acessível</h4>
-                    <p>Polarização: alta-renda quer experiências curadas; classe média quer qualidade. Oportunidade: portfolio com posicionamentos complementares</p>
-                </div>
+            <div class="intro-box">
+                <p>Análise detalhada dos principais indicadores financeiros por modelo de negócio. Dados de suporte para investidores e stakeholders.</p>
             </div>
 
-            <h3>Posicionamento Competitivo</h3>
-            <p style="margin-bottom: 1.5rem;">Grupo RPE diferencia-se por:</p>
-            <ul style="margin-left: 2rem; margin-bottom: 2rem; line-height: 2;">
-                <li><strong>Curadorias proprietárias</strong> — Seleção de produtos, bebidas e pratos que refletem identidade local</li>
-                <li><strong>Operação integrada</strong> — Supply chain compartilhado, RH centralizado, redução de custos operacionais</li>
-                <li><strong>Cluster da Rua Amauri</strong> — Sinergia entre marcas; consumidor move-se entre espaços, aumentando ticket total</li>
-                <li><strong>Gestão familiar + profissionalismo</strong> — Legado de qualidade com estrutura escalável</li>
-            </ul>
-        </section>
+            <h3>KPIs por Modelo de Negócio</h3>
 
-        <!-- SEÇÃO 4: CONCEITOS (NOVO) -->
-        <section id="conceitos">
-            <h2>Exemplos de Conceitos Inspiradores</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Modelo</th>
+                        <th>Investimento</th>
+                        <th>Rampup (meses)</th>
+                        <th>Breakeven (meses)</th>
+                        <th>Payback (anos)</th>
+                        <th>ROI (3 anos)</th>
+                        <th>Margem LL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>QRS Latino-Asiático</strong></td>
+                        <td>R$ 1,0M</td>
+                        <td>7</td>
+                        <td>13</td>
+                        <td>1,5-2</td>
+                        <td>2.5x</td>
+                        <td>24%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dark Kitchen (Sorvete)</strong></td>
+                        <td>R$ 600k</td>
+                        <td>4</td>
+                        <td>9</td>
+                        <td>1,2</td>
+                        <td>3.5x</td>
+                        <td>38%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Boteco Asiático Saúde</strong></td>
+                        <td>R$ 1,4M</td>
+                        <td>9</td>
+                        <td>17</td>
+                        <td>2-2.5</td>
+                        <td>2.2x</td>
+                        <td>26%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Software/SaaS</strong></td>
+                        <td>R$ 1,8M</td>
+                        <td>12</td>
+                        <td>19</td>
+                        <td>2,3</td>
+                        <td>4.0x</td>
+                        <td>70%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Educação (Platform)</strong></td>
+                        <td>R$ 1,0M</td>
+                        <td>9</td>
+                        <td>15</td>
+                        <td>2,1</td>
+                        <td>3.5x</td>
+                        <td>65%</td>
+                    </tr>
+                </tbody>
+            </table>
 
-            <p style="margin-bottom: 2rem; color: #666;">Análise de casos de sucesso que demonstram viabilidade de verticalizações complementares ao portfolio RPE.</p>
-
-            <div class="grid-2">
-                <div class="card">
-                    <h4>SAIKŌ — Katsu Sando</h4>
-                    <p style="margin-bottom: 1rem;">Especialização em sandubão de carne empanada (katsu), servido com caldo dashi. Localizado em região de alto fluxo, operação 100% replicável.</p>
-                    <p><strong>Seguidores Instagram:</strong> 40.5k</p>
-                    <p><strong>Modelo:</strong> Fila desde a abertura, alta rotatividade, ticket médio R$ 65-85</p>
-                    <p style="margin-top: 1rem; color: #999; font-size: 0.85rem;"><strong>Relevância para RPE:</strong> Demonstra viabilidade de conceitos de nicho com operação simples e margens elevadas. Candidato a expansão em modelo de rede.</p>
-                </div>
-
-                <div class="card">
-                    <h4>Nori Vaz — Ramen Coreano</h4>
-                    <p style="margin-bottom: 1rem;">Especialização em ramen coreano (ramyeon), ambiente descontraído, não aceita reservas (high-touch). Comunidade leal.</p>
-                    <p><strong>Seguidores Instagram:</strong> 21.1k</p>
-                    <p><strong>Modelo:</strong> Fila regulada, operação rápida, ticket médio R$ 50-70, venda de bebidas incrementa ticket</p>
-                    <p style="margin-top: 1rem; color: #999; font-size: 0.85rem;"><strong>Relevância para RPE:</strong> Prova que conceitos asiáticos com autenticidade atraem público lecionado. Oportunidade de parcerias ou aquisições de marcas similares com operação já validada.</p>
-                </div>
-            </div>
-
-            <h3>Insight Estratégico</h3>
-            <div class="highlight">
-                <p>Ambos os conceitos compartilham: <strong>(i)</strong> especialização vertical (não menu amplo), <strong>(ii)</strong> operação escalável, <strong>(iii)</strong> comunidade engajada em redes sociais, <strong>(iv)</strong> margens saudáveis via volume. Modelo replicável para Grupo RPE: identificar nichos validados e estruturar marcas proprietárias ou aquisições estratégicas.</p>
-            </div>
-        </section>
-
-        <!-- SEÇÃO 5: MODELO -->
-        <section id="modelo">
-            <h2>Modelo de Entrada & Operação</h2>
-
-            <h3>Fase 1: Consolidação & Teste (2025-Q2 2026)</h3>
-            <div class="grid-2">
-                <div class="card">
-                    <h4>Ações Imediatas</h4>
-                    <ul style="margin-left: 1rem; line-height: 1.8;">
-                        <li>Otimizar ticket médio em 5 marcas atuais (curation, menu, pairing)</li>
-                        <li>Expandir Mercearia Campos: 2 → 4 unidades (capital + interior)</li>
-                        <li>Estruturar operação central (supply, marketing, RH)</li>
-                        <li>Investimento: ~R$ 2,5M capex</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h4>Resultados Esperados (Q2 2026)</h4>
-                    <ul style="margin-left: 1rem; line-height: 1.8;">
-                        <li>Receita: ~R$ 92,5M anualizados (+26% vs 2025)</li>
-                        <li>Margem LL: 24-25% (melhoria via escala)</li>
-                        <li>Base para replicação: 1ª marca pronta para franquias</li>
-                    </ul>
-                </div>
-            </div>
-
-            <h3>Fase 2: Expansão Estruturada (2026 H2 - 2027)</h3>
-            <div class="grid-2">
-                <div class="card">
-                    <h4>Novos Conceitos</h4>
-                    <ul style="margin-left: 1rem; line-height: 1.8;">
-                        <li>2-3 marcas complementares (ex: ramen, cevicheria, pizza artesanal)</li>
-                        <li>Primeiro teste em Rua Amauri ou proximidades</li>
-                        <li>Validação: 12-18 meses antes de franquia</li>
-                        <li>Capex: ~R$ 1,5-2M por novo conceito</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h4>Modelo de Franquia (Campos)</h4>
-                    <ul style="margin-left: 1rem; line-height: 1.8;">
-                        <li>Franquia semi-aberta: Mercearia Campos em novas regiões</li>
-                        <li>Franqueador retém supply central</li>
-                        <li>Taxa de franquia: 10% faturamento</li>
-                        <li>Meta: 3-5 novas unidades até 2028</li>
-                    </ul>
-                </div>
-            </div>
-
-            <h3>Fase 3: Escala Nacional (2028-2030)</h3>
-            <div class="grid-2">
-                <div class="card">
-                    <h4>Portfolio de Marcas</h4>
-                    <p>15 marcas/conceitos operando, com 25-35 unidades distribuídas:</p>
-                    <ul style="margin-left: 1rem; line-height: 1.8; font-size: 0.9rem;">
-                        <li>5 marcas originais (consolidadas)</li>
-                        <li>5 novos conceitos (2026-2027)</li>
-                        <li>5 conceitos escalados (2028-2030)</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h4>Operação de Rede</h4>
-                    <p>Estrutura holding para gerenciar múltiplas marcas:</p>
-                    <ul style="margin-left: 1rem; line-height: 1.8; font-size: 0.9rem;">
-                        <li>Supply chain centralizado</li>
-                        <li>Marketing em comum</li>
-                        <li>Inteligência de dados compartilhada</li>
-                        <li>Redução de custo unitário em 10-12%</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- SEÇÃO 6: PROJEÇÕES -->
-        <section id="projecoes">
-            <h2>Projeções de Receita (2025-2030)</h2>
-
-            <h3>Receita por Trimestre (R$ Milhões)</h3>
+            <h3>Projeção de Receita Consolidada (2025-2030)</h3>
             <div class="chart-container">
-                <canvas id="chartProjecoes"></canvas>
+                <canvas id="chartFinanceiro"></canvas>
             </div>
 
-            <h3>Decomposição Anual</h3>
+            <h3>Estrutura de Investimento Acumulado</h3>
+
             <table>
                 <thead>
                     <tr>
                         <th>Período</th>
-                        <th>Receita Trimestral</th>
-                        <th>Receita Anual</th>
-                        <th>Crescimento YoY</th>
-                        <th>Nº Unidades (est.)</th>
+                        <th>QRS (Nº Unidades)</th>
+                        <th>Dark Kitchen</th>
+                        <th>Boteco Asiático</th>
+                        <th>Software/Educação</th>
+                        <th>Capex Total</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td><strong>2025</strong></td>
-                        <td>R$ 18,3M</td>
-                        <td>R$ 73,2M</td>
-                        <td>Baseline</td>
-                        <td>5</td>
+                        <td>1 (R$ 1M)</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>R$ 1M</td>
                     </tr>
                     <tr>
                         <td><strong>2026</strong></td>
-                        <td>R$ 23,1M</td>
-                        <td>R$ 92,5M</td>
-                        <td>+26,3%</td>
-                        <td>7</td>
+                        <td>2 (R$ 2M)</td>
+                        <td>1 (R$ 600k)</td>
+                        <td>1 (R$ 1,4M)</td>
+                        <td>Software (R$ 1,8M)</td>
+                        <td>R$ 5,8M</td>
                     </tr>
                     <tr>
                         <td><strong>2027</strong></td>
-                        <td>R$ 32,75M</td>
-                        <td>R$ 131,0M</td>
-                        <td>+41,6%</td>
-                        <td>10</td>
+                        <td>3 (R$ 3M)</td>
+                        <td>1 (R$ 600k)</td>
+                        <td>2 (R$ 2,8M)</td>
+                        <td>Educação (R$ 1M)</td>
+                        <td>R$ 7,4M</td>
                     </tr>
                     <tr>
                         <td><strong>2028</strong></td>
-                        <td>R$ 46,25M</td>
-                        <td>R$ 185,0M</td>
-                        <td>+41,2%</td>
-                        <td>15</td>
+                        <td>3 (R$ 3M)</td>
+                        <td>1 (R$ 600k)</td>
+                        <td>2 (R$ 2,8M)</td>
+                        <td>R$ 500k (manutenção)</td>
+                        <td>R$ 6,9M</td>
                     </tr>
                     <tr>
-                        <td><strong>2029</strong></td>
-                        <td>R$ 60,9M</td>
-                        <td>R$ 243,5M</td>
-                        <td>+31,6%</td>
-                        <td>20</td>
+                        <td><strong>2029-2030</strong></td>
+                        <td>4 (R$ 4M)</td>
+                        <td>1 (R$ 600k)</td>
+                        <td>2 (R$ 2,8M)</td>
+                        <td>R$ 500k (manutenção)</td>
+                        <td>R$ 7,9M</td>
                     </tr>
-                    <tr>
-                        <td><strong>2030 (Estimado)</strong></td>
-                        <td>R$ 62,0M</td>
-                        <td>R$ 248,8M</td>
-                        <td>+2,2%</td>
-                        <td>22</td>
+                    <tr style="font-weight: 700; background-color: #f9f9f9;">
+                        <td>TOTAL 2025-2030</td>
+                        <td>13 (R$ 13M)</td>
+                        <td>4 (R$ 2,4M)</td>
+                        <td>7 (R$ 9,8M)</td>
+                        <td>R$ 3,8M</td>
+                        <td>R$ 29M</td>
                     </tr>
                 </tbody>
             </table>
 
-            <h3>Assunções</h3>
-            <div class="grid-2">
-                <div class="card">
-                    <h4>Crescimento Orgânico (Marcas Atuais)</h4>
-                    <ul style="margin-left: 1rem; line-height: 1.8; font-size: 0.9rem;">
-                        <li>Aumento de ticket: 3-5% a.a.</li>
-                        <li>Melhoria operacional: 2-3% a.a.</li>
-                        <li>Crescimento base: ~5-8% a.a.</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h4>Crescimento por Expansão</h4>
-                    <ul style="margin-left: 1rem; line-height: 1.8; font-size: 0.9rem;">
-                        <li>Mercearia Campos: 2 → 4 unidades (2026)</li>
-                        <li>Novos conceitos: 2-3 a cada 18m</li>
-                        <li>Margem por nova unidade: 20-24%</li>
-                    </ul>
-                </div>
-            </div>
-
             <div class="highlight">
-                <h4>Nota</h4>
-                <p>Projeção conservadora. Assume crescimento disciplinado com foco em operação saudável, não alavancagem agressiva. Margem LL mantida acima de 22% em todo período.</p>
-            </div>
-        </section>
-
-        <!-- SEÇÃO 7: ROADMAP -->
-        <section id="roadmap">
-            <h2>Roadmap Executivo (2025-2030)</h2>
-
-            <div class="timeline">
-                <div class="timeline-item">
-                    <h4>H1 2025</h4>
-                    <p>Estruturação operacional central. Optimização de ticket em 5 marcas atuais. Início planejamento expansão Campos.</p>
-                </div>
-                <div class="timeline-item">
-                    <h4>H2 2025</h4>
-                    <p>Expansão Mercearia Campos iniciada (2 novas unidades). Scouting de 2º conceito complementar (ramen/especializado).</p>
-                </div>
-                <div class="timeline-item">
-                    <h4>H1 2026</h4>
-                    <p>Mercearia Campos com 4 unidades operando. 1º novo conceito lançado em Rua Amauri (validação de modelo). Receita projeta R$ 92,5M anualizados.</p>
-                </div>
-                <div class="timeline-item">
-                    <h4>H2 2026</h4>
-                    <p>Estrutura de franquia de Campos finalizada. 2º novo conceito lançado. Scouting de 3º conceito. Operação pronta para aceleração 2027.</p>
-                </div>
-                <div class="timeline-item">
-                    <h4>2027</h4>
-                    <p>Aceleração: 9-10 marcas operando. Primeira franquia de Campos em nova região. 3º conceito lançado. Receita target: R$ 131M.</p>
-                </div>
-                <div class="timeline-item">
-                    <h4>2028</h4>
-                    <p>Escala: 15+ marcas operando. Franquias de Campos em 3+ regiões. Modelo holding implementado. Receita target: R$ 185M.</p>
-                </div>
-                <div class="timeline-item">
-                    <h4>2029-2030</h4>
-                    <p>Consolidação nacional: 20-22 unidades distribuídas em 4-5 capitais. Margem LL 23-24%. Receita target: R$ 248,8M. Preparação para próxima fase (IPO ou strategic investor).</p>
-                </div>
+                <strong>ROI Consolidado:</strong> Investimento de R$ 29M gera receita adicional de R$ 250M - 73M (linha de base) = R$ 177M em 5 anos. ROI de 6.1x.
             </div>
 
-            <h3>Investimentos Acumulados</h3>
+            <h3>Margem Líquida Consolidada</h3>
+
             <table>
                 <thead>
                     <tr>
-                        <th>Período</th>
-                        <th>Capex Estimado</th>
-                        <th>Tipo</th>
-                        <th>Impacto Receita</th>
+                        <th>Ano</th>
+                        <th>Receita Total</th>
+                        <th>Receita F&B</th>
+                        <th>Receita Software/Educação</th>
+                        <th>Margem Ponderada</th>
+                        <th>Lucro Líquido Est.</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>2025-2026</strong></td>
-                        <td>R$ 2,5M - 3,5M</td>
-                        <td>Expansão Campos + novo conceito</td>
-                        <td>+R$ 19,3M</td>
+                        <td><strong>2025</strong></td>
+                        <td>R$ 73.2M</td>
+                        <td>R$ 73.2M</td>
+                        <td>—</td>
+                        <td>22.7%</td>
+                        <td>R$ 16.6M</td>
                     </tr>
                     <tr>
-                        <td><strong>2026-2027</strong></td>
-                        <td>R$ 3,0M - 4,0M</td>
-                        <td>2º e 3º conceitos + infraestrutura</td>
-                        <td>+R$ 38,5M</td>
+                        <td><strong>2026</strong></td>
+                        <td>R$ 110M</td>
+                        <td>R$ 108M</td>
+                        <td>R$ 2M</td>
+                        <td>23.5%</td>
+                        <td>R$ 25.8M</td>
                     </tr>
                     <tr>
-                        <td><strong>2027-2028</strong></td>
-                        <td>R$ 4,0M - 5,0M</td>
-                        <td>Escala, franquias Campos, novos conceitos</td>
-                        <td>+R$ 54,0M</td>
+                        <td><strong>2027</strong></td>
+                        <td>R$ 155M</td>
+                        <td>R$ 148M</td>
+                        <td>R$ 7M</td>
+                        <td>24.2%</td>
+                        <td>R$ 37.5M</td>
                     </tr>
                     <tr>
-                        <td><strong>2028-2030</strong></td>
-                        <td>R$ 5,0M - 6,0M/ano</td>
-                        <td>Consolidação, manutenção</td>
-                        <td>+R$ 63,8M</td>
+                        <td><strong>2028</strong></td>
+                        <td>R$ 200M</td>
+                        <td>R$ 185M</td>
+                        <td>R$ 15M</td>
+                        <td>24.8%</td>
+                        <td>R$ 49.6M</td>
                     </tr>
                     <tr>
-                        <td colspan="2"><strong>TOTAL 2025-2030</strong></td>
-                        <td><strong>~R$ 25-27M</strong></td>
-                        <td><strong>+R$ 175,6M</strong></td>
+                        <td><strong>2029</strong></td>
+                        <td>R$ 235M</td>
+                        <td>R$ 210M</td>
+                        <td>R$ 25M</td>
+                        <td>25.1%</td>
+                        <td>R$ 59.0M</td>
+                    </tr>
+                    <tr style="font-weight: 700; background-color: #f9f9f9;">
+                        <td><strong>2030</strong></td>
+                        <td>R$ 250M</td>
+                        <td>R$ 215M</td>
+                        <td>R$ 35M</td>
+                        <td>25%</td>
+                        <td>R$ 62.5M</td>
                     </tr>
                 </tbody>
             </table>
 
-            <div class="highlight">
-                <h4>ROI Esperado</h4>
-                <p>Investimento total de R$ 25-27M gera aumento de receita de R$ 175,6M em 5 anos. ROI de <strong>6,5x</strong> (ou 49% CAGR). Payback em 2-3 anos.</p>
+        </section>
+
+        <!-- SEÇÃO 6: ROADMAP -->
+        <section id="roadmap">
+            <h2>Roadmap Executivo 2025-2030</h2>
+
+            <div class="intro-box">
+                <p>Timeline interativa de 5 anos. Selecione um trimestre para visualizar os projetos previstos, clique em cada projeto para acessar o checklist detalhado de tarefas, materiais de apoio e acompanhamento de status em tempo real. Todos os períodos são navegáveis — um Asana colaborativo para toda a organização.</p>
+            </div>
+
+            <div class="roadmap-controls">
+                <button class="quarter-btn active" data-quarter="Q1-2025">Q1 2025</button>
+                <button class="quarter-btn" data-quarter="Q2-2025">Q2 2025</button>
+                <button class="quarter-btn" data-quarter="Q3-2025">Q3 2025</button>
+                <button class="quarter-btn" data-quarter="Q4-2025">Q4 2025</button>
+                <button class="quarter-btn" data-quarter="Q1-2026">Q1 2026</button>
+                <button class="quarter-btn" data-quarter="Q2-2026">Q2 2026</button>
+                <button class="quarter-btn" data-quarter="Q3-2026">Q3 2026</button>
+                <button class="quarter-btn" data-quarter="Q4-2026">Q4 2026</button>
+                <button class="quarter-btn" data-quarter="2027">2027</button>
+                <button class="quarter-btn" data-quarter="2028">2028</button>
+                <button class="quarter-btn" data-quarter="2029-2030">2029-2030</button>
+            </div>
+
+            <div class="roadmap-grid" id="roadmapGrid">
+                <!-- Projects loaded dynamically -->
+            </div>
+
+            <div id="taskModal" class="task-modal" style="display: none;">
+                <div class="task-modal-content">
+                    <button class="task-modal-close" onclick="closeTaskModal()">&times;</button>
+                    <h3 id="taskModalTitle"></h3>
+                    <div id="taskModalBody"></div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- SEÇÃO 7: RADAR (INTERACTIVE OPPORTUNITIES) -->
+        <section id="radar">
+            <h2>Oportunidades Radar</h2>
+            <p class="section-intro">Portfolio de oportunidades estratégicas e complementares em análise, aprovação e execução. Filtre por tipo ou status, visualize detalhes, e registre novas oportunidades.</p>
+
+            <div class="radar-filters">
+                <div class="filter-group">
+                    <label>Tipo:</label>
+                    <button class="filter-btn active" data-filter="all">Todas</button>
+                    <button class="filter-btn" data-filter="estrategica">Estratégicas (5)</button>
+                    <button class="filter-btn" data-filter="complementar">Complementares (8)</button>
+                </div>
+                <div class="filter-group">
+                    <label>Status:</label>
+                    <button class="filter-btn active" data-filter-status="all">Todos</button>
+                    <button class="filter-btn" data-filter-status="analise">Em Análise</button>
+                    <button class="filter-btn" data-filter-status="aprovada">Aprovada</button>
+                    <button class="filter-btn" data-filter-status="reprovada">Reprovada</button>
+                    <button class="filter-btn" data-filter-status="sob-analise">Sob Análise</button>
+                </div>
+            </div>
+
+            <div class="opportunities-grid" id="opportunitiesGrid">
+                <!-- Opportunity cards loaded dynamically -->
+            </div>
+
+            <div class="register-opportunity-section">
+                <h3>Cadastrar Nova Oportunidade</h3>
+                <form id="oppForm" class="opp-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nome da Oportunidade *</label>
+                            <input type="text" name="name" required placeholder="Ex: Sorveteria Premium">
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo *</label>
+                            <select name="type" required>
+                                <option value="">Selecione...</option>
+                                <option value="estrategica">Estratégica</option>
+                                <option value="complementar">Complementar</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label>Descrição *</label>
+                            <textarea name="description" required placeholder="Descrição detalhada da oportunidade..." rows="4"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Status Inicial *</label>
+                            <select name="status" required>
+                                <option value="">Selecione...</option>
+                                <option value="analise">Em Análise</option>
+                                <option value="sob-analise">Sob Análise</option>
+                                <option value="aprovada">Aprovada</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Capex Estimado (R$)</label>
+                            <input type="number" name="capex" placeholder="Ex: 500000" min="0">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary">Registrar Oportunidade</button>
+                </form>
+            </div>
+
+            <div id="oppModal" class="opp-modal" style="display: none;">
+                <div class="opp-modal-content">
+                    <span class="opp-modal-close">&times;</span>
+                    <div id="oppModalBody"></div>
+                </div>
             </div>
         </section>
+
+        <!-- SEÇÃO 8: SOFTWARES (INTERACTIVE TECH SOLUTIONS) -->
+        <section id="softwares">
+            <h2>Soluções de Tecnologia</h2>
+            <p class="section-intro">Portfólio de soluções tecnológicas em desenvolvimento, análise e implementação. Acompanhe o progresso de cada sistema e registre novas propostas de software.</p>
+
+            <div class="tech-filters">
+                <label>Filtrar por Status:</label>
+                <button class="tech-filter-btn active" data-tech-status="all">Todas (12)</button>
+                <button class="tech-filter-btn" data-tech-status="desenvolvimento">Em Desenvolvimento (6)</button>
+                <button class="tech-filter-btn" data-tech-status="analise">Em Análise (3)</button>
+                <button class="tech-filter-btn" data-tech-status="on-hold">On Hold (2)</button>
+                <button class="tech-filter-btn" data-tech-status="producao">Em Produção (1)</button>
+            </div>
+
+            <div class="tech-grid" id="techGrid">
+                <!-- Tech solutions loaded dynamically -->
+            </div>
+
+            <div class="register-tech-section">
+                <h3>Sugerir Nova Solução Tecnológica</h3>
+                <form id="techForm" class="tech-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nome da Solução *</label>
+                            <input type="text" name="name" required placeholder="Ex: Sistema de Agendamento Online">
+                        </div>
+                        <div class="form-group">
+                            <label>Categoria *</label>
+                            <select name="category" required>
+                                <option value="">Selecione...</option>
+                                <option value="pdv">POS / PDV</option>
+                                <option value="gestao">Gestão & ERP</option>
+                                <option value="rh">RH & Folha</option>
+                                <option value="financeiro">Financeiro</option>
+                                <option value="delivery">Delivery & Marketplace</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label>Descrição & Justificativa *</label>
+                            <textarea name="description" required placeholder="Descreva a solução e o problema que resolve..." rows="4"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Custo Estimado (R$/mês)</label>
+                            <input type="number" name="cost" placeholder="Ex: 5000" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Prioridade</label>
+                            <select name="priority">
+                                <option value="media">Média</option>
+                                <option value="alta">Alta</option>
+                                <option value="baixa">Baixa</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary">Registrar Sugestão</button>
+                </form>
+            </div>
+
+            <div id="techModal" class="tech-modal" style="display: none;">
+                <div class="tech-modal-content">
+                    <span class="tech-modal-close">&times;</span>
+                    <div id="techModalBody"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 9: EDUCAÇÃO (INTERACTIVE EDUCATION PLATFORM) -->
+        <section id="educacao">
+            <h2>Plataforma de Educação</h2>
+            <p class="section-intro">Módulos educacionais em desenvolvimento para capacitação contínua do ecossistema RPE. Acompanhe o progresso de cada módulo e sugira novos conteúdos.</p>
+
+            <div class="edu-filters">
+                <label>Filtrar por Status:</label>
+                <button class="edu-filter-btn active" data-edu-status="all">Todos (10)</button>
+                <button class="edu-filter-btn" data-edu-status="desenvolvimento">Em Desenvolvimento (4)</button>
+                <button class="edu-filter-btn" data-edu-status="beta">Beta (3)</button>
+                <button class="edu-filter-btn" data-edu-status="producao">Em Produção (2)</button>
+                <button class="edu-filter-btn" data-edu-status="planejamento">Planejamento (1)</button>
+            </div>
+
+            <div class="edu-grid" id="eduGrid">
+                <!-- Education modules loaded dynamically -->
+            </div>
+
+            <div class="register-edu-section">
+                <h3>Sugerir Novo Módulo Educacional</h3>
+                <form id="eduForm" class="edu-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Título do Módulo *</label>
+                            <input type="text" name="name" required placeholder="Ex: Técnicas Avançadas de Pastelaria">
+                        </div>
+                        <div class="form-group">
+                            <label>Área Temática *</label>
+                            <select name="area" required>
+                                <option value="">Selecione...</option>
+                                <option value="cozinha">Cozinha</option>
+                                <option value="salao">Salão</option>
+                                <option value="estoque">Estoque</option>
+                                <option value="bar">Bar</option>
+                                <option value="rh">RH</option>
+                                <option value="financeiro">Financeiro</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="lideranca">Liderança</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label>Objetivo do Módulo *</label>
+                            <textarea name="description" required placeholder="Descreva os objetivos de aprendizado e conteúdo proposto..." rows="4"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Público-Alvo</label>
+                            <select name="audience">
+                                <option value="todos">Todos</option>
+                                <option value="gerentes">Gerentes</option>
+                                <option value="operacional">Operacional</option>
+                                <option value="chefes">Chefes</option>
+                                <option value="administrativo">Administrativo</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Duração Estimada (horas)</label>
+                            <input type="number" name="duration" placeholder="Ex: 20" min="1">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary">Sugerir Módulo</button>
+                </form>
+            </div>
+
+            <div id="eduModal" class="edu-modal" style="display: none;">
+                <div class="edu-modal-content">
+                    <span class="edu-modal-close">&times;</span>
+                    <div id="eduModalBody"></div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <footer>
-        <p>&copy; 2025 Grupo RPE. Planejamento Estratégico 2025-2030.</p>
-        <p>Confidencial — Uso Interno Exclusivamente</p>
+        <p>&copy; 2025 Grupo RPE. Plano de Expansão Oficial — Confidencial.</p>
+        <p>Última atualização: maio de 2026 | Versão 1.0</p>
     </footer>
 
     <script>
@@ -795,85 +2210,939 @@
             window.scrollTo(0, 0);
         }
 
-        // Chart.js — Projeções de Receita (Trimestral, Recalculado)
-        const ctx = document.getElementById('chartProjecoes').getContext('2d');
-        const chartProjecoes = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: [
-                    'Q1 25', 'Q2 25', 'Q3 25', 'Q4 25',
-                    'Q1 26', 'Q2 26', 'Q3 26', 'Q4 26',
-                    'Q1 27', 'Q2 27', 'Q3 27', 'Q4 27',
-                    'Q1 28', 'Q2 28', 'Q3 28', 'Q4 28',
-                    'Q1 29', 'Q2 29', 'Q3 29', 'Q4 29'
-                ],
-                datasets: [
-                    {
-                        label: 'Receita Total (R$ M)',
-                        data: [
-                            18.3, 18.3, 18.3, 18.3,
-                            23.1, 23.1, 23.1, 23.1,
-                            32.75, 32.75, 32.75, 32.75,
-                            46.25, 46.25, 46.25, 46.25,
-                            60.9, 60.9, 60.9, 60.9
-                        ],
-                        borderColor: '#00B73D',
-                        backgroundColor: 'rgba(0, 183, 61, 0.1)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.4,
-                        pointRadius: 4,
-                        pointBackgroundColor: '#00B73D',
-                        pointBorderColor: '#fff',
-                        pointBorderWidth: 2,
-                        pointHoverRadius: 6
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true,
-                        labels: {
-                            color: '#0F0F0F',
-                            font: { size: 12 }
+        // Chart.js — Projeção Financeira
+        const ctx = document.getElementById('chartFinanceiro');
+        if (ctx) {
+            const chartFinanceiro = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['2025', '2026', '2027', '2028', '2029', '2030'],
+                    datasets: [
+                        {
+                            label: 'Receita Total (R$ M)',
+                            data: [73.2, 110, 155, 200, 235, 250],
+                            borderColor: '#00B73D',
+                            backgroundColor: 'rgba(0, 183, 61, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 5,
+                            pointBackgroundColor: '#00B73D',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2
+                        },
+                        {
+                            label: 'Lucro Líquido (R$ M)',
+                            data: [16.6, 25.8, 37.5, 49.6, 59.0, 62.5],
+                            borderColor: '#2E75B6',
+                            backgroundColor: 'rgba(46, 117, 182, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 5,
+                            pointBackgroundColor: '#2E75B6',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2
                         }
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(0,0,0,0.8)',
-                        padding: 12,
-                        titleColor: '#fff',
-                        bodyColor: '#fff',
-                        borderColor: '#00B73D',
-                        borderWidth: 1,
-                        callbacks: {
-                            label: function(context) {
-                                return 'R$ ' + context.parsed.y.toFixed(2) + 'M';
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                color: '#0F0F0F',
+                                font: { size: 12, weight: 600 }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0,0,0,0.8)',
+                            padding: 12,
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: '#00B73D',
+                            borderWidth: 1,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': R$ ' + context.parsed.y.toFixed(1) + 'M';
+                                }
                             }
                         }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 70,
-                        ticks: {
-                            callback: function(value) {
-                                return 'R$ ' + value + 'M';
-                            },
-                            color: '#666'
-                        },
-                        grid: { color: '#eee' }
                     },
-                    x: {
-                        ticks: { color: '#666' },
-                        grid: { display: false }
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 280,
+                            ticks: {
+                                callback: function(value) {
+                                    return 'R$ ' + value + 'M';
+                                },
+                                color: '#666'
+                            },
+                            grid: { color: '#eee' }
+                        },
+                        x: {
+                            ticks: { color: '#666' },
+                            grid: { display: false }
+                        }
                     }
                 }
+            });
+        }
+
+        // ROADMAP DATA
+        const roadmapData = {
+            'Q1-2025': [
+                {
+                    id: 'hub-prep-2025',
+                    name: 'Preparação Hub (Rua Amauri)',
+                    type: 'Sistema & Processos',
+                    description: 'Setup operacional do hub central: sistemas ERP, processos, infraestrutura de supply chain.',
+                    typeClass: 'software',
+                    tasks: [
+                        { title: 'Arquitetura de Processos', status: 'pending', material: 'Documentação de processos core' },
+                        { title: 'Seleção de Sistemas (ERP, POS, BI)', status: 'pending', material: 'RFP para fornecedores' },
+                        { title: 'Setup de Infraestrutura', status: 'pending', material: 'Datacenter, redes, segurança' },
+                        { title: 'Recrutamento Equipe Central', status: 'pending', material: 'Job specs, JD dos roles' }
+                    ]
+                },
+                {
+                    id: 'qrs-1-concept-2025',
+                    name: '1ª QRS — Conceito & Scouting',
+                    type: 'QRS Latino-Asiático',
+                    description: 'Conceituação detalhada e identificação de ponto comercial na Rua Amauri.',
+                    typeClass: 'qrs',
+                    tasks: [
+                        { title: 'Definição de Ponto Comercial', status: 'in-progress', material: 'Relatório de scouting com 3 opções' },
+                        { title: 'Criação de Conceito Detalhado', status: 'pending', material: 'Cardápio, identidade visual, menu engineering' },
+                        { title: 'Projeto Arquitetônico Inicial', status: 'pending', material: 'Renders 3D, layout operacional' },
+                        { title: 'Business Plan Específico', status: 'pending', material: 'Projeções de receita, COGS, capex detalhado' }
+                    ]
+                }
+            ],
+            'Q2-2025': [
+                {
+                    id: 'qrs-1-obra-2025',
+                    name: '1ª QRS — Obra & Reforma',
+                    type: 'QRS Latino-Asiático',
+                    description: 'Início da reforma do ponto comercial selecionado.',
+                    typeClass: 'qrs',
+                    tasks: [
+                        { title: 'Projeto Arquitetônico Completo', status: 'in-progress', material: 'Plantas, elevações, especificações técnicas' },
+                        { title: 'Aprovações (PMCMV, Bombeiros, Saúde)', status: 'pending', material: 'Documentação e aprovações' },
+                        { title: 'Obra: Demolição & Estrutura', status: 'pending', material: 'Cronograma de obra com milestones' },
+                        { title: 'Interiores: Revestimentos & Acabamentos', status: 'pending', material: 'Especificações de materiais' }
+                    ]
+                }
+            ],
+            'Q3-2025': [
+                {
+                    id: 'qrs-1-montagem-2025',
+                    name: '1ª QRS — Montagem & Treinamento',
+                    type: 'QRS Latino-Asiático',
+                    description: 'Conclusão da obra, instalação de equipamentos e treinamento de equipe.',
+                    typeClass: 'qrs',
+                    tasks: [
+                        { title: 'Montagem de Equipamentos (Cozinha, Bar, Salão)', status: 'pending', material: 'Especificações de equipamentos, instaladores' },
+                        { title: 'Contratação de Equipe', status: 'pending', material: 'Job specs, seleção, ofertas' },
+                        { title: 'Treinamento Intensivo (8 semanas)', status: 'pending', material: 'Plano de treinamento, materiais pedagógicos' },
+                        { title: 'Testes de Operação (Soft Opening)', status: 'pending', material: 'Roteiros de teste, feedback' }
+                    ]
+                },
+                {
+                    id: 'software-mvp-2025',
+                    name: 'Software/SaaS — MVP Dev',
+                    type: 'Software & Tech',
+                    description: 'Desenvolvimento de MVP da plataforma de gestão integrada.',
+                    typeClass: 'software',
+                    tasks: [
+                        { title: 'Arquitetura & Tech Stack Definition', status: 'in-progress', material: 'Decision log, stack choice rationale' },
+                        { title: 'Core Module 1: POS Integrado', status: 'pending', material: 'Specs técnicos, wireframes, protótipos' },
+                        { title: 'Core Module 2: Controle de Estoque', status: 'pending', material: 'BD schema, API design' },
+                        { title: 'Testes Iniciais & Feedback Loops', status: 'pending', material: 'Test cases, bug tracking' }
+                    ]
+                }
+            ],
+            'Q4-2025': [
+                {
+                    id: 'qrs-1-inauguration-2025',
+                    name: '1ª QRS — Inauguração Oficial',
+                    type: 'QRS Latino-Asiático',
+                    description: 'Abertura oficial da primeira unidade QRS com eventos e marketing.',
+                    typeClass: 'qrs',
+                    tasks: [
+                        { title: 'Soft Opening (Convidados & Press)', status: 'pending', material: 'Guest list, press kit, cobertura' },
+                        { title: 'Inauguração Oficial', status: 'pending', material: 'Evento público, cobertura mídia' },
+                        { title: 'Ramp-Up de Vendas (Primeiras 4 semanas)', status: 'pending', material: 'Promoções, customer acquisition strategy' },
+                        { title: 'Estabilização Operacional', status: 'pending', material: 'KPI targets, diários, planos de melhoria' }
+                    ]
+                }
+            ],
+            'Q1-2026': [
+                {
+                    id: 'qrs-2-start-2026',
+                    name: '2ª QRS — Início (Ponto + Conceito)',
+                    type: 'QRS Latino-Asiático',
+                    description: 'Scouting e conceituação para segunda unidade QRS.',
+                    typeClass: 'qrs',
+                    tasks: [
+                        { title: 'Definição de Ponto Comercial', status: 'pending', material: 'Scouting em 3-4 locais viáveis' },
+                        { title: 'Replicação de Conceito (com ajustes locais)', status: 'pending', material: 'Adaptação cardápio, layout' },
+                        { title: 'Projeto Arquitetônico Customizado', status: 'pending', material: 'Renders, layouts locais' },
+                        { title: 'Aprovações Regulatórias', status: 'pending', material: 'Documentação' }
+                    ]
+                },
+                {
+                    id: 'dark-kitchen-1-2026',
+                    name: 'Dark Kitchen Sorvete — Scouting',
+                    type: 'Dark Kitchen',
+                    description: 'Identificação de espaço ghost kitchen para sorveteria proteica.',
+                    typeClass: 'dark-kitchen',
+                    tasks: [
+                        { title: 'Definição de Ponto (Ghost Kitchen)', status: 'pending', material: 'Análise de viabilidade logística' },
+                        { title: 'Concept & Menu Engineering', status: 'pending', material: 'Receitas, COGS, diferenciais' },
+                        { title: 'Projeto Operacional (Cozinha Compacta)', status: 'pending', material: 'Layout otimizado para delivery' },
+                        { title: 'Aprovações & Licenças', status: 'pending', material: 'Saúde, anvisa' }
+                    ]
+                },
+                {
+                    id: 'boteco-1-2026',
+                    name: 'Boteco Asiático — Início',
+                    type: 'Boteco Asiático Saúde',
+                    description: 'Scouting e conceituação para primeiro Boteco Asiático.',
+                    typeClass: 'boteco',
+                    tasks: [
+                        { title: 'Definição de Ponto Comercial', status: 'pending', material: 'Análise demográfica + tráfego' },
+                        { title: 'Criação de Conceito (Saúde + Asiático)', status: 'pending', material: 'Cardápio wellness, identidade' },
+                        { title: 'Projeto Arquitetônico', status: 'pending', material: 'Design moderno, ambiente' },
+                        { title: 'Aprovações Saúde & Bombeiros', status: 'pending', material: 'Documentação' }
+                    ]
+                }
+            ],
+            'Q2-2026': [
+                {
+                    id: 'software-alpha-2026',
+                    name: 'Software/SaaS — Alpha Testing',
+                    type: 'Software & Tech',
+                    description: 'Testes alpha internos da plataforma com 1ª QRS como beta tester.',
+                    typeClass: 'software',
+                    tasks: [
+                        { title: 'Core Module 3: Recursos Humanos & Folha', status: 'pending', material: 'Integração com RH, cálculos' },
+                        { title: 'Core Module 4: Relatórios & BI Básicos', status: 'pending', material: 'Dashboards de KPIs principais' },
+                        { title: 'Beta Testing com Unidade 1 (QRS)', status: 'pending', material: 'Feedback loops, documentation' },
+                        { title: 'Security & Data Protection Review', status: 'pending', material: 'Compliance checks, LGPD' }
+                    ]
+                },
+                {
+                    id: 'qrs-2-obra-2026',
+                    name: '2ª QRS — Obra & Acabamentos',
+                    type: 'QRS Latino-Asiático',
+                    description: 'Execução de reforma da segunda unidade.',
+                    typeClass: 'qrs',
+                    tasks: [
+                        { title: 'Obra: Estrutura & Revestimentos', status: 'pending', material: 'Cronograma, supervisão' },
+                        { title: 'Interiores Customizados (locais)', status: 'pending', material: 'Materiais, acabamentos' },
+                        { title: 'Instalação de Equipamentos', status: 'pending', material: 'Especificações, cronograma' },
+                        { title: 'Testes Pre-Opening', status: 'pending', material: 'Roteiros, checklists' }
+                    ]
+                },
+                {
+                    id: 'dark-kitchen-1-obra-2026',
+                    name: 'Dark Kitchen — Montagem',
+                    type: 'Dark Kitchen',
+                    description: 'Setup e equipagem da ghost kitchen.',
+                    typeClass: 'dark-kitchen',
+                    tasks: [
+                        { title: 'Reforma Mínima (Kitchen-Ready Space)', status: 'pending', material: 'Especificações' },
+                        { title: 'Instalação de Equipamentos (Industrial)', status: 'pending', material: 'Maquinário' },
+                        { title: 'Setup de Integração com Plataformas Delivery', status: 'pending', material: 'APIs, integração' },
+                        { title: 'Testes de Produção & Qualidade', status: 'pending', material: 'SOPs de produção' }
+                    ]
+                }
+            ],
+            'Q3-2026': [
+                {
+                    id: 'dark-kitchen-1-open-2026',
+                    name: 'Dark Kitchen — Inauguração',
+                    type: 'Dark Kitchen',
+                    description: 'Soft opening e abertura oficial da primeira dark kitchen.',
+                    typeClass: 'dark-kitchen',
+                    tasks: [
+                        { title: 'Soft Opening (Controle de Qualidade)', status: 'pending', material: 'Test orders, QA protocol' },
+                        { title: 'Ramp-Up no Ifood & Uber Eats', status: 'pending', material: 'Catálogos, fotos, promoções' },
+                        { title: 'Monitoramento de NPS & Reclamações', status: 'pending', material: 'Feedback loops' },
+                        { title: 'Otimização de Receita & Margem', status: 'pending', material: 'Análises, ajustes de cardápio' }
+                    ]
+                },
+                {
+                    id: 'boteco-1-obra-2026',
+                    name: 'Boteco Asiático — Obra & Treinamento',
+                    type: 'Boteco Asiático Saúde',
+                    description: 'Reforma e recrutamento para primeiro Boteco.',
+                    typeClass: 'boteco',
+                    tasks: [
+                        { title: 'Obra Completa (Design Specific)', status: 'pending', material: 'Cronograma, supervisão' },
+                        { title: 'Contratação & Treinamento (12 semanas)', status: 'pending', material: 'Wellness coaching, cardápio' },
+                        { title: 'Setup de Marketing Localizad (Nutricionistas)', status: 'pending', material: 'Parcerias, influencers' },
+                        { title: 'Soft Opening & Ajustes', status: 'pending', material: 'Feedback loops' }
+                    ]
+                },
+                {
+                    id: 'educacao-platform-2026',
+                    name: 'Educação — Plataforma MVP',
+                    type: 'Educação',
+                    description: 'Desenvolvimento de MVP da plataforma de educação online/híbrida.',
+                    typeClass: 'educacao',
+                    tasks: [
+                        { title: 'Definição de Módulos Core (Cozinha, Salão, Bar)', status: 'pending', material: 'Currículos detalhados' },
+                        { title: 'Gravação de Vídeo-Aulas Piloto', status: 'pending', material: 'Roteiros, equipamento de produção' },
+                        { title: 'Plataforma LMS (Learning Management)', status: 'pending', material: 'Tech stack, design UX' },
+                        { title: 'Testes Internos com Equipe', status: 'pending', material: 'Feedback, iterações' }
+                    ]
+                }
+            ],
+            'Q4-2026': [
+                {
+                    id: 'qrs-3-5-concept-2026',
+                    name: 'QRS 3-5 — Conceito & Scouting (Lote)',
+                    type: 'QRS Latino-Asiático',
+                    description: 'Identificação de 3 novos pontos para próximas 3 QRS em paralelo.',
+                    typeClass: 'qrs',
+                    tasks: [
+                        { title: 'Scouting em 3 Zonas Prioritárias', status: 'pending', material: 'Mapa de demanda, pontos viáveis' },
+                        { title: 'Replicação de Modelo & Conceito', status: 'pending', material: 'Templates de projeto' },
+                        { title: 'Aprovações Regulatórias Paralelas', status: 'pending', material: 'Documentação' },
+                        { title: 'Cronograma Master 2027 (3 aberturas)', status: 'pending', material: 'Roadmap detalhado' }
+                    ]
+                },
+                {
+                    id: 'boteco-1-open-2026',
+                    name: 'Boteco Asiático — Inauguração',
+                    type: 'Boteco Asiático Saúde',
+                    description: 'Abertura oficial do primeiro Boteco.',
+                    typeClass: 'boteco',
+                    tasks: [
+                        { title: 'Soft Opening (Influencers + Nutricionistas)', status: 'pending', material: 'Guest list' },
+                        { title: 'Inauguração Oficial (Marketing Wellness)', status: 'pending', material: 'Campanha digital' },
+                        { title: 'Ramp-Up de Receita', status: 'pending', material: 'Aquisição de clientes' },
+                        { title: 'Monitoramento de KPIs Saúde', status: 'pending', material: 'NPS, retenção' }
+                    ]
+                },
+                {
+                    id: 'software-beta-2026',
+                    name: 'Software/SaaS — Beta & Preparação Comercial',
+                    type: 'Software & Tech',
+                    description: 'Refinamento pós-alpha e preparação para comercialização a outras unidades.',
+                    typeClass: 'software',
+                    tasks: [
+                        { title: 'Bug Fixes & Performance Optimization', status: 'pending', material: 'Issue tracking, sprints' },
+                        { title: 'Documentação & Training Materials', status: 'pending', material: 'Vídeos, guides, FAQs' },
+                        { title: 'Comercial Strategy & Pricing Model', status: 'pending', material: 'Business case' },
+                        { title: 'Preparação para Escalabilidade (Infrastructure)', status: 'pending', material: 'DevOps, load testing' }
+                    ]
+                }
+            ],
+            '2027': [
+                {
+                    id: 'qrs-3-5-expansion-2027',
+                    name: 'QRS 3-5 — Abertura Paralela',
+                    type: 'QRS Latino-Asiático',
+                    description: '3 novas unidades QRS abrindo ao longo de 2027 (Q1, Q2, Q3).',
+                    typeClass: 'qrs',
+                    tasks: [
+                        { title: 'Obra Simultânea em 3 Unidades', status: 'pending', material: 'Gestão de múltiplas frentes' },
+                        { title: 'Centralização de Sourcing & Fornecedores', status: 'pending', material: 'Negociação volume' },
+                        { title: 'Escalabilidade de RH (Recrutamento Mass)', status: 'pending', material: 'Pipeline de talento' },
+                        { title: 'Replicação de Processos & SOPs', status: 'pending', material: 'Documentação' }
+                    ]
+                },
+                {
+                    id: 'dark-kitchen-2-3-2027',
+                    name: 'Dark Kitchen — Expansão (Unidade 2 & 3)',
+                    type: 'Dark Kitchen',
+                    description: '2 novas dark kitchens em paralelo, lições aprendidas integradas.',
+                    typeClass: 'dark-kitchen',
+                    tasks: [
+                        { title: 'Replicação de Modelo (Lições de Unit 1)', status: 'pending', material: 'Playbook' },
+                        { title: 'Otimização de COGS (Compras Consolidadas)', status: 'pending', material: 'Negociação' },
+                        { title: 'Expansão de Cobertura Delivery (Google, Zomato)', status: 'pending', material: 'Estratégia' },
+                        { title: 'Sistemas de Controle de Qualidade Centralizados', status: 'pending', material: 'QA hub' }
+                    ]
+                },
+                {
+                    id: 'boteco-2-3-2027',
+                    name: 'Boteco Asiático — Expansão (Unidades 2 & 3)',
+                    type: 'Boteco Asiático Saúde',
+                    description: '2 novos Botecos em 2027, consolidação de marca.',
+                    typeClass: 'boteco',
+                    tasks: [
+                        { title: 'Replicação com Customização Local', status: 'pending', material: 'Playbook' },
+                        { title: 'Parcerias com Nutricionistas Locais', status: 'pending', material: 'Rede profissional' },
+                        { title: 'Integração com Software (Beta Completo)', status: 'pending', material: 'Tech rollout' },
+                        { title: 'Consolidação de Marca Wellness', status: 'pending', material: 'Marketing 360' }
+                    ]
+                },
+                {
+                    id: 'educacao-platform-launch-2027',
+                    name: 'Educação — Lançamento Beta',
+                    type: 'Educação',
+                    description: 'Lançamento beta da plataforma de educação com primeiros alunos.',
+                    typeClass: 'educacao',
+                    tasks: [
+                        { title: 'Primeiro Lote de Módulos Online (3-4 cursos)', status: 'pending', material: 'Currículos finalizados' },
+                        { title: 'Hybrid Model Pilot (Online + In-Person)', status: 'pending', material: 'Programa híbrido' },
+                        { title: 'Recrutamento de Alunos (Internos + Externos)', status: 'pending', material: 'Marketing' },
+                        { title: 'Feedback & Iteração de Conteúdo', status: 'pending', material: 'Avaliações' }
+                    ]
+                },
+                {
+                    id: 'software-commercialization-2027',
+                    name: 'Software/SaaS — Comercialização',
+                    type: 'Software & Tech',
+                    description: 'Venda da plataforma para unidades RPE e início de abordagem a terceiros.',
+                    typeClass: 'software',
+                    tasks: [
+                        { title: 'Rollout para Todas as Unidades RPE', status: 'pending', material: 'Implementação, suporte' },
+                        { title: 'Primeiros Clientes Externos (Pilots)', status: 'pending', material: 'Case studies' },
+                        { title: 'Estrutura de Suporte & CS', status: 'pending', material: 'Help desk, SLA' },
+                        { title: 'Roadmap de Features 2028+', status: 'pending', material: 'Product strategy' }
+                    ]
+                }
+            ],
+            '2028': [
+                {
+                    id: 'qrs-6-7-2028',
+                    name: 'QRS 6-7 — Continuação Escalada',
+                    type: 'QRS Latino-Asiático',
+                    description: '2 novas QRS abrem em 2028, modelo completamente replicável.',
+                    typeClass: 'qrs',
+                    tasks: [
+                        { title: 'Seleção de Pontos (Dados Driven)', status: 'pending', material: 'Analytics de viabilidade' },
+                        { title: 'Zero-Touch Replicação (Template Total)', status: 'pending', material: 'Automated processes' },
+                        { title: 'Recurso Humano: Promoção de Gerentes', status: 'pending', material: 'Career pathing' },
+                        { title: 'Consolidação de Hub (Capacidade 15+ units)', status: 'pending', material: 'Escalabilidade infra' }
+                    ]
+                },
+                {
+                    id: 'educacao-full-platform-2028',
+                    name: 'Educação — Plataforma Completa',
+                    type: 'Educação',
+                    description: 'Lançamento de plataforma completa com 8-10 módulos core.',
+                    typeClass: 'educacao',
+                    tasks: [
+                        { title: 'Expansão de Conteúdo (8-10 Módulos)', status: 'pending', material: 'Produção vídeo, curriculum' },
+                        { title: 'Certificações Profissionais (Parcerias)', status: 'pending', material: 'Acreditações' },
+                        { title: 'B2B Model (Venda para Restaurantes Externas)', status: 'pending', material: 'Go-to-market' },
+                        { title: 'Comunidade Online (Forum, Live Classes)', status: 'pending', material: 'Engagement' }
+                    ]
+                },
+                {
+                    id: 'software-growth-2028',
+                    name: 'Software/SaaS — Crescimento & Inovação',
+                    type: 'Software & Tech',
+                    description: 'Expansion da base de clientes, novas features AI/analytics.',
+                    typeClass: 'software',
+                    tasks: [
+                        { title: 'Feature: AI-Powered Menu Optimization', status: 'pending', material: 'ML models' },
+                        { title: 'Feature: Demand Forecasting', status: 'pending', material: 'Predictive analytics' },
+                        { title: 'Enterprise Features (Multi-Store Management)', status: 'pending', material: 'Architecture' },
+                        { title: 'Integração com Novos Parceiros (Delivery, Payment)', status: 'pending', material: 'APIs' }
+                    ]
+                }
+            ],
+            '2029-2030': [
+                {
+                    id: 'qrs-8-13-2029-2030',
+                    name: 'QRS 8-13 — Escala Meta (15 unidades)',
+                    type: 'QRS Latino-Asiático',
+                    description: 'Consolidação de 13-15 unidades QRS operando simultaneamente.',
+                    typeClass: 'qrs',
+                    tasks: [
+                        { title: 'Gestão de Portfolio (15 unidades)', status: 'pending', material: 'Governance' },
+                        { title: 'Franquia ou Partnership (Expansão externa)', status: 'pending', material: 'Legal, compliance' },
+                        { title: 'Inovação Contínua (Novo Conceito Testado)', status: 'pending', material: 'R&D, pilots' },
+                        { title: 'Consolidação de Marca & Reputação', status: 'pending', material: 'PR, métricas' }
+                    ]
+                },
+                {
+                    id: 'boteco-5-7-2029-2030',
+                    name: 'Boteco Asiático — Consolidação (5-7 units)',
+                    type: 'Boteco Asiático Saúde',
+                    description: 'Rede de Botecos consolidada em principais mercados São Paulo.',
+                    typeClass: 'boteco',
+                    tasks: [
+                        { title: 'Cobertura Geográfica (Zona sul, west, northeast)', status: 'pending', material: 'Estratégia de locais' },
+                        { title: 'Brand Leadership (Nutrition category)', status: 'pending', material: 'Thought leadership' },
+                        { title: 'Parcerias B2B (Corporate wellness)', status: 'pending', material: 'Sales engine' },
+                        { title: 'Consolidação de Fornecedores Especializados', status: 'pending', material: 'Supply chain' }
+                    ]
+                },
+                {
+                    id: 'dark-kitchen-4-operando-2029-2030',
+                    name: 'Dark Kitchen — 4ª Unidade + Escala',
+                    type: 'Dark Kitchen',
+                    description: '4ª dark kitchen consolidando modelo de delivery puro.',
+                    typeClass: 'dark-kitchen',
+                    tasks: [
+                        { title: 'Scouting & Abertura (Unit 4)', status: 'pending', material: 'Expansão logística' },
+                        { title: 'Otimização de Ofertas (Cross-Selling)', status: 'pending', material: 'Análise de cesta' },
+                        { title: 'Integração com Software (Completa)', status: 'pending', material: 'Tech ecosystem' },
+                        { title: 'Consolidação de Rentabilidade (38% margem target)', status: 'pending', material: 'P&L' }
+                    ]
+                },
+                {
+                    id: 'software-saas-producto-2029-2030',
+                    name: 'Software/SaaS — Produto Maduro',
+                    type: 'Software & Tech',
+                    description: 'Software gerando R$ 35M de receita com 70% margem, cliente base diversificada.',
+                    typeClass: 'software',
+                    tasks: [
+                        { title: 'Clientes B2B Consolidados (100+ clientes)', status: 'pending', material: 'Customer success' },
+                        { title: 'Internacional Pilot (1-2 mercados)', status: 'pending', material: 'Localization' },
+                        { title: 'Marketplace de Integrações (3rd party)', status: 'pending', material: 'Platform strategy' },
+                        { title: 'Preparação para M&A ou IPO', status: 'pending', material: 'FP&A, legal' }
+                    ]
+                },
+                {
+                    id: 'educacao-saas-2029-2030',
+                    name: 'Educação — EdTech SaaS Maduro',
+                    type: 'Educação',
+                    description: 'Plataforma de educação gerando R$ 35M receita com 65% margem, franquiados.',
+                    typeClass: 'educacao',
+                    tasks: [
+                        { title: 'Modelo Franquiado (10+ franchisees)', status: 'pending', material: 'Franquia handbook' },
+                        { title: 'Conteúdo Internacional (3+ idiomas)', status: 'pending', material: 'Produção vídeo' },
+                        { title: 'Certificações Profissionais Reconhecidas', status: 'pending', material: 'Parcerias govs' },
+                        { title: 'Consolidação de Brand (EdTech Leader F&B)', status: 'pending', material: 'PR' }
+                    ]
+                }
+            ]
+        };
+
+        // ROADMAP INTERACTION
+        function loadRoadmapData(quarter) {
+            const grid = document.getElementById('roadmapGrid');
+            grid.innerHTML = '';
+            const projects = roadmapData[quarter] || [];
+
+            if (projects.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #999;">Nenhum projeto agendado para este período.</p>';
+                return;
             }
+
+            projects.forEach(project => {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.innerHTML = `
+                    <div class="project-type ${project.typeClass}">${project.type}</div>
+                    <h4>${project.name}</h4>
+                    <p class="project-description">${project.description}</p>
+                    <button class="project-button" onclick="openTaskModal('${project.id}')">
+                        Ver Tarefas Detalhadas
+                    </button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function openTaskModal(projectId) {
+            let selectedProject = null;
+            for (let quarter in roadmapData) {
+                const project = roadmapData[quarter].find(p => p.id === projectId);
+                if (project) {
+                    selectedProject = project;
+                    break;
+                }
+            }
+
+            if (!selectedProject) return;
+
+            const modal = document.getElementById('taskModal');
+            const title = document.getElementById('taskModalTitle');
+            const body = document.getElementById('taskModalBody');
+
+            title.textContent = selectedProject.name;
+            body.innerHTML = `
+                <p style="color: #666; margin-bottom: 1.5rem;">${selectedProject.description}</p>
+                <div class="task-checklist">
+                    ${selectedProject.tasks.map((task, idx) => `
+                        <div class="task-item">
+                            <input type="checkbox" class="task-checkbox" />
+                            <div class="task-content">
+                                <div class="task-title">${task.title}</div>
+                                <div style="font-size: 0.85rem; color: #999; margin-bottom: 0.5rem;">${task.material}</div>
+                                <span class="task-status ${task.status.toLowerCase()}">${task.status}</span>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            modal.style.display = 'flex';
+        }
+
+        function closeTaskModal() {
+            document.getElementById('taskModal').style.display = 'none';
+        }
+
+        document.querySelectorAll('.quarter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.quarter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                loadRoadmapData(this.dataset.quarter);
+            });
         });
+
+        // Load initial data
+        loadRoadmapData('Q1-2025');
+
+        // Close modal on background click
+        document.getElementById('taskModal').addEventListener('click', function(e) {
+            if (e.target === this) closeTaskModal();
+        });
+
+        // RADAR SECTION - OPPORTUNITIES MANAGEMENT
+        const opportunitiesData = [
+            // Strategic Opportunities (5)
+            { id: 1, name: 'Hotel Ceará', type: 'estrategica', description: 'Serviço de food & beverage para operação hoteleira. Conceito F&B integrado com experiência de hospedagem premium.', status: 'analise', capex: 'Alto', timeline: 'Q3-2026' },
+            { id: 2, name: 'Dohmus', type: 'estrategica', description: 'Conceito de culinária caseira/comfort food. Especialização em receitas tradicionais com toque contemporâneo. Modelo de operação escalável.', status: 'aprovada', capex: 'Médio', timeline: 'Q1-2025' },
+            { id: 3, name: 'Humus House', type: 'estrategica', description: 'Especialização em culinária Oriente Médio e hummus artesanal. Conceito health-forward com alto potencial de replicação.', status: 'sob-analise', capex: 'Médio', timeline: 'Q2-2026' },
+            { id: 4, name: 'Labas 2', type: 'estrategica', description: 'Expansão ou segunda unidade de conceito existente. Replicação de modelo validado com operação otimizada.', status: 'aprovada', capex: 'Médio', timeline: 'Q3-2026' },
+            { id: 5, name: 'Katsu + UMA UMA', type: 'estrategica', description: 'Fusão de conceitos: Katsu sando com parceria ou integração com UMA UMA. Modelo de co-branding ou joint venture.', status: 'analise', capex: 'Alto', timeline: 'Q4-2025' },
+
+            // Complementary Opportunities (8)
+            { id: 6, name: 'Abraão', type: 'complementar', description: 'Projeto de expansão relacionado a operação de alimentos especializados. Modelo de nicho com margem elevada.', status: 'sob-analise', capex: 'Baixo', timeline: '2027' },
+            { id: 7, name: 'Operação de Verão Ceará', type: 'complementar', description: 'Seasonal pop-up ou operação sazonal no Ceará. Aproveitamento de temporada turística com conceito itinerante.', status: 'analise', capex: 'Baixo', timeline: 'Q2-2026' },
+            { id: 8, name: 'Betina', type: 'complementar', description: 'Conceito de confeitaria/pâtisserie premium. Foco em produtos artesanais e experiência café-da-tarde diferenciada.', status: 'analise', capex: 'Médio', timeline: '2027' },
+            { id: 9, name: 'Sorveteria e DK', type: 'complementar', description: 'Conceito de sorveteria artesanal + dark kitchen. Modelo de delivery-first para bebidas e sobremesas congeladas.', status: 'aprovada', capex: 'Médio', timeline: 'Q2-2026' },
+            { id: 10, name: 'Nami NORI', type: 'complementar', description: 'Possível especialização ou submarca dentro de NAMI. Foco em algas nori e culinária japonesa autêntica.', status: 'sob-analise', capex: 'Baixo', timeline: '2027' },
+            { id: 11, name: 'Sociedade Uma Uma', type: 'complementar', description: 'Estrutura societária ou parceria formal com marca/conceito Uma Uma. Possível aquisição ou JV de longo prazo.', status: 'analise', capex: 'Alto', timeline: '2028' },
+            { id: 12, name: 'Casa Amauri', type: 'complementar', description: 'Conceito de residência/loja/experiência em Rua Amauri. Integração de retail, café e espaço gastronômico.', status: 'aprovada', capex: 'Alto', timeline: 'Q1-2027' },
+            { id: 13, name: 'Catering Campos Hall', type: 'complementar', description: 'Serviço de catering especializado baseado em Mercearia Campos. Operação B2B para eventos corporativos e sociais.', status: 'sob-analise', capex: 'Baixo', timeline: '2027' }
+        ];
+
+        let filteredOpportunities = [...opportunitiesData];
+        let currentTypeFilter = 'all';
+        let currentStatusFilter = 'all';
+
+        function renderOpportunities() {
+            const grid = document.getElementById('opportunitiesGrid');
+            grid.innerHTML = '';
+
+            filteredOpportunities.forEach(opp => {
+                const card = document.createElement('div');
+                card.className = 'opportunity-card';
+                card.innerHTML = `
+                    <div class="opp-header">
+                        <h3 class="opp-card-title">${opp.name}</h3>
+                        <span class="opp-badge ${opp.type}">${opp.type === 'estrategica' ? 'Estratégica' : 'Complementar'}</span>
+                    </div>
+                    <span class="opp-status-badge ${opp.status}">${opp.status === 'analise' ? 'Em Análise' : opp.status === 'aprovada' ? 'Aprovada' : opp.status === 'reprovada' ? 'Reprovada' : 'Sob Análise'}</span>
+                    <p class="opp-description">${opp.description}</p>
+                    <div class="opp-meta">
+                        <span>Capex: ${opp.capex}</span>
+                        <span>Timeline: ${opp.timeline}</span>
+                    </div>
+                `;
+                card.addEventListener('click', () => openOppModal(opp));
+                grid.appendChild(card);
+            });
+
+            if (filteredOpportunities.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #999;">Nenhuma oportunidade encontrada com os filtros selecionados.</p>';
+            }
+        }
+
+        function filterOpportunities() {
+            filteredOpportunities = opportunitiesData.filter(opp => {
+                const typeMatch = currentTypeFilter === 'all' || opp.type === currentTypeFilter;
+                const statusMatch = currentStatusFilter === 'all' || opp.status === currentStatusFilter;
+                return typeMatch && statusMatch;
+            });
+            renderOpportunities();
+        }
+
+        function openOppModal(opp) {
+            const modal = document.getElementById('oppModal');
+            const body = document.getElementById('oppModalBody');
+            body.innerHTML = `
+                <h2>${opp.name}</h2>
+                <p style="color: #666; margin-bottom: 1rem;">
+                    <span class="opp-badge ${opp.type}">${opp.type === 'estrategica' ? 'Estratégica' : 'Complementar'}</span>
+                    <span class="opp-status-badge ${opp.status}" style="margin-left: 0.5rem;">${opp.status === 'analise' ? 'Em Análise' : opp.status === 'aprovada' ? 'Aprovada' : opp.status === 'reprovada' ? 'Reprovada' : 'Sob Análise'}</span>
+                </p>
+                <p>${opp.description}</p>
+                <div style="background-color: #f5f4f0; padding: 1rem; border-radius: 4px; margin-top: 1.5rem;">
+                    <p><strong>Capex Estimado:</strong> ${opp.capex}</p>
+                    <p><strong>Timeline:</strong> ${opp.timeline}</p>
+                </div>
+            `;
+            modal.style.display = 'flex';
+        }
+
+        function closeOppModal() {
+            document.getElementById('oppModal').style.display = 'none';
+        }
+
+        // Filter button listeners
+        document.querySelectorAll('[data-filter]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentTypeFilter = this.dataset.filter;
+                filterOpportunities();
+            });
+        });
+
+        document.querySelectorAll('[data-filter-status]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('[data-filter-status]').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentStatusFilter = this.dataset.filterStatus;
+                filterOpportunities();
+            });
+        });
+
+        // Form submission
+        document.getElementById('oppForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const newOpp = {
+                id: opportunitiesData.length + 1,
+                name: formData.get('name'),
+                type: formData.get('type'),
+                description: formData.get('description'),
+                status: formData.get('status'),
+                capex: formData.get('capex') ? `R$ ${parseInt(formData.get('capex')).toLocaleString('pt-BR')}` : 'A definir',
+                timeline: 'Em Definição'
+            };
+            opportunitiesData.push(newOpp);
+            filteredOpportunities = [...opportunitiesData];
+            renderOpportunities();
+            this.reset();
+            alert('Oportunidade registrada com sucesso!');
+        });
+
+        // Modal close listeners
+        document.querySelector('.opp-modal-close')?.addEventListener('click', closeOppModal);
+        document.getElementById('oppModal')?.addEventListener('click', function(e) {
+            if (e.target === this) closeOppModal();
+        });
+
+        // Initial render
+        renderOpportunities();
+
+        // TECHNOLOGY SOLUTIONS SECTION
+        const techSolutions = [
+            { id: 1, name: 'Sistema POS RPE (Custom)', category: 'pdv', description: 'POS customizado integrado com BI e kitchen display.', status: 'producao', cost: 'R$ 8.000', timeline: '2025' },
+            { id: 2, name: 'Plataforma de Agendamento Online', category: 'delivery', description: 'Reservas online com integração de pagamento.', status: 'desenvolvimento', cost: 'R$ 3.500', timeline: 'Q2-2026' },
+            { id: 3, name: 'ERP Financeiro & Contábil', category: 'financeiro', description: 'Sistema integrado de gestão financeira e contábil.', status: 'desenvolvimento', cost: 'R$ 10.000', timeline: 'Q3-2026' },
+            { id: 4, name: 'Sistema de Folha de Pagamento', category: 'rh', description: 'Folha automática com integrações fiscais.', status: 'desenvolvimento', cost: 'R$ 5.000', timeline: 'Q1-2027' },
+            { id: 5, name: 'Painel de BI & Dashboards', category: 'gestao', description: 'Inteligência de negócio em tempo real.', status: 'analise', cost: 'R$ 15.000', timeline: '2027' },
+            { id: 6, name: 'Integração Ifood & Uber Eats', category: 'delivery', description: 'API de integração com marketplaces de delivery.', status: 'desenvolvimento', cost: 'R$ 4.000', timeline: 'Q2-2026' },
+            { id: 7, name: 'Mobile App de Gerenciamento', category: 'gestao', description: 'App mobile para controle operacional.', status: 'analise', cost: 'R$ 25.000', timeline: '2027' },
+            { id: 8, name: 'Sistema de CRM & Fidelização', category: 'marketing', description: 'CRM para gestão de clientes e campanhas.', status: 'on-hold', cost: 'R$ 8.000', timeline: '2028' },
+            { id: 9, name: 'Automação de Marketing (Email)', category: 'marketing', description: 'Campanhas de email marketing automatizadas.', status: 'analise', cost: 'R$ 3.000', timeline: 'Q4-2026' },
+            { id: 10, name: 'API de Integração Terceiros', category: 'gestao', description: 'Webhooks e APIs para integrações customizadas.', status: 'desenvolvimento', cost: 'R$ 12.000', timeline: 'Q1-2027' },
+            { id: 11, name: 'Sistema de Gestão de Estoque', category: 'estoque', description: 'Controle de inventário com alertas automáticos.', status: 'on-hold', cost: 'R$ 6.000', timeline: '2028' },
+            { id: 12, name: 'Portal de Fornecedores', category: 'gestao', description: 'Portal B2B para gerenciamento de fornecedores.', status: 'planejamento', cost: 'R$ 9.000', timeline: '2028' }
+        ];
+
+        let techFiltered = [...techSolutions];
+        let currentTechStatus = 'all';
+
+        function renderTechSolutions() {
+            const grid = document.getElementById('techGrid');
+            grid.innerHTML = '';
+
+            techFiltered.forEach(tech => {
+                const card = document.createElement('div');
+                card.className = 'tech-card';
+                card.innerHTML = `
+                    <span class="tech-status-badge ${tech.status}">${tech.status === 'desenvolvimento' ? 'Em Desenvolvimento' : tech.status === 'analise' ? 'Em Análise' : tech.status === 'on-hold' ? 'On Hold' : 'Em Produção'}</span>
+                    <h3 style="margin-bottom: 0.8rem; font-size: 1rem;">${tech.name}</h3>
+                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem; flex: 1;">${tech.description}</p>
+                    <div style="border-top: 1px solid #eee; padding-top: 1rem; font-size: 0.8rem; color: #999;">
+                        <p><strong>Custo:</strong> ${tech.cost}/mês</p>
+                        <p><strong>Timeline:</strong> ${tech.timeline}</p>
+                    </div>
+                `;
+                card.addEventListener('click', () => openTechModal(tech));
+                grid.appendChild(card);
+            });
+        }
+
+        function filterTechSolutions() {
+            techFiltered = techSolutions.filter(tech => currentTechStatus === 'all' || tech.status === currentTechStatus);
+            renderTechSolutions();
+        }
+
+        function openTechModal(tech) {
+            const modal = document.getElementById('techModal');
+            const body = document.getElementById('techModalBody');
+            body.innerHTML = `
+                <h2>${tech.name}</h2>
+                <p style="color: #666; margin-bottom: 1rem;">
+                    <span class="tech-status-badge ${tech.status}">${tech.status === 'desenvolvimento' ? 'Em Desenvolvimento' : tech.status === 'analise' ? 'Em Análise' : tech.status === 'on-hold' ? 'On Hold' : 'Em Produção'}</span>
+                </p>
+                <p><strong>Descrição:</strong></p>
+                <p>${tech.description}</p>
+                <div style="background-color: #f5f4f0; padding: 1rem; border-radius: 4px; margin-top: 1.5rem;">
+                    <p><strong>Custo Mensal:</strong> ${tech.cost}</p>
+                    <p><strong>Timeline Estimada:</strong> ${tech.timeline}</p>
+                    <p><strong>Categoria:</strong> ${tech.category}</p>
+                </div>
+            `;
+            modal.style.display = 'flex';
+        }
+
+        function closeTechModal() {
+            document.getElementById('techModal').style.display = 'none';
+        }
+
+        // Tech filter buttons
+        document.querySelectorAll('[data-tech-status]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('[data-tech-status]').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentTechStatus = this.dataset.techStatus;
+                filterTechSolutions();
+            });
+        });
+
+        // Tech form submission
+        document.getElementById('techForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const newTech = {
+                id: techSolutions.length + 1,
+                name: formData.get('name'),
+                category: formData.get('category'),
+                description: formData.get('description'),
+                status: 'analise',
+                cost: formData.get('cost') ? `R$ ${parseInt(formData.get('cost')).toLocaleString('pt-BR')}` : 'A definir',
+                timeline: 'Em Definição'
+            };
+            techSolutions.push(newTech);
+            techFiltered = [...techSolutions];
+            renderTechSolutions();
+            this.reset();
+            alert('Sugestão de tecnologia registrada com sucesso!');
+        });
+
+        // Tech modal close
+        document.querySelector('.tech-modal-close')?.addEventListener('click', closeTechModal);
+        document.getElementById('techModal')?.addEventListener('click', function(e) {
+            if (e.target === this) closeTechModal();
+        });
+
+        renderTechSolutions();
+
+        // EDUCATION MODULES SECTION
+        const eduModules = [
+            { id: 1, name: 'Fundamentos de Cozinha Profissional', area: 'cozinha', description: 'Técnicas básicas de knife skills, segurança alimentar e mise en place.', status: 'producao', audience: 'Todos', duration: 20 },
+            { id: 2, name: 'Gestão de Estoque & Inventory Control', area: 'estoque', description: 'Métodos de controle de estoque, FIFO, rotatividade e minimização de perdas.', status: 'beta', audience: 'Gerentes', duration: 15 },
+            { id: 3, name: 'Técnicas de Atendimento de Salão Premium', area: 'salao', description: 'Serviço impecável, técnica de garfo/faca, upselling e atendimento VIP.', status: 'desenvolvimento', audience: 'Operacional', duration: 18 },
+            { id: 4, name: 'Coctelaria Avançada & Bar Management', area: 'bar', description: 'Preparação de coquetéis, gestão de bebidas e controle de custos de bar.', status: 'desenvolvimento', audience: 'Chefes', duration: 25 },
+            { id: 5, name: 'Liderança e Gestão de Pessoas', area: 'lideranca', description: 'Motivação de equipe, feedback construtivo, gestão de conflitos.', status: 'beta', audience: 'Gerentes', duration: 30 },
+            { id: 6, name: 'Fundamentos de Contabilidade Operacional', area: 'financeiro', description: 'Leitura de demonstrações, análise de margem, controle de custos.', status: 'desenvolvimento', audience: 'Administrativo', duration: 20 },
+            { id: 7, name: 'Segurança Alimentar & HACCP', area: 'cozinha', description: 'Normas de segurança, temperatura, armazenagem e rastreabilidade.', status: 'producao', audience: 'Todos', duration: 12 },
+            { id: 8, name: 'Marketing Operacional para Restaurantes', area: 'marketing', description: 'Estratégias de promoção, mídias sociais e eventos de experimentação.', status: 'beta', audience: 'Administrativo', duration: 16 },
+            { id: 9, name: 'Gastronomia Asiática & Tendências', area: 'cozinha', description: 'Conceitos de culinária asiática, ingredientes, técnicas modernas.', status: 'desenvolvimento', audience: 'Chefes', duration: 22 },
+            { id: 10, name: 'Customer Experience & NPS', area: 'salao', description: 'Criação de experiências memoráveis, medição de satisfação e fidelização.', status: 'planejamento', audience: 'Gerentes', duration: 14 }
+        ];
+
+        let eduFiltered = [...eduModules];
+        let currentEduStatus = 'all';
+
+        function renderEduModules() {
+            const grid = document.getElementById('eduGrid');
+            grid.innerHTML = '';
+
+            eduFiltered.forEach(module => {
+                const card = document.createElement('div');
+                card.className = 'edu-card';
+                card.innerHTML = `
+                    <span class="edu-status-badge ${module.status}">${module.status === 'desenvolvimento' ? 'Em Desenvolvimento' : module.status === 'beta' ? 'Beta' : module.status === 'producao' ? 'Em Produção' : 'Planejamento'}</span>
+                    <h3 style="margin-bottom: 0.8rem; font-size: 1rem;">${module.name}</h3>
+                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem; flex: 1;">${module.description}</p>
+                    <div style="border-top: 1px solid #eee; padding-top: 1rem; font-size: 0.8rem; color: #999;">
+                        <p><strong>Público:</strong> ${module.audience}</p>
+                        <p><strong>Duração:</strong> ${module.duration}h</p>
+                    </div>
+                `;
+                card.addEventListener('click', () => openEduModal(module));
+                grid.appendChild(card);
+            });
+        }
+
+        function filterEduModules() {
+            eduFiltered = eduModules.filter(module => currentEduStatus === 'all' || module.status === currentEduStatus);
+            renderEduModules();
+        }
+
+        function openEduModal(module) {
+            const modal = document.getElementById('eduModal');
+            const body = document.getElementById('eduModalBody');
+            body.innerHTML = `
+                <h2>${module.name}</h2>
+                <p style="color: #666; margin-bottom: 1rem;">
+                    <span class="edu-status-badge ${module.status}">${module.status === 'desenvolvimento' ? 'Em Desenvolvimento' : module.status === 'beta' ? 'Beta' : module.status === 'producao' ? 'Em Produção' : 'Planejamento'}</span>
+                </p>
+                <p><strong>Objetivo:</strong></p>
+                <p>${module.description}</p>
+                <div style="background-color: #f5f4f0; padding: 1rem; border-radius: 4px; margin-top: 1.5rem;">
+                    <p><strong>Público-Alvo:</strong> ${module.audience}</p>
+                    <p><strong>Duração Estimada:</strong> ${module.duration} horas</p>
+                    <p><strong>Área Temática:</strong> ${module.area.charAt(0).toUpperCase() + module.area.slice(1)}</p>
+                </div>
+            `;
+            modal.style.display = 'flex';
+        }
+
+        function closeEduModal() {
+            document.getElementById('eduModal').style.display = 'none';
+        }
+
+        // Edu filter buttons
+        document.querySelectorAll('[data-edu-status]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('[data-edu-status]').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentEduStatus = this.dataset.eduStatus;
+                filterEduModules();
+            });
+        });
+
+        // Edu form submission
+        document.getElementById('eduForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const newModule = {
+                id: eduModules.length + 1,
+                name: formData.get('name'),
+                area: formData.get('area'),
+                description: formData.get('description'),
+                status: 'planejamento',
+                audience: formData.get('audience'),
+                duration: parseInt(formData.get('duration')) || 0
+            };
+            eduModules.push(newModule);
+            eduFiltered = [...eduModules];
+            renderEduModules();
+            this.reset();
+            alert('Sugestão de módulo educacional registrada com sucesso!');
+        });
+
+        // Edu modal close
+        document.querySelector('.edu-modal-close')?.addEventListener('click', closeEduModal);
+        document.getElementById('eduModal')?.addEventListener('click', function(e) {
+            if (e.target === this) closeEduModal();
+        });
+
+        renderEduModules();
     </script>
 </body>
 </html>
