@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Grupo RPE - O maior vazio da culinária premium em São Paulo. Expansão 2026-2030: R$ 72.6M → R$ 250M">
+    <meta name="theme-color" content="#00B73D">
+    <title>Grupo RPE - Expansão Estratégica 2026-2030</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --green: #00B73D;
+            --black: #0F0F0F;
+            --off-white: #F5F4F0;
+            --dark-gray: #1A1A1A;
+            --medium-gray: #646464;
+            --white: #FFFFFF;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: var(--off-white);
+            color: var(--dark-gray);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ============ HEADER / NAV ============ */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--off-white);
+            border-bottom: 1px solid #E0E0E0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--green);
+        }
+
+        .logo span {
+            color: var(--black);
+        }
+
+        nav a {
+            color: var(--dark-gray);
+            text-decoration: none;
+            margin-left: 2.5rem;
+            font-weight: 500;
+            font-size: 14px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--green);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* ============ HERO SECTION ============ */
+        .hero {
+            margin-top: 80px;
+            background: var(--black);
+            color: var(--off-white);
+            padding: 80px 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--green);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--green);
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 8vw, 64px);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--green);
+            animation: slideInDown 0.8s ease;
+        }
+
+        .hero h2 {
+            font-size: clamp(14px, 4vw, 24px);
+            color: var(--off-white);
+            font-weight: 300;
+            margin-bottom: 2rem;
+            animation: slideInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-tagline {
+            font-size: 14px;
+            color: var(--medium-gray);
+            max-width: 600px;
+            margin: 0 auto;
+            animation: slideInUp 0.8s ease 0.4s both;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============ SECTION LAYOUT ============ */
+        section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 2rem;
+        }
+
+        section h2 {
+            font-size: clamp(28px, 6vw, 48px);
+            margin-bottom: 3rem;
+            color: var(--black);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        section h2::before {
+            content: '';
+            width: 4px;
+            height: clamp(28px, 6vw, 48px);
+            background: var(--green);
+            border-radius: 2px;
+        }
+
+        /* ============ MARKET GROWTH ============ */
+        .market-growth {
+            background: var(--off-white);
+        }
+
+        .metric-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .metric-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .metric-card {
+            background: var(--white);
+            border: 2px solid var(--green);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: var(--transition);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 183, 61, 0.15);
+        }
+
+        .metric-label {
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--green);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: clamp(36px, 8vw, 56px);
+            font-weight: bold;
+            color: var(--green);
+            margin-bottom: 1rem;
+        }
+
+        .metric-desc {
+            font-size: 14px;
+            color: var(--medium-gray);
+            line-height: 1.6;
+        }
+
+        /* ============ TAM/SAM/SOM ============ */
+        .market-sizing {
+            background: var(--white);
+        }
+
+        .funnel-container {
+            margin: 3rem 0;
+        }
+
+        .funnel-box {
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--green);
+        }
+
+        .funnel-box.tam {
+            background: #F0F8FF;
+            border-left-color: var(--green);
+        }
+
+        .funnel-box.sam {
+            background: #E0F8E0;
+            border-left-color: var(--green);
+        }
+
+        .funnel-box.som {
+            background: var(--green);
+            color: var(--off-white);
+        }
+
+        .funnel-title {
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .funnel-value {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .funnel-desc {
+            font-size: 13px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* ============ CONSUMER INSIGHTS ============ */
+        .consumer-insights {
+            background: var(--off-white);
+        }
+
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .insight-card {
+            background: var(--white);
+            border: 2px solid var(--green);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: var(--transition);
+        }
+
+        .insight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 183, 61, 0.15);
+        }
+
+        .insight-label {
+            display: inline-block;
+            background: var(--green);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .insight-card h3 {
+            font-size: 20px;
+            color: var(--black);
+            margin-bottom: 1rem;
+        }
+
+        .insight-card p {
+            font-size: 14px;
+            color: var(--medium-gray);
+            line-height: 1.6;
+        }
+
+        /* ============ COMPETITIVE LANDSCAPE ============ */
+        .competitive {
+            background: var(--white);
+        }
+
+        .competitive-table {
+            overflow-x: auto;
+            margin: 3rem 0;
+            border-radius: 8px;
+            border: 1px solid #E0E0E0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        thead {
+            background: var(--green);
+            color: var(--white);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        tbody tr:hover {
+            background: #F9F9F9;
+        }
+
+        /* ============ HUB-SPOKE MODEL ============ */
+        .hub-spoke {
+            background: var(--off-white);
+        }
+
+        .model-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin: 3rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .model-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .hub-diagram {
+            position: relative;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hub {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: var(--green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: bold;
+            font-size: 12px;
+            text-align: center;
+            z-index: 2;
+            box-shadow: 0 4px 16px rgba(0, 183, 61, 0.3);
+        }
+
+        .spoke {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: var(--off-white);
+            border: 2px solid var(--green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+            color: var(--green);
+            text-align: center;
+        }
+
+        .spoke:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
+        .spoke:nth-child(2) { top: 50%; right: 0; transform: translateY(-50%); }
+        .spoke:nth-child(3) { bottom: 0; left: 50%; transform: translateX(-50%); }
+        .spoke:nth-child(4) { top: 50%; left: 0; transform: translateY(-50%); }
+
+        .model-benefits {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .benefit {
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .benefit::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--green);
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .benefit h4 {
+            font-size: 16px;
+            color: var(--black);
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit p {
+            font-size: 13px;
+            color: var(--medium-gray);
+        }
+
+        /* ============ UNIT ECONOMICS ============ */
+        .unit-economics {
+            background: var(--white);
+        }
+
+        .economics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .economics-card {
+            background: var(--off-white);
+            border: 2px solid var(--green);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .economics-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(0, 183, 61, 0.15);
+        }
+
+        .concept-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--green);
+            margin-bottom: 1.5rem;
+        }
+
+        .economics-stat {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .economics-stat:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--medium-gray);
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--black);
+        }
+
+        /* ============ ROADMAP ============ */
+        .roadmap {
+            background: var(--off-white);
+        }
+
+        .timeline {
+            position: relative;
+            margin: 3rem 0;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--green);
+            transform: translateX(-50%);
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 0;
+            }
+        }
+
+        .milestone {
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .milestone {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .milestone:nth-child(odd) .milestone-content {
+                grid-column: 1;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+        }
+
+        .milestone:nth-child(odd) {
+            padding-right: 50%;
+        }
+
+        .milestone:nth-child(even) {
+            padding-left: 50%;
+        }
+
+        @media (max-width: 768px) {
+            .milestone:nth-child(odd),
+            .milestone:nth-child(even) {
+                padding-left: 2rem;
+                padding-right: 0;
+            }
+        }
+
+        .milestone-dot {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: var(--green);
+            border: 3px solid var(--off-white);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .milestone-dot {
+                left: -8px;
+            }
+        }
+
+        .milestone-content {
+            background: var(--white);
+            border: 2px solid var(--green);
+            border-radius: 8px;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .milestone-date {
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--green);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .milestone-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--black);
+            margin-bottom: 0.5rem;
+        }
+
+        .milestone-desc {
+            font-size: 13px;
+            color: var(--medium-gray);
+        }
+
+        /* ============ SCENARIOS ============ */
+        .scenarios {
+            background: var(--white);
+        }
+
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .scenario {
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .scenario.conservative {
+            background: #E8E8E8;
+            border: 2px solid #999;
+        }
+
+        .scenario.base {
+            background: var(--green);
+            color: var(--white);
+            border: 2px solid var(--green);
+            transform: scale(1.05);
+        }
+
+        .scenario.upside {
+            background: var(--black);
+            color: var(--white);
+            border: 2px solid var(--black);
+        }
+
+        .scenario-label {
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .scenario-value {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .scenario-desc {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        /* ============ FINANCIAL PROJECTIONS ============ */
+        .financials {
+            background: var(--off-white);
+        }
+
+        .projection-table {
+            overflow-x: auto;
+            margin: 3rem 0;
+            border-radius: 8px;
+        }
+
+        .projection-table table {
+            background: var(--white);
+        }
+
+        .highlight-row {
+            background: #F0F8FF;
+            font-weight: bold;
+        }
+
+        .insight-box {
+            background: var(--green);
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .insight-box strong {
+            font-size: 18px;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ============ RISKS ============ */
+        .risks {
+            background: var(--white);
+        }
+
+        .risk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .risk-item {
+            border-left: 4px solid var(--green);
+            padding-left: 1.5rem;
+            background: var(--off-white);
+            padding: 1.5rem;
+            border-radius: 4px;
+        }
+
+        .risk-category {
+            display: inline-block;
+            background: var(--green);
+            color: var(--white);
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .risk-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--black);
+            margin-bottom: 0.5rem;
+        }
+
+        .risk-description {
+            font-size: 13px;
+            color: var(--medium-gray);
+            margin-bottom: 1rem;
+        }
+
+        .mitigation {
+            padding-top: 1rem;
+            border-top: 1px solid #D0D0D0;
+            font-size: 12px;
+            color: var(--green);
+            font-weight: bold;
+        }
+
+        /* ============ CTA SECTION ============ */
+        .cta {
+            background: var(--black);
+            color: var(--off-white);
+            padding: 80px 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .cta h2::before {
+            background: var(--green);
+        }
+
+        .cta h2 {
+            color: var(--off-white);
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-desc {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: var(--off-white);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: var(--green);
+            color: var(--black);
+        }
+
+        .btn-primary:hover {
+            background: #00A035;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 183, 61, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--off-white);
+            border: 2px solid var(--off-white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--off-white);
+            color: var(--black);
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            background: var(--dark-gray);
+            color: var(--medium-gray);
+            text-align: center;
+            padding: 2rem;
+            font-size: 13px;
+            border-top: 1px solid var(--black);
+        }
+
+        footer a {
+            color: var(--green);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ============ SCROLL ANIMATIONS ============ */
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            nav a {
+                margin-left: 1rem;
+            }
+
+            section {
+                padding: 40px 1.5rem;
+            }
+
+            .insight-grid,
+            .economics-grid,
+            .scenario-grid,
+            .risk-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .scenario.base {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">RPE<span>.</span></div>
+            <nav>
+                <a href="#mercado">Mercado</a>
+                <a href="#oportunidade">Oportunidade</a>
+                <a href="#modelo">Modelo</a>
+                <a href="#roadmap">Roadmap</a>
+                <a href="#financeiro">Financeiro</a>
+                <a href="#contato">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <h1>O Maior Vazio da Culinária Premium em SP</h1>
+        <h2>3x crescimento | 0 players consolidados | R$ 150-160M SOM</h2>
+        <p class="hero-tagline">Uma oportunidade de mercado extraordinária para o Grupo RPE</p>
+    </section>
+
+    <!-- MARKET GROWTH -->
+    <section id="mercado" class="market-growth">
+        <h2>Mercado Cresce 4x Mais Rápido</h2>
+        <div class="metric-row">
+            <div class="metric-card">
+                <div class="metric-label">Crescimento Anual</div>
+                <div class="metric-value">23%</div>
+                <div class="metric-desc">
+                    <strong>Asiático Premium</strong><br>
+                    vs 6% culinária geral
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Bairros-Alvo</div>
+                <div class="metric-value">3</div>
+                <div class="metric-desc">
+                    <strong>Pinheiros • Vila Mariana • Itaim Bibi</strong><br>
+                    135k+ domicílios com renda > R$ 12k/mês
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TAM/SAM/SOM -->
+    <section id="oportunidade" class="market-sizing">
+        <h2>Oportunidade: TAM → SAM → SOM</h2>
+        <div class="funnel-container">
+            <div class="funnel-box tam">
+                <div class="funnel-title">TAM (Total Addressable Market)</div>
+                <div class="funnel-value">R$ 320B</div>
+                <div class="funnel-desc">Mercado total de F&B em São Paulo | Crescimento 6% a.a.</div>
+            </div>
+            <div class="funnel-box sam">
+                <div class="funnel-title">SAM (Serviceable Addressable Market)</div>
+                <div class="funnel-value">R$ 52B</div>
+                <div class="funnel-desc">Premium dining (ticket > R$ 80) | CAGR 8-10% a.a.</div>
+            </div>
+            <div class="funnel-box som">
+                <div class="funnel-title">SOM (Serviceable Obtainable Market)</div>
+                <div class="funnel-value">R$ 150-160M</div>
+                <div class="funnel-desc">Fatia viável Grupo RPE (5 anos) | 8-10 unidades</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONSUMER INSIGHTS -->
+    <section class="consumer-insights">
+        <h2>Consumer Insights: NOW • NEW • NEXT</h2>
+        <div class="insight-grid">
+            <div class="insight-card">
+                <span class="insight-label">NOW</span>
+                <h3>Autenticidade</h3>
+                <p>Millennials HNI buscam narrativas locais. Sourcing direto Japão + Tailândia. Recusam mainstream.</p>
+            </div>
+            <div class="insight-card">
+                <span class="insight-label">NEW</span>
+                <h3>Experiencialismo</h3>
+                <p>Premium é Instagram-worthy. Ambiance, service theatre, open kitchen concept.</p>
+            </div>
+            <div class="insight-card">
+                <span class="insight-label">NEXT</span>
+                <h3>Bairro-fication</h3>
+                <p>Comunidade local é atestado de qualidade. Pop-ups + eventos criam cultura de pertencimento.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPETITIVE LANDSCAPE -->
+    <section class="competitive">
+        <h2>Competição: Quem Está no Jogo?</h2>
+        <div class="competitive-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Conceito</th>
+                        <th>Ticket Médio</th>
+                        <th>Posicionamento</th>
+                        <th>Gap vs RPE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Banzai Sushi</strong></td>
+                        <td>R$ 120-150</td>
+                        <td>Sushi + Sake casual</td>
+                        <td>Falta experiência; delivery-first</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Matsuri</strong></td>
+                        <td>R$ 180-220</td>
+                        <td>Fine dining tradicional</td>
+                        <td>Rígido; sem inovação de conceitos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tamashii</strong></td>
+                        <td>R$ 100-130</td>
+                        <td>Ramen + F&B casual</td>
+                        <td>Foca categoria única</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bangkok Garden</strong></td>
+                        <td>R$ 95-130</td>
+                        <td>Tailandês convencional</td>
+                        <td>Sem premium positioning; menu genérico</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mercearia Local</strong></td>
+                        <td>R$ 70-100</td>
+                        <td>Boteco + gourmet</td>
+                        <td>Não cobre asiático premium</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="insight-box" style="background: #333;">
+            <strong>Insight:</strong> Nenhum competitor oferece a combinação: Hub-and-Spoke + Multi-conceito asiático + Premium experience + Bairro-centric. Essa é a oportunidade.
+        </div>
+    </section>
+
+    <!-- HUB-SPOKE MODEL -->
+    <section id="modelo" class="hub-spoke">
+        <h2>Modelo: Hub-and-Spoke</h2>
+        <div class="model-container">
+            <div class="hub-diagram">
+                <div class="hub">Cozinha Central<br>Rua Amauri</div>
+                <div class="spoke">Tom Yum</div>
+                <div class="spoke">Poke</div>
+                <div class="spoke">Dim Sum</div>
+                <div class="spoke">MerçaNami</div>
+            </div>
+            <div class="model-benefits">
+                <div class="benefit">
+                    <h4>Eficiência Operacional</h4>
+                    <p>Centralização de mise-en-place reduz 40% dos custos de COGS vs modelo fragmented</p>
+                </div>
+                <div class="benefit">
+                    <h4>Qualidade Consistente</h4>
+                    <p>Um sous-chef gerencia receitas e treinamento em todos os satélites</p>
+                </div>
+                <div class="benefit">
+                    <h4>Escalabilidade</h4>
+                    <p>Adicionar nova unidade em 60 dias (vs 90-120 dias modelo tradicional)</p>
+                </div>
+                <div class="benefit">
+                    <h4>Capital Leve</h4>
+                    <p>Satélites são "assembly + service" — capex reduzido em 35%</p>
+                </div>
+                <div class="benefit">
+                    <h4>Portfólio Diversificado</h4>
+                    <p>Mitiga risco de conceito; receita espalhada em 4 flechas asiáticas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UNIT ECONOMICS -->
+    <section class="unit-economics">
+        <h2>Unit Economics: A Prova</h2>
+        <div class="economics-grid">
+            <div class="economics-card">
+                <div class="concept-name">Tom Yum QSR</div>
+                <div class="economics-stat">
+                    <div class="stat-label">Covers/dia</div>
+                    <div class="stat-value">190</div>
+                </div>
+                <div class="economics-stat">
+                    <div class="stat-label">Ticket Médio</div>
+                    <div class="stat-value">R$ 65</div>
+                </div>
+                <div class="economics-stat">
+                    <div class="stat-label">Receita/mês</div>
+                    <div class="stat-value">R$ 500k</div>
+                </div>
+                <div class="economics-stat">
+                    <div class="stat-label">EBITDA %</div>
+                    <div class="stat-value">38%</div>
+                </div>
+                <div class="economics-stat">
+                    <div class="stat-label">Payback</div>
+                    <div class="stat-value">21 meses</div>
+                </div>
+            </div>
+            <div class="economics-card">
+                <div class="concept-name">Poke Premium</div>
+                <div class="economics-stat">
+                    <div class="stat-label">Covers/dia</div>
+                    <div class="stat-value">180</div>
+                </div>
+                <div class="economics-stat">
+                    <div class="stat-label">Ticket Médio</div>
+                    <div class="stat-value">R$ 85</div>
+                </div>
+                <div class="economics-stat">
+                    <div class="stat-label">Receita/mês</div>
+                    <div class="stat-value">R$ 415k</div>
+                </div>
+                <div class="economics-stat">
+                    <div class="stat-label">EBITDA %</div>
+                    <div class="stat-value">36%</div>
+                </div>
+                <div class="economics-stat">
+                    <div class="stat-label">Payback</div>
+                    <div class="stat-value">24 meses</div>
+                </div>
+            </div>
+            <div class="economics-card">
+                <div class="concept-name">Dim Sum Casual</div>
+                <div class="economics-stat">
+                    <div class="stat-label">Covers/dia</div>
+                    <div class="stat-value">185</div>
+                </div>
+                <div class="economics-stat">
+                    <div class="stat-label">Ticket Médio</div>
+                    <div class="stat-value">R$ 70</div>
+                </div>
+                <div class="economics-stat">
+                    <div class="stat-label">Receita/mês</div>
+                    <div class="stat-value">R$ 455k</div>
+                </div>
+                <div class="economics-stat">
+                    <div class="stat-label">EBITDA %</div>
+                    <div class="stat-value">37%</div>
+                </div>
+                <div class="economics-stat">
+                    <div class="stat-label">Payback</div>
+                    <div class="stat-value">23 meses</div>
+                </div>
+            </div>
+            <div class="economics-card">
+                <div class="concept-name">MerçaNami</div>
+                <div class="economics-stat">
+                    <div class="stat-label">Covers/dia</div>
+                    <div class="stat-value">220</div>
+                </div>
+                <div class="economics-stat">
+                    <div class="stat-label">Ticket Médio</div>
+                    <div class="stat-value">R$ 52</div>
+                </div>
+                <div class="economics-stat">
+                    <div class="stat-label">Receita/mês</div>
+                    <div class="stat-value">R$ 385k</div>
+                </div>
+                <div class="economics-stat">
+                    <div class="stat-label">EBITDA %</div>
+                    <div class="stat-value">23%</div>
+                </div>
+                <div class="economics-stat">
+                    <div class="stat-label">Payback</div>
+                    <div class="stat-value">45 meses</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section id="roadmap" class="roadmap">
+        <h2>18 Meses: Fase 1</h2>
+        <div class="timeline">
+            <div class="milestone">
+                <div class="milestone-dot"></div>
+                <div class="milestone-content">
+                    <div class="milestone-date">Jun 2026</div>
+                    <div class="milestone-title">Cozinha Central Operacional</div>
+                    <div class="milestone-desc">Rua Amauri: 600m² kitchen + office. Staff treinado. Recipes locked.</div>
+                </div>
+            </div>
+            <div class="milestone">
+                <div class="milestone-dot"></div>
+                <div class="milestone-content">
+                    <div class="milestone-date">Set 2026</div>
+                    <div class="milestone-title">Primeira Unidade Satélite</div>
+                    <div class="milestone-desc">Tom Yum em Pinheiros. Validação do modelo hub-spoke.</div>
+                </div>
+            </div>
+            <div class="milestone">
+                <div class="milestone-dot"></div>
+                <div class="milestone-content">
+                    <div class="milestone-date">Jan 2027</div>
+                    <div class="milestone-title">Expansão a 3 Unidades</div>
+                    <div class="milestone-desc">Poke (Vila Mariana) + Dim Sum (Itaim). Marketing acelera.</div>
+                </div>
+            </div>
+            <div class="milestone">
+                <div class="milestone-dot"></div>
+                <div class="milestone-content">
+                    <div class="milestone-date">Mar 2027</div>
+                    <div class="milestone-title">MerçaNami Launch</div>
+                    <div class="milestone-desc">Flagship retail em Pinheiros. Full brand reveal.</div>
+                </div>
+            </div>
+            <div class="milestone">
+                <div class="milestone-dot"></div>
+                <div class="milestone-content">
+                    <div class="milestone-date">Jun 2027</div>
+                    <div class="milestone-title">5ª Unidade + 50% Revenue Growth</div>
+                    <div class="milestone-desc">2ª Poke ou 2º Dim Sum. Receita cumulativa R$ 12-15M.</div>
+                </div>
+            </div>
+        </div>
+        <div class="insight-box">
+            <strong>Capex Fase 1: R$ 5.5M</strong><br>
+            • Cozinha Central: R$ 2.2M<br>
+            • 5 satélites @ R$ 650k cada: R$ 3.25M<br>
+            • Working Capital + Contingency: R$ 50k
+        </div>
+    </section>
+
+    <!-- SCENARIOS -->
+    <section class="scenarios">
+        <h2>3 Cenários: 2030</h2>
+        <div class="scenario-grid">
+            <div class="scenario conservative">
+                <div class="scenario-label">Conservador</div>
+                <div class="scenario-value">R$ 180M</div>
+                <div class="scenario-desc">6 unidades | EBITDA 28% | Sem M&A</div>
+            </div>
+            <div class="scenario base">
+                <div class="scenario-label">Base Case</div>
+                <div class="scenario-value">R$ 250M</div>
+                <div class="scenario-desc">8-10 unidades | EBITDA 32% | Hub escalável</div>
+            </div>
+            <div class="scenario upside">
+                <div class="scenario-label">Upside</div>
+                <div class="scenario-value">R$ 320M</div>
+                <div class="scenario-desc">12+ unidades | EBITDA 35% | Franchising iniciado</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINANCIAL PROJECTIONS -->
+    <section id="financeiro" class="financials">
+        <h2>Projeções Financeiras</h2>
+        <div class="projection-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ano</th>
+                        <th>2025 (Base)</th>
+                        <th>2026</th>
+                        <th>2027</th>
+                        <th>2028</th>
+                        <th>2029</th>
+                        <th>2030</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Receita (R$M)</strong></td>
+                        <td>72.6</td>
+                        <td>85.4</td>
+                        <td>125.3</td>
+                        <td>165.2</td>
+                        <td>210.5</td>
+                        <td>250.0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>EBITDA %</strong></td>
+                        <td>22.7%</td>
+                        <td>24.2%</td>
+                        <td>28.5%</td>
+                        <td>30.1%</td>
+                        <td>31.5%</td>
+                        <td>32.0%</td>
+                    </tr>
+                    <tr class="highlight-row">
+                        <td><strong>Units</strong></td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>5</td>
+                        <td>7</td>
+                        <td>9</td>
+                        <td>10</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="insight-box">
+            <strong>Key Metrics:</strong><br>
+            • CAGR (2025-2030): <strong>3.4x</strong><br>
+            • FCF cumulativo: <strong>R$ 61M+</strong><br>
+            • IRR esperado: <strong>42-48%</strong> (base/upside)
+        </div>
+    </section>
+
+    <!-- RISKS -->
+    <section class="risks">
+        <h2>Riscos & Mitigações</h2>
+        <div class="risk-grid">
+            <div class="risk-item">
+                <span class="risk-category">Operacional</span>
+                <div class="risk-title">Consistência de Qualidade</div>
+                <div class="risk-description">Risco de variação entre satélites; brand dilution se hub não suster demand.</div>
+                <div class="mitigation">✓ SOP rigoroso; audit mensal; sous-chef como guardiã</div>
+            </div>
+            <div class="risk-item">
+                <span class="risk-category">Mercado</span>
+                <div class="risk-title">Saturação de Nicho</div>
+                <div class="risk-description">Se competitors copiarem modelo, margem comprime rapidamente.</div>
+                <div class="mitigation">✓ IP na propriedade intelectual de recipes; lock-in via community</div>
+            </div>
+            <div class="risk-item">
+                <span class="risk-category">Financeiro</span>
+                <div class="risk-title">Capex Overrun</div>
+                <div class="risk-description">Construção de cozinha central ou satélites acima do orçado.</div>
+                <div class="mitigation">✓ Contingency 10%; parceria com construtora fixa-preço</div>
+            </div>
+            <div class="risk-item">
+                <span class="risk-category">Talent</span>
+                <div class="risk-title">Chefs & Management</div>
+                <div class="risk-description">Dependência de 2-3 key people; pouca profissionalização.</div>
+                <div class="mitigation">✓ Programa de retenção; plano de sucessão; capacitação interna</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contato" class="cta">
+        <div class="cta-content">
+            <h2>Move Forward</h2>
+            <p class="cta-desc">
+                O mercado de culinária premium em SP cresce 23% a.a. Nenhum competitor oferece a combinação de Hub-and-Spoke + Multi-conceito asiático + Premium experience que o Grupo RPE pode escalar hoje.
+            </p>
+            <div class="cta-buttons">
+                <a href="mailto:erich@gruporpe.com.br" class="btn btn-primary">Começar Conversa</a>
+                <a href="./APRESENTACAO_RPE_VISUAL_PREMIUM_FINAL.pptx" download class="btn btn-secondary">Baixar Deck</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Grupo RPE. Confidencial. | <a href="mailto:erich@gruporpe.com.br">erich@gruporpe.com.br</a></p>
+    </footer>
+
+    <script>
+        // Smooth scroll anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section > *:not(h2)').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
