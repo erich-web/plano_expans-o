@@ -168,7 +168,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px;
-            align-items: center;
+            align-items: start;
             margin-bottom: 80px;
         }
 
@@ -579,6 +579,7 @@
                 <a href="#" onclick="switchSection('conceitos')" class="nav-link">Conceitos</a>
                 <a href="#" onclick="switchSection('uniteconomics')" class="nav-link">Unit Economics</a>
                 <a href="#" onclick="switchSection('financeiro')" class="nav-link">Financeiro</a>
+                <a href="#" onclick="switchSection('projecoes')" class="nav-link">Projeções</a>
                 <a href="#" onclick="switchSection('roadmap')" class="nav-link">Roadmap</a>
                 <a href="#" onclick="switchSection('negociosalternos')" class="nav-link">Edu + Software</a>
                 <a href="#" onclick="switchSection('businessplan')" class="nav-link">Plano Completo</a>
@@ -789,15 +790,15 @@
             <div style="background: var(--OFF_WHITE); padding: 40px; border-radius: 4px; margin-bottom: 40px;">
                 <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase;">Benefícios operacionais QRS</h3>
                 <div class="grid-3">
-                    <div>
+                    <div style="text-align: left;">
                         <h4 style="font-size: 16px; font-weight: 700; color: var(--PRIMARY_GREEN); margin-bottom: 8px;">-40% COGS</h4>
                         <p style="font-size: 14px; color: var(--DARK_GRAY);">Escala de compra e prep centralizado reduzem custos de ingredientes em 40%.</p>
                     </div>
-                    <div>
+                    <div style="text-align: left;">
                         <h4 style="font-size: 16px; font-weight: 700; color: var(--PRIMARY_GREEN); margin-bottom: 8px;">60 Dias de Launch</h4>
                         <p style="font-size: 14px; color: var(--DARK_GRAY);">QRS units lançam em 60 dias, não 6 meses. Modelo replicável e testado. QRS 1, 2, 3 orbitam Rua Amauri.</p>
                     </div>
-                    <div>
+                    <div style="text-align: left;">
                         <h4 style="font-size: 16px; font-weight: 700; color: var(--PRIMARY_GREEN); margin-bottom: 8px;">-35% Capex</h4>
                         <p style="font-size: 14px; color: var(--DARK_GRAY);">Kitchens menores = investimento reduzido. Rua Amauri absorve os CapEx maiores.</p>
                     </div>
@@ -806,20 +807,20 @@
 
             <div style="background: var(--OFF_WHITE); padding: 40px; border-radius: 4px; margin-bottom: 40px;">
                 <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase;">Benefícios Operacionais Dark Kitchen</h3>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8;">
+                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; text-align: left;">
                     Central de produção para teste de produto, desenvolvimento e distribuição para as casas para validação e distribuição. Dark Kitchen opera 100% via supply Rua Amauri, capturando eficiência de escala em sourcing de ingredientes premium e produção de base de calda.
                 </p>
             </div>
 
             <div style="background: var(--OFF_WHITE); padding: 40px; border-radius: 4px; margin-bottom: 40px;">
                 <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase;">Benefícios Dohmus como Boteco Asiático</h3>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8;">
+                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; text-align: left;">
                     Fusão do rigor técnico e expertise em culinária asiática da NAMI com a acessibilidade social e conhecimento de bar/bebidas da Mercearia Amauri. Dohmus captura slot de tempo (happy hour 18h-20h) não ocupado pela NAMI (dinner-only), recebendo proteínas prep e bases de sopas via Hub para finalização in loco com técnica wok e shoyu.
                 </p>
             </div>
 
-            <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 24px; text-transform: uppercase;">Ecossistema Integrado</h3>
-            <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 20px;">
+            <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 24px; text-transform: uppercase; text-align: left;">Ecossistema Integrado</h3>
+            <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 20px; text-align: left;">
                 O Hub-Spoke não é apenas operacional—é um ecossistema onde cada conceito alimenta o outro. A Mercearia Amauri treina chefs, a NAMI validou técnicas asiáticas, os QRS testam escala, o Dohmus comprova hybrid models, a Dark Kitchen prova inovação.
             </p>
         </div>
@@ -1560,6 +1561,71 @@
         </div>
     </div>
 
+    <!-- PROJEÇÕES DE RECEITA SECTION -->
+    <div id="projecoes" class="section">
+        <div class="container">
+            <h2 class="section-title">Projeções de Receita 5 Anos</h2>
+            <p class="section-subtitle">Estratégia de crescimento consolidada: R$ 72.6M (2025) → R$ 248.8M (2030)</p>
+
+            <div style="background: var(--WHITE); border: 1px solid var(--BORDER_COLOR); padding: 40px; border-radius: 4px; margin-bottom: 60px;">
+                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 30px; text-transform: uppercase;">Faturamento Grupo (20 Trimestres)</h3>
+                <canvas id="revenueChart" style="max-height: 500px;"></canvas>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 40px;">
+                    <div>
+                        <h4 style="font-size: 13px; color: var(--PRIMARY_GREEN); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">2025 (Baseline)</h4>
+                        <p style="font-size: 18px; font-weight: 700; color: var(--BLACK);">R$ 72.6M</p>
+                        <p style="font-size: 13px; color: var(--MEDIUM_GRAY); margin-top: 4px;">Operações consolidadas</p>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 13px; color: var(--PRIMARY_GREEN); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">2027 (Mês 24)</h4>
+                        <p style="font-size: 18px; font-weight: 700; color: var(--BLACK);">R$ 148.3M</p>
+                        <p style="font-size: 13px; color: var(--MEDIUM_GRAY); margin-top: 4px;">+104% vs. baseline</p>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 13px; color: var(--PRIMARY_GREEN); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">2030 (Mês 60)</h4>
+                        <p style="font-size: 18px; font-weight: 700; color: var(--BLACK);">R$ 248.8M</h4>
+                        <p style="font-size: 13px; color: var(--MEDIUM_GRAY); margin-top: 4px;">3.4x crescimento | Target atingido</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: var(--OFF_WHITE); padding: 40px; border-radius: 4px; margin-bottom: 40px;">
+                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase;">Drivers de Crescimento por Fase</h3>
+                <div class="grid-3">
+                    <div>
+                        <h4 style="font-size: 14px; color: var(--PRIMARY_GREEN); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">Fase 1 (M0-18)</h4>
+                        <p style="font-size: 14px; color: var(--DARK_GRAY); line-height: 1.8;">Hub ramp-up, QRS 1-3 launch, Dohmus + Dark Kitchen MVP, Educação + Software primeiras receitas. Capex R$ 5.5M.</p>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 14px; color: var(--PRIMARY_GREEN); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">Fase 2 (M19-36)</h4>
+                        <p style="font-size: 14px; color: var(--DARK_GRAY); line-height: 1.8;">QRS 4-5 expansion, Hub scale, software comercial traction, educação consolidada. Capex R$ 3.6M.</p>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 14px; color: var(--PRIMARY_GREEN); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">Fase 3-4 (M37-72)</h4>
+                        <p style="font-size: 14px; color: var(--DARK_GRAY); line-height: 1.8;">QRS network scaling (15-20 units), Dohmus replica sites, Dark Kitchen CPG, software + educação exponencial. Capex R$ 18M.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: var(--WHITE); border: 1px solid var(--BORDER_COLOR); padding: 40px; border-radius: 4px;">
+                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase;">Narrativa Estratégica</h3>
+                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 16px;">
+                    A projeção consolida 4 fases de crescimento, cada uma validando modelo operacional + produto antes de escalar. <strong>Fase 1 (0-18 meses)</strong> é a mais crítica: prova Hub-and-Spoke com QRS units, Dohmus (hibridização), Dark Kitchen (inovação), Educação (margens 80%), Software (margens 90%).
+                </p>
+                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 16px;">
+                    Saída de Fase 1 (M18): R$ 108.7M receita, 7 conceitos operacionais, playbook documentado e replicável. <strong>Fase 2 (19-36 meses)</strong> replica este modelo: QRS 4-5 em adjacências, consolidação regional SP/RJ, software comercial ativo com 30-50+ restaurantes parceiros, educação com 150+ alunos assinantes.
+                </p>
+                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 16px;">
+                    Saída de Fase 2 (M36): R$ 148.3M receita, +15 QRS units planejadas, software scalável para ISV partnerships. <strong>Fases 3-4</strong> escalam a rede QRS (15-20 total), expandem Dohmus (3-4 sítios), crescem Dark Kitchen em CPG (distribution nacional), e exploram software + educação em verticals adjacentes (cloud kitchen networks, chef training platforms, F&B supply chain para mercado).
+                </p>
+                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8;">
+                    Saída de Fase 4 (M72, 2030): R$ 248.8M receita, 20+ unidades operacionais, EBITDA margem 20%+, software + educação gerando R$ 50M+ anualmente. IRR projeto 42-48%, FCF acumulado R$ 61M+, payback total 36-42 meses.
+                </p>
+            </div>
+        </div>
+    </div>
+
     <!-- ROADMAP SECTION -->
     <div id="roadmap" class="section">
         <div class="container">
@@ -1788,6 +1854,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
     <script>
         function switchSection(sectionId) {
             // Hide all sections
@@ -1808,6 +1875,94 @@
 
             // Scroll to top
             window.scrollTo(0, 0);
+
+            // Initialize chart if projecoes section is shown
+            if (sectionId === 'projecoes' && !window.chartInitialized) {
+                initializeRevenueChart();
+                window.chartInitialized = true;
+            }
+        }
+
+        function initializeRevenueChart() {
+            const ctx = document.getElementById('revenueChart');
+            if (!ctx) return;
+
+            const quarters = ['Q1 25', 'Q2 25', 'Q3 25', 'Q4 25', 'Q1 26', 'Q2 26', 'Q3 26', 'Q4 26', 'Q1 27', 'Q2 27', 'Q3 27', 'Q4 27', 'Q1 28', 'Q2 28', 'Q3 28', 'Q4 28', 'Q1 29', 'Q2 29', 'Q3 29', 'Q4 29', 'Q1 30'];
+
+            const units = {
+                'Mercearia Amauri': [18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2],
+                'NAMI': [19.0, 19.0, 19.0, 19.0, 19.0, 19.0, 19.0, 19.0, 19.5, 19.5, 19.5, 19.5, 20.0, 20.0, 20.0, 20.0, 20.5, 20.5, 20.5, 20.5, 21.0],
+                'Mercearia Campos': [18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0],
+                'QRS 1': [0, 0, 0.0, 4.0, 5.0, 5.2, 5.4, 5.6, 5.8, 6.0, 6.2, 6.4, 6.6, 6.8, 7.0, 7.2, 7.4, 7.6, 7.8, 8.0, 8.2],
+                'QRS 2': [0, 0, 0, 0, 0, 0, 0, 3.8, 5.0, 5.2, 5.4, 5.6, 5.8, 6.0, 6.2, 6.4, 6.6, 6.8, 7.0, 7.2, 7.4],
+                'QRS 3': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4.2, 5.0, 5.2, 5.4, 5.6, 5.8, 6.0, 6.2, 6.4, 6.6],
+                'Dohmus': [0, 0, 0, 0, 0, 0, 1.2, 3.6, 4.8, 5.0, 5.2, 5.4, 5.6, 5.8, 6.0, 6.2, 6.4, 6.6, 6.8, 7.0, 7.2],
+                'Dark Kitchen': [0, 0, 0, 0, 0, 0.5, 1.2, 1.8, 2.2, 2.6, 3.0, 3.4, 3.8, 4.2, 4.6, 5.0, 5.4, 5.8, 6.2, 6.6, 7.0],
+                'Educação (SaaS)': [0, 0, 0, 0, 0.075, 0.15, 0.225, 0.3, 0.375, 0.45, 0.525, 0.6, 0.675, 0.75, 0.825, 0.9, 0.975, 1.05, 1.125, 1.2, 1.275],
+                'Software': [0, 0, 0, 0, 0, 0, 0, 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.15, 0.2, 0.25, 0.35, 0.45, 0.55, 0.7, 0.85],
+            };
+
+            const colors = ['#00B73D', '#1E2761', '#2C5F2D', '#B85042', '#F96167', '#1C7293', '#028090', '#6D2E46', '#84B59F'];
+            const datasets = Object.keys(units).map((name, idx) => ({
+                label: name,
+                data: units[name],
+                borderColor: colors[idx % colors.length],
+                backgroundColor: colors[idx % colors.length] + '20',
+                tension: 0.4,
+                borderWidth: 2.5,
+                pointRadius: 4,
+                pointHoverRadius: 6
+            }));
+
+            const grupoTotal = quarters.map((_, i) =>
+                Object.keys(units).reduce((sum, key) => sum + units[key][i], 0)
+            );
+
+            datasets.push({
+                label: 'Grupo (Total)',
+                data: grupoTotal,
+                borderColor: '#0F0F0F',
+                backgroundColor: '#0F0F0F20',
+                tension: 0.4,
+                borderWidth: 3.5,
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                borderDash: [5, 5]
+            });
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: quarters,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels: {
+                                font: { size: 12, weight: '600' },
+                                padding: 20,
+                                usePointStyle: true,
+                                pointStyle: 'circle'
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Faturamento (R$ Milhões)' },
+                            ticks: { font: { size: 12 } }
+                        },
+                        x: {
+                            ticks: { font: { size: 11 } }
+                        }
+                    }
+                }
+            });
         }
 
         function openModal(modalId) {
@@ -1833,6 +1988,15 @@
                 document.querySelectorAll('.modal.show').forEach(modal => {
                     closeModal(modal.id);
                 });
+            }
+        });
+
+        // Initialize chart when page loads if projecoes is active
+        document.addEventListener('DOMContentLoaded', function() {
+            const activeSection = document.querySelector('.section.active');
+            if (activeSection && activeSection.id === 'projecoes') {
+                initializeRevenueChart();
+                window.chartInitialized = true;
             }
         });
     </script>
