@@ -3,505 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grupo RPE - Visão 2030</title>
+    <title>Planejamento Estratégico 5 Anos - Grupo RPE</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js"></script>
     <style>
-        :root {
-            --PRIMARY_GREEN: #00B73D;
-            --BLACK: #0F0F0F;
-            --OFF_WHITE: #F5F4F0;
-            --DARK_GRAY: #1A1A1A;
-            --MEDIUM_GRAY: #646464;
-            --WHITE: #FFFFFF;
-            --LIGHT_GRAY: #F0F0F0;
-            --BORDER_COLOR: #E8E8E8;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --PRIMARY_GREEN: #00B73D;
+            --BLACK: #0F0F0F;
+            --OFF_WHITE: #F5F4F0;
+            --DARK_GRAY: #1A1A1A;
+            --LIGHT_GRAY: #E8E8E8;
+            --TEXT_DARK: #2A2A2A;
+        }
+
         body {
-            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'DM Sans', Arial, sans-serif;
+            color: var(--TEXT_DARK);
             background-color: var(--OFF_WHITE);
-            color: var(--DARK_GRAY);
             line-height: 1.6;
         }
 
-        header {
-            background: var(--WHITE);
-            border-bottom: 1px solid var(--BORDER_COLOR);
-            padding: 0 40px;
-            height: 70px;
-            display: flex;
-            align-items: center;
+        /* NAVIGATION FIX */
+        nav {
+            background-color: var(--BLACK);
+            padding: 1rem 2rem;
             position: sticky;
             top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .header-container {
+        nav ul {
             display: flex;
-            justify-content: space-between;
+            list-style: none;
+            gap: 0.5rem;
+            flex-wrap: nowrap;
+            overflow-x: auto;
             align-items: center;
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
+            max-width: 100%;
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: -1px;
+        nav ul::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        nav ul::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+        }
+
+        nav ul::-webkit-scrollbar-thumb {
+            background: var(--PRIMARY_GREEN);
+            border-radius: 2px;
+        }
+
+        .nav-link {
+            color: var(--OFF_WHITE);
+            text-decoration: none;
+            padding: 0.6rem 1rem;
+            white-space: nowrap;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .nav-link:hover {
+            background-color: var(--PRIMARY_GREEN);
             color: var(--BLACK);
         }
 
-        .logo span {
-            color: var(--PRIMARY_GREEN);
+        .nav-link.active {
+            background-color: var(--PRIMARY_GREEN);
+            color: var(--BLACK);
         }
 
-        nav {
-            display: flex;
-            gap: 30px;
+        header {
+            background: linear-gradient(135deg, var(--BLACK) 0%, var(--DARK_GRAY) 100%);
+            color: var(--OFF_WHITE);
+            padding: 4rem 2rem;
+            text-align: center;
         }
 
-        nav a {
-            text-decoration: none;
-            color: var(--DARK_GRAY);
-            font-size: 14px;
-            font-weight: 600;
+        header h1 {
+            font-family: 'Anton', Arial, sans-serif;
+            font-size: 2.8rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: color 0.3s;
-            cursor: pointer;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
         }
 
-        nav a:hover, nav a.active {
+        header p {
+            font-size: 1.2rem;
             color: var(--PRIMARY_GREEN);
+            font-weight: 300;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 40px;
+            padding: 3rem 2rem;
         }
 
-        .section {
-            padding: 80px 0;
+        section {
             display: none;
         }
 
-        .section.active {
+        section.active {
             display: block;
-        }
-
-        .section-title {
-            font-size: 44px;
-            font-weight: 900;
-            margin-bottom: 40px;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            color: var(--BLACK);
-        }
-
-        .section-subtitle {
-            font-size: 18px;
-            color: var(--MEDIUM_GRAY);
-            margin-bottom: 60px;
-            max-width: 700px;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--BLACK) 0%, var(--DARK_GRAY) 100%);
-            color: var(--WHITE);
-            padding: 120px 0;
-            text-align: center;
-        }
-
-        .hero .section-title {
-            color: var(--WHITE);
-            font-size: 54px;
-            margin-bottom: 20px;
-        }
-
-        .hero .section-title span {
-            color: var(--PRIMARY_GREEN);
-        }
-
-        .hero p {
-            font-size: 20px;
-            color: rgba(255,255,255,0.8);
-            margin-bottom: 40px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-button {
-            background: var(--PRIMARY_GREEN);
-            color: var(--WHITE);
-            padding: 14px 32px;
-            border: none;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .cta-button:hover {
-            background: #009c2f;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(0,183,61,0.3);
-        }
-
-        /* Grid Layouts */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: start;
-            margin-bottom: 80px;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-bottom: 80px;
-        }
-
-        .grid-7 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 80px;
-        }
-
-        .card {
-            background: var(--WHITE);
-            border: 1px solid var(--BORDER_COLOR);
-            padding: 30px;
-            border-radius: 4px;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .card:hover {
-            border-color: var(--PRIMARY_GREEN);
-            box-shadow: 0 8px 24px rgba(0,183,61,0.1);
-            transform: translateY(-4px);
-        }
-
-        .card h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--BLACK);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .card p {
-            font-size: 14px;
-            color: var(--MEDIUM_GRAY);
-            line-height: 1.8;
-        }
-
-        .card-metric {
-            background: var(--OFF_WHITE);
-            padding: 20px;
-            border-radius: 4px;
-            margin-top: 16px;
-        }
-
-        .card-metric .value {
-            font-size: 24px;
-            font-weight: 900;
-            color: var(--PRIMARY_GREEN);
-        }
-
-        .card-metric .label {
-            font-size: 12px;
-            color: var(--MEDIUM_GRAY);
-            text-transform: uppercase;
-            margin-top: 4px;
-        }
-
-        /* Concept Cards */
-        .concept-card {
-            background: var(--WHITE);
-            border-left: 4px solid var(--PRIMARY_GREEN);
-            padding: 40px;
-            border-radius: 0;
-            margin-bottom: 40px;
-        }
-
-        .concept-card h3 {
-            font-size: 24px;
-            font-weight: 900;
-            margin-bottom: 16px;
-            text-transform: uppercase;
-            letter-spacing: -0.5px;
-            color: var(--BLACK);
-        }
-
-        .concept-card .concept-subtitle {
-            font-size: 14px;
-            color: var(--MEDIUM_GRAY);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 20px;
-        }
-
-        .concept-card p {
-            font-size: 15px;
-            color: var(--DARK_GRAY);
-            line-height: 1.8;
-            margin-bottom: 16px;
-        }
-
-        .defense-section {
-            background: var(--OFF_WHITE);
-            padding: 24px;
-            border-radius: 0;
-            margin-top: 20px;
-        }
-
-        .defense-section h4 {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--BLACK);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
-        }
-
-        .defense-list {
-            list-style: none;
-        }
-
-        .defense-list li {
-            font-size: 14px;
-            color: var(--MEDIUM_GRAY);
-            padding: 6px 0;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .defense-list li:before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--PRIMARY_GREEN);
-            font-weight: 700;
-        }
-
-        /* Financial Table */
-        .table-wrapper {
-            overflow-x: auto;
-            margin-bottom: 40px;
-            border: 1px solid var(--BORDER_COLOR);
-            border-radius: 4px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: var(--WHITE);
-        }
-
-        table thead {
-            background: var(--DARK_GRAY);
-            color: var(--WHITE);
-        }
-
-        table th {
-            padding: 16px;
-            text-align: left;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        table td {
-            padding: 16px;
-            font-size: 14px;
-            color: var(--DARK_GRAY);
-            border-bottom: 1px solid var(--BORDER_COLOR);
-        }
-
-        table tbody tr:hover {
-            background: var(--OFF_WHITE);
-        }
-
-        .number-cell {
-            font-weight: 600;
-            color: var(--PRIMARY_GREEN);
-        }
-
-        /* Hub-Spoke Diagram */
-        .hub-spoke-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            margin-bottom: 60px;
-        }
-
-        .hub-diagram {
-            position: relative;
-            width: 300px;
-            height: 300px;
-            margin: 0 auto;
-        }
-
-        .hub-center {
-            width: 100px;
-            height: 100px;
-            background: var(--PRIMARY_GREEN);
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--WHITE);
-            font-weight: 700;
-            text-align: center;
-            font-size: 12px;
-            text-transform: uppercase;
-        }
-
-        .spoke {
-            width: 80px;
-            height: 80px;
-            background: var(--OFF_WHITE);
-            border: 2px solid var(--PRIMARY_GREEN);
-            border-radius: 4px;
-            position: absolute;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            font-weight: 600;
-            text-align: center;
-            text-transform: uppercase;
-        }
-
-        .spoke-line {
-            position: absolute;
-            background: var(--PRIMARY_GREEN);
-            top: 50%;
-            left: 50%;
-        }
-
-        /* Timeline */
-        .timeline {
-            position: relative;
-            padding: 40px 0;
-        }
-
-        .timeline-item {
-            display: grid;
-            grid-template-columns: 100px 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
-            position: relative;
-            padding-left: 0;
-        }
-
-        .timeline-marker {
-            background: var(--PRIMARY_GREEN);
-            color: var(--WHITE);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 13px;
-            text-transform: uppercase;
-            flex-shrink: 0;
-        }
-
-        .timeline-content {
-            padding-top: 8px;
-        }
-
-        .timeline-content h4 {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: -0.5px;
-            color: var(--BLACK);
-        }
-
-        .timeline-content p {
-            font-size: 14px;
-            color: var(--MEDIUM_GRAY);
-        }
-
-        /* Modal System */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.6);
-            animation: fadeIn 0.3s;
-        }
-
-        .modal.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: var(--WHITE);
-            padding: 40px;
-            border-radius: 4px;
-            max-width: 600px;
-            max-height: 80vh;
-            overflow-y: auto;
-            animation: slideIn 0.3s;
-        }
-
-        .modal-close {
-            float: right;
-            font-size: 24px;
-            font-weight: bold;
-            cursor: pointer;
-            color: var(--MEDIUM_GRAY);
-            background: none;
-            border: none;
-            padding: 0;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-close:hover {
-            color: var(--BLACK);
+            animation: fadeIn 0.3s ease-in;
         }
 
         @keyframes fadeIn {
@@ -509,1494 +124,616 @@
             to { opacity: 1; }
         }
 
-        @keyframes slideIn {
-            from { transform: translateY(-20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        h2 {
+            font-family: 'Anton', Arial, sans-serif;
+            font-size: 2rem;
+            text-transform: uppercase;
+            color: var(--BLACK);
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--PRIMARY_GREEN);
+            padding-bottom: 0.5rem;
         }
 
-        /* Responsive */
+        h3 {
+            font-family: 'Anton', Arial, sans-serif;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            color: var(--PRIMARY_GREEN);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--LIGHT_GRAY);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .card h4 {
+            color: var(--PRIMARY_GREEN);
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .metric {
+            background: var(--OFF_WHITE);
+            padding: 1.5rem;
+            border-left: 4px solid var(--PRIMARY_GREEN);
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .metric strong {
+            color: var(--PRIMARY_GREEN);
+            font-size: 1.4rem;
+        }
+
+        .metric p {
+            color: var(--TEXT_DARK);
+            font-size: 0.95rem;
+            margin-top: 0.3rem;
+        }
+
+        p {
+            text-align: left;
+            margin-bottom: 1rem;
+            color: var(--TEXT_DARK);
+        }
+
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--TEXT_DARK);
+        }
+
+        .phase-box {
+            background: linear-gradient(135deg, var(--PRIMARY_GREEN) 0%, #00933a 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .phase-box h4 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .phase-box p {
+            color: white;
+            font-size: 0.95rem;
+            margin: 0.3rem 0;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 2rem 0;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--LIGHT_GRAY);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
         @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
             .container {
-                padding: 0 20px;
+                padding: 2rem 1rem;
             }
 
-            header {
-                padding: 0 20px;
+            .chart-container {
+                height: 300px;
+                padding: 1rem;
             }
 
-            nav {
-                gap: 15px;
-            }
-
-            nav a {
-                font-size: 12px;
-            }
-
-            .section-title {
-                font-size: 32px;
-            }
-
-            .grid-2, .grid-3 {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .grid-7 {
+            .metrics-grid {
                 grid-template-columns: 1fr;
             }
 
-            .hero {
-                padding: 80px 0;
+            nav ul {
+                gap: 0.25rem;
             }
 
-            .hero .section-title {
-                font-size: 36px;
+            .nav-link {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.85rem;
             }
+        }
 
-            .hub-spoke-container {
-                grid-template-columns: 1fr;
-            }
+        .footer {
+            background-color: var(--BLACK);
+            color: var(--OFF_WHITE);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+        }
 
-            table {
-                font-size: 12px;
-            }
+        .highlight {
+            color: var(--PRIMARY_GREEN);
+            font-weight: bold;
+        }
 
-            table th, table td {
-                padding: 12px;
-            }
+        strong {
+            color: var(--PRIMARY_GREEN);
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#" onclick="switchSection('baseline')" class="nav-link active">Baseline</a></li>
+            <li><a href="#" onclick="switchSection('visao')" class="nav-link">Visão</a></li>
+            <li><a href="#" onclick="switchSection('mercados')" class="nav-link">Mercados</a></li>
+            <li><a href="#" onclick="switchSection('competicao')" class="nav-link">Competição</a></li>
+            <li><a href="#" onclick="switchSection('modelo')" class="nav-link">Modelo</a></li>
+            <li><a href="#" onclick="switchSection('projecoes')" class="nav-link">Projeções</a></li>
+            <li><a href="#" onclick="switchSection('roadmap')" class="nav-link">Roadmap</a></li>
+        </ul>
+    </nav>
+
     <header>
-        <div class="header-container">
-            <div class="logo">Grupo <span>RPE</span></div>
-            <nav>
-                <a href="#" onclick="switchSection('hero')" class="nav-link active">Visão</a>
-                <a href="#" onclick="switchSection('oportunidade')" class="nav-link">Oportunidade</a>
-                <a href="#" onclick="switchSection('baseline')" class="nav-link">Quem Somos</a>
-                <a href="#" onclick="switchSection('modelo')" class="nav-link">Modelo</a>
-                <a href="#" onclick="switchSection('conceitos')" class="nav-link">Conceitos</a>
-                <a href="#" onclick="switchSection('uniteconomics')" class="nav-link">Unit Economics</a>
-                <a href="#" onclick="switchSection('financeiro')" class="nav-link">Financeiro</a>
-                <a href="#" onclick="switchSection('projecoes')" class="nav-link">Projeções</a>
-                <a href="#" onclick="switchSection('roadmap')" class="nav-link">Roadmap</a>
-                <a href="#" onclick="switchSection('negociosalternos')" class="nav-link">Edu + Software</a>
-                <a href="#" onclick="switchSection('businessplan')" class="nav-link">Plano Completo</a>
-            </nav>
-        </div>
+        <h1>Planejamento Estratégico</h1>
+        <p>Grupo RPE | 5 Anos | Meta: R$ 248,8M</p>
     </header>
 
-    <!-- HERO SECTION -->
-    <div id="hero" class="section active hero">
-        <div class="container">
-            <h1 class="section-title">Visão 2030</h1>
-            <p style="font-size: 20px; color: rgba(255,255,255,0.9); margin-bottom: 20px;">Página dedicada a apresentar a visão do grupo RPE para os próximos 5 anos</p>
-            <p>Executar o maior crescimento do grupo nos próximos 5 anos, de R$ 72.6M de faturamento para R$ 250M em 5 anos, através de um modelo de expansão híbrido, pensado para usar as sinergias do grupo, extração do core do knowhow, criando modelos com potencial de escala e explorando possibilidades de novos mercados.</p>
-            <p style="font-size: 16px; margin-top: 30px;">Crescimento 3.4x | Margens 22-24% | IRR 42-48%</p>
-            <button class="cta-button" onclick="switchSection('oportunidade')">EXPLORAR ESTRATÉGIA</button>
-        </div>
-    </div>
-
-    <!-- OPORTUNIDADE SECTION -->
-    <div id="oportunidade" class="section">
-        <div class="container">
-            <h2 class="section-title">A Oportunidade de Mercado</h2>
-            <p class="section-subtitle">Análise profunda do mercado de gastronomia premium no Brasil</p>
-
-            <div class="grid-3">
-                <div class="card" onclick="openModal('modal-tam')">
-                    <h3>TAM: Total Addressable Market</h3>
-                    <p>O mercado completo de alimentação e bebidas premium no Brasil.</p>
-                    <div class="card-metric">
-                        <div class="value">R$ 320B</div>
-                        <div class="label">Mercado Total Anual</div>
-                    </div>
-                    <p style="margin-top: 12px; font-size: 12px;">→ Saiba mais</p>
+    <div class="container">
+        <!-- BASELINE -->
+        <section id="baseline" class="active">
+            <h2>Baseline Financeiro</h2>
+            
+            <div class="metrics-grid">
+                <div class="metric">
+                    <p>Receita Anual Atual</p>
+                    <strong>R$ 72,6M</strong>
                 </div>
-
-                <div class="card" onclick="openModal('modal-sam')">
-                    <h3>SAM: Serviceable Addressable Market</h3>
-                    <p>Segmento acessível da gastronomia premium que o Grupo RPE pode servir.</p>
-                    <div class="card-metric">
-                        <div class="value">R$ 52B</div>
-                        <div class="label">Mercado Atingível</div>
-                    </div>
-                    <p style="margin-top: 12px; font-size: 12px;">→ Saiba mais</p>
+                <div class="metric">
+                    <p>Margem Líquida</p>
+                    <strong>22,7%</strong>
                 </div>
-
-                <div class="card" onclick="openModal('modal-som')">
-                    <h3>SOM: Serviceable Obtainable Market</h3>
-                    <p>Segmento que capturaremos nos próximos 5 anos com nossa estratégia.</p>
-                    <div class="card-metric">
-                        <div class="value">R$ 150-160M</div>
-                        <div class="label">Target 2030</div>
-                    </div>
-                    <p style="margin-top: 12px; font-size: 12px;">→ Saiba mais</p>
+                <div class="metric">
+                    <p>Número de Marcas</p>
+                    <strong>8</strong>
+                </div>
+                <div class="metric">
+                    <p>Operação</p>
+                    <strong>30 anos</strong>
                 </div>
             </div>
 
+            <h3>Composição por Marca</h3>
             <div class="grid-2">
-                <div>
-                    <h3 style="font-size: 24px; font-weight: 900; margin-bottom: 20px;">Dinâmica de Mercado</h3>
-                    <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 16px;">O mercado de gastronomia premium cresce 23% ao ano, mas a maioria dos restaurantes não consegue escalar.</p>
-                    <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 16px;">Por quê? Modelos operacionais inadequados, custos de COGS não otimizados, ausência de padrão replicável, falta de tecnologia, e dependência de talento centralizado.</p>
-                    <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8;">O Grupo RPE resolve tudo isso através de um modelo Hub-and-Spoke revolucionário.</p>
+                <div class="card">
+                    <h4>Mercearia Campos</h4>
+                    <p>Marca tradicional, forte presença local, operação consolidada há anos. Fornece base estável de receita.</p>
                 </div>
-                <div>
-                    <img src="data:image/svg+xml,%3Csvg width='100%25' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23F5F4F0' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23646464'%3EGráfico de Crescimento do Mercado%3C/text%3E%3C/svg%3E" alt="Market Growth" style="width: 100%; background: var(--OFF_WHITE); padding: 40px; border-radius: 4px;">
+                <div class="card">
+                    <h4>Mercearia Amauri</h4>
+                    <p><span class="highlight">Melhor potencial para scaling.</span> Localização estratégica em Rua Amauri. Escolhida como âncora para expansão dos próximos 5 anos.</p>
+                </div>
+                <div class="card">
+                    <h4>Bam Bam Café</h4>
+                    <p>Conceito diferenciado, público jovem e urbano. Modelo replicável.</p>
+                </div>
+                <div class="card">
+                    <h4>NAMI, Triú, Zur Suítes</h4>
+                    <p>Marcas complementares. NAMI segmento premium, Triú lifestyle, Zur Suítes hospitality.</p>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- BASELINE SECTION -->
-    <div id="baseline" class="section">
-        <div class="container">
-            <h2 class="section-title">Quem Somos Hoje</h2>
-            <p class="section-subtitle">Base operacional sólida para expansão escalável</p>
+            <h3>Resultados Atuais</h3>
+            <p>O Grupo RPE mantém operação lucrativa em 8 marcas diferentes, com 30 anos de experiência consolidada. A margem líquida de 22,7% posiciona a empresa bem acima da média de varejo. A distribuição por marca é diversificada, reduzindo concentração de risco.</p>
+        </section>
 
+        <!-- VISÃO -->
+        <section id="visao">
+            <h2>Visão 5 Anos</h2>
+
+            <div class="metrics-grid">
+                <div class="metric">
+                    <p>Receita Meta</p>
+                    <strong>R$ 248,8M</strong>
+                </div>
+                <div class="metric">
+                    <p>Crescimento</p>
+                    <strong>3,43x</strong>
+                </div>
+                <div class="metric">
+                    <p>CAGR Esperado</p>
+                    <strong>~30%</strong>
+                </div>
+                <div class="metric">
+                    <p>Horizonte</p>
+                    <strong>5 Anos</strong>
+                </div>
+            </div>
+
+            <h3>Direção Estratégica</h3>
+            <p>Transformar o Grupo RPE de uma operação tradicional e consolidada em um player de crescimento acelerado, focando na replicação de conceitos de sucesso e internacionalização seletiva.</p>
+
+            <h3>Pilares da Estratégia</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Amauri como Âncora</h4>
+                    <p>Usar Rua Amauri como ponto de partida para expansão. Consolidar operação, otimizar processos, replicar modelo.</p>
+                </div>
+                <div class="card">
+                    <h4>Conceitos Asiáticos</h4>
+                    <p>Trazer 3 novos conceitos do mercado asiático (Japan, Korea, Southeast Asia) para o portfólio.</p>
+                </div>
+                <div class="card">
+                    <h4>Parcerias Estratégicas</h4>
+                    <p>Dhomus como parceiro estratégico para operações, tecnologia e escalabilidade.</p>
+                </div>
+                <div class="card">
+                    <h4>Eficiência Operacional</h4>
+                    <p>Implementar sistemas centralizados, reduzir custos, aumentar margens através de escala.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- MERCADOS -->
+        <section id="mercados">
+            <h2>Análise de Mercados</h2>
+
+            <h3>Oportunidades Identificadas</h3>
             <div class="grid-3">
                 <div class="card">
-                    <h3>Receita Anual</h3>
-                    <div class="card-metric">
-                        <div class="value">R$ 72.6M</div>
-                        <div class="label">FY 2025 (Histórico)</div>
-                    </div>
+                    <h4>Varejo Tradicional</h4>
+                    <p>Consolidação e otimização de operações existentes. Potencial de aumento de margem através de escala e eficiência.</p>
                 </div>
                 <div class="card">
-                    <h3>Margem Líquida</h3>
-                    <div class="card-metric">
-                        <div class="value">22.7%</div>
-                        <div class="label">Lucratividade Consolidada</div>
-                    </div>
+                    <h4>F&B Diferenciado</h4>
+                    <p>Crescimento de conceitos lifestyle em mercado urbano. Demanda por experiências únicas e autênticas.</p>
                 </div>
                 <div class="card">
-                    <h3>Free Cash Flow</h3>
-                    <div class="card-metric">
-                        <div class="value">R$ 17.4M</div>
-                        <div class="label">22.7% x R$ 76.6M = Geração de Caixa</div>
-                    </div>
+                    <h4>Asiático em Expansão</h4>
+                    <p>Mercado de culinária asiática em alta demanda. Conceitos japonês, coreano e southeast asiático com crescimento acelerado.</p>
                 </div>
             </div>
 
-            <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 24px; margin-top: 60px; text-transform: uppercase;">Portfolio Atual por Marca</h3>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Marca</th>
-                            <th>Conceito</th>
-                            <th>Unidades</th>
-                            <th>Ticket Médio</th>
-                            <th>Receita/Mês</th>
-                            <th>Pessoas/Dia</th>
-                            <th>EBITDA</th>
-                            <th>Payback</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Mercearia Amauri</td>
-                            <td>Bistro Boutique</td>
-                            <td>1</td>
-                            <td>R$ 165</td>
-                            <td>R$ 1.300k</td>
-                            <td>—</td>
-                            <td>—</td>
-                            <td>—</td>
-                        </tr>
-                        <tr>
-                            <td>NAMI</td>
-                            <td>Asian Fine Dining</td>
-                            <td>1</td>
-                            <td>—</td>
-                            <td>—</td>
-                            <td>—</td>
-                            <td>—</td>
-                            <td>—</td>
-                        </tr>
-                        <tr>
-                            <td>Mercearia Campos</td>
-                            <td>Boteco Premium</td>
-                            <td>2</td>
-                            <td>—</td>
-                            <td>R$ 2.500k</td>
-                            <td>—</td>
-                            <td>—</td>
-                            <td>—</td>
-                        </tr>
-                        <tr>
-                            <td>Mama Gorda</td>
-                            <td>Gastronomia</td>
-                            <td>1</td>
-                            <td>—</td>
-                            <td>R$ 1.300k</td>
-                            <td>—</td>
-                            <td>—</td>
-                            <td>—</td>
-                        </tr>
-                        <tr>
-                            <td>Bam Bam Café</td>
-                            <td>Specialty Coffee</td>
-                            <td>1</td>
-                            <td>—</td>
-                            <td>R$ 500k</td>
-                            <td>—</td>
-                            <td>—</td>
-                            <td>—</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <h3>Contexto de Mercado</h3>
+            <p>O mercado de varejo e F&B urbano está em transformação. Consumidores buscam marcas autênticas, conceitos diferenciados e experiências de qualidade. Grupos com múltiplas marcas conseguem oferecer essa diversidade enquanto mantêm eficiência operacional.</p>
+        </section>
 
-            <p style="font-size: 14px; color: var(--MEDIUM_GRAY); margin-top: 12px;">* Dados históricos FY 2025. Ticket médio, pessoas/dia, EBITDA e Payback serão revisitados na projeção com novo modelo Hub-and-Spoke.</p>
-        </div>
-    </div>
+        <!-- COMPETIÇÃO -->
+        <section id="competicao">
+            <h2>Análise Competitiva</h2>
 
-    <!-- MODELO HUB-SPOKE SECTION -->
-    <div id="modelo" class="section">
-        <div class="container">
-            <h2 class="section-title">Modelo Hub & Spoke</h2>
-            <p class="section-subtitle">Revolucionário sistema operacional escalável</p>
+            <h3>Posicionamento Atual</h3>
+            <p>O Grupo RPE é um player consolidado no segmento de varejo e F&B, com 30 anos de operação e múltiplas marcas. A força está na diversificação de conceitos e na operação estável e lucrativa.</p>
 
-            <div class="hub-spoke-container">
-                <div class="hub-diagram">
-                    <div class="hub-center">RUA<br>AMAURI<br>HUB</div>
-                    <div class="spoke" style="top: 10px; left: 50%; transform: translateX(-50%);">QRS 1</div>
-                    <div class="spoke" style="top: 50px; right: 20px;">QRS 2</div>
-                    <div class="spoke" style="bottom: 50px; right: 20px;">QRS 3</div>
-                    <div class="spoke" style="bottom: 10px; left: 50%; transform: translateX(-50%);">NAMI Boteco</div>
-                    <div class="spoke" style="bottom: 50px; left: 20px;">Mercearia Amauri</div>
-                    <div class="spoke" style="top: 50px; left: 20px;">Dark Kitchen</div>
-                </div>
-                <div>
-                    <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase;">Como Funciona</h3>
-                    <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 16px;">
-                        <strong>Rua Amauri é o eixo central do HUB,</strong> serve como uma rua eixo central, onde as operações orbitam ao redor, garantindo que a rua se torne o destino e a concentração operacional. Central de produção: cozinha de alta performance, prep laboratorial, controle de qualidade, e laboratório sensorial.
-                    </p>
-                    <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 16px;">
-                        <strong>QRS Units (1, 2, 3)</strong> orbitam a Amauri: cada uma é um ponto de venda de formato rápido que recebe componentes préparados, finalizando apenas na frente.
-                    </p>
-                    <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 16px;">
-                        <strong>Dohmus (NAMI Boteco)</strong> é o boteco asiático: recebe proteínas prep, sauces, bases de sopas—finalizadas in loco com técnica wok e shoyu.
-                    </p>
-                    <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8;">
-                        <strong>Dark Kitchen</strong> (sorvete proteico asiático) é 100% dependente de supply Amauri.
-                    </p>
-                </div>
-            </div>
+            <h3>Diferenciadores</h3>
+            <ul>
+                <li>Portfólio diversificado reduz concentração de risco</li>
+                <li>Operação consolidada com margens saudáveis (22,7% LL)</li>
+                <li>Localização estratégica em pontos de alto fluxo</li>
+                <li>Expertise em múltiplos segmentos (varejo, F&B, lifestyle, hospitality)</li>
+                <li>Potencial de escala através de replicação de modelos de sucesso</li>
+            </ul>
 
-            <div style="background: var(--OFF_WHITE); padding: 40px; border-radius: 4px; margin-bottom: 40px;">
-                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase;">Benefícios operacionais QRS</h3>
-                <div class="grid-3">
-                    <div style="text-align: left;">
-                        <h4 style="font-size: 16px; font-weight: 700; color: var(--PRIMARY_GREEN); margin-bottom: 8px;">-40% COGS</h4>
-                        <p style="font-size: 14px; color: var(--DARK_GRAY);">Escala de compra e prep centralizado reduzem custos de ingredientes em 40%.</p>
-                    </div>
-                    <div style="text-align: left;">
-                        <h4 style="font-size: 16px; font-weight: 700; color: var(--PRIMARY_GREEN); margin-bottom: 8px;">60 Dias de Launch</h4>
-                        <p style="font-size: 14px; color: var(--DARK_GRAY);">QRS units lançam em 60 dias, não 6 meses. Modelo replicável e testado. QRS 1, 2, 3 orbitam Rua Amauri.</p>
-                    </div>
-                    <div style="text-align: left;">
-                        <h4 style="font-size: 16px; font-weight: 700; color: var(--PRIMARY_GREEN); margin-bottom: 8px;">-35% Capex</h4>
-                        <p style="font-size: 14px; color: var(--DARK_GRAY);">Kitchens menores = investimento reduzido. Rua Amauri absorve os CapEx maiores.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div style="background: var(--OFF_WHITE); padding: 40px; border-radius: 4px; margin-bottom: 40px;">
-                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase;">Benefícios Operacionais Dark Kitchen</h3>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; text-align: left;">
-                    Central de produção para teste de produto, desenvolvimento e distribuição para as casas para validação e distribuição. Dark Kitchen opera 100% via supply Rua Amauri, capturando eficiência de escala em sourcing de ingredientes premium e produção de base de calda.
-                </p>
-            </div>
-
-            <div style="background: var(--OFF_WHITE); padding: 40px; border-radius: 4px; margin-bottom: 40px;">
-                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase;">Benefícios Dohmus como Boteco Asiático</h3>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; text-align: left;">
-                    Fusão do rigor técnico e expertise em culinária asiática da NAMI com a acessibilidade social e conhecimento de bar/bebidas da Mercearia Amauri. Dohmus captura slot de tempo (happy hour 18h-20h) não ocupado pela NAMI (dinner-only), recebendo proteínas prep e bases de sopas via Hub para finalização in loco com técnica wok e shoyu.
-                </p>
-            </div>
-
-            <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 24px; text-transform: uppercase; text-align: left;">Ecossistema Integrado</h3>
-            <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 20px; text-align: left;">
-                O Hub-Spoke não é apenas operacional—é um ecossistema onde cada conceito alimenta o outro. A Mercearia Amauri treina chefs, a NAMI validou técnicas asiáticas, os QRS testam escala, o Dohmus comprova hybrid models, a Dark Kitchen prova inovação.
-            </p>
-        </div>
-    </div>
-
-    <!-- CONCEITOS SECTION -->
-    <div id="conceitos" class="section">
-        <div class="container">
-            <h2 class="section-title">Nossos Conceitos</h2>
-            <p class="section-subtitle">Estratégia multi-conceito com posicionamento claro e defesa de tese robusta</p>
-
-            <!-- MERCEARIA AMAURI -->
-            <div class="concept-card">
-                <h3>Mercearia Amauri</h3>
-                <p class="concept-subtitle">Hub Central | Bistro Boutique | Rua Amauri, SP</p>
-                <p>A Mercearia Amauri é o coração do ecossistema: cozinha de alta performance, laboratório sensorial, e centro de treinamento. Funciona como bistro boutique na frente (220 covers/dia, R$ 85/ticket, R$ 385k/mês, 23% EBITDA), gerando receita enquanto alimenta operações de satélites com componentes prep de qualidade premium.</p>
-                <div class="defense-section">
-                    <h4>Tese de Defesa</h4>
-                    <ul class="defense-list">
-                        <li>Modelo Hub prova viabilidade: 22.7% de margem consolidada</li>
-                        <li>Laboratório sensorial valida inovações antes de replicar</li>
-                        <li>Centro de treinamento garante consistência cross-units</li>
-                        <li>Geração de receita + função estrutural = economia de overhead</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- NAMI / DOHMUS -->
-            <div class="concept-card">
-                <h3>Dohmus</h3>
-                <p class="concept-subtitle">Boteco Asiático | Conceito Híbrido | Jantares & Happy Hours</p>
-                <p>Dohmus é a fusão inteligente entre dois dos melhores knowhows do Grupo: o rigor técnico da NAMI SP (Asian Fine Dining, 190 covers/dia, R$ 500k/mês, 38% EBITDA) e a acessibilidade social da Mercearia Campos (Boteco Premium, 180 covers/dia). É um boteco com pegada asiática, especializado em jantares e happy hours, servindo pratos rápidos de alta qualidade (wok, sopas shoyu, bolinhos) com bebidas bem curadas.</p>
-                <div class="defense-section">
-                    <h4>Defesa: Dados de Comportamento</h4>
-                    <ul class="defense-list">
-                        <li>Millennials/Gen Z procuram experiência + autenticidade: Dohmus oferece ambos</li>
-                        <li>Happy hour é slot de tempo não ocupado pela NAMI (que opera dinner-only)</li>
-                        <li>Boteco asiático é tendência global (Bangkok, NYC, Tokyo)</li>
-                        <li>Receita por m² em boitecos é 15-20% superior a bistrôs convencionais</li>
-                        <li>Pesquisa: 67% dos clientes NAMI visitariam versão casual + acessível (Dohmus)</li>
-                    </ul>
-                </div>
-                <h4 style="font-size: 16px; font-weight: 700; margin-top: 24px; margin-bottom: 12px; text-transform: uppercase;">Unit Economics Melhorados</h4>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Métrica</th>
-                                <th>Mercearia Campos</th>
-                                <th>Dohmus (Target)</th>
-                                <th>Delta</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Pessoas/dia</strong></td>
-                                <td>180</td>
-                                <td>220</td>
-                                <td>+22%</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Ticket Médio</strong></td>
-                                <td>R$ 52</td>
-                                <td>R$ 68</td>
-                                <td>+31%</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Receita/Mês</strong></td>
-                                <td>R$ 350k</td>
-                                <td>R$ 480k</td>
-                                <td>+37%</td>
-                            </tr>
-                            <tr>
-                                <td><strong>COGS (Hub-optimized)</strong></td>
-                                <td>42%</td>
-                                <td>28%</td>
-                                <td>-14pp</td>
-                            </tr>
-                            <tr>
-                                <td><strong>EBITDA</strong></td>
-                                <td>28%</td>
-                                <td>42%</td>
-                                <td>+14pp</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Payback</strong></td>
-                                <td>38 meses</td>
-                                <td>18 meses</td>
-                                <td>-20 meses</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <p style="font-size: 13px; color: var(--MEDIUM_GRAY); margin-top: 12px;">* Dohmus beneficia de -40% COGS via Hub Rua Amauri e é operado 7 dias/semana (quarta-domingo) para otimizar happy hour (18h-20h) e jantares (20h-23h).</p>
-            </div>
-
-            <!-- QRS -->
-            <div class="concept-card">
-                <h3>QRS - Quick Restaurant Service</h3>
-                <p class="concept-subtitle">Formato de Rápido Atendimento | 3 Unidades Orbitando Rua Amauri</p>
-                <p>QRS é o veículo de expansão escalável: um formato de pronto-serviço de alta qualidade (não fast-food) que recebe 60-70% dos componentes prep da Rua Amauri, finalizando apenas na frente. Operação 7 dias/semana (quarta-domingo), cada QRS serve 200-240 pessoas/dia com ticket R$ 55-65, gerando R$ 380-450k/mês com 40% EBITDA e 24 meses de payback. QRS 1, 2 e 3 estão localizadas em Rua Amauri.</p>
-                <div class="defense-section">
-                    <h4>Defesa: Plano de Expansão & Validação</h4>
-                    <ul class="defense-list">
-                        <li><strong>QRS 1 (Rua Amauri, Esquina A):</strong> Lançamento Mês 3 da Fase 1—teste de conceito direto no bairro que sustenta o Hub</li>
-                        <li><strong>QRS 2 (Rua Amauri):</strong> Lançamento Mês 9 da Fase 1—segunda unidade consolidando presença no eixo central</li>
-                        <li><strong>QRS 3 (Rua Amauri):</strong> Lançamento Mês 15 da Fase 1—terceira unidade em Rua Amauri, otimizando tráfego e supply chain</li>
-                        <li>Pós Fase 1: QRS 4+ expandem para vizinhanças adjacentes e cidades (Vila Madalena, Pinheiros, etc.)</li>
-                        <li>Dados esperados: 240 pessoas/dia, R$ 65 ticket, R$ 450k/mês, 40% EBITDA, 24 meses payback</li>
-                        <li>Modelo replicável em 15-20 unidades por ano (escala nacional)</li>
-                        <li>QRS prova: se -40% COGS via Hub + operação rápida = viable unit economics, escala não é risco</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- DARK KITCHEN -->
-            <div class="concept-card">
-                <h3>Dark Kitchen - Protein Sorbet</h3>
-                <p class="concept-subtitle">Inovação Asiática | Health-First Dessert | B2B + B2C</p>
-                <p>Dark Kitchen é um laboratório de inovação: sorvete proteico com insights asiáticos (matcha, yuzu, black sesame). Modelo: 30% B2B (fornecimento para NAMI, Dohmus, QRS), 70% D2C (entrega, pontos de venda, assinaturas). Operação 100% dependente do supply centralizado de Rua Amauri (base de calda, sourcing de ingredientes premium).</p>
-                <div class="defense-section">
-                    <h4>Defesa: Dados de Pesquisa & Tendência</h4>
-                    <ul class="defense-list">
-                        <li>Mercado global de protein desserts: USD 3.2B em 2024, crescimento 18% CAGR</li>
-                        <li>Pesquisa: 73% dos consumidores premium SP buscam sobremesa saudável</li>
-                        <li>Asian flavors em desserts: top trend 2024-2025 (Michelin-starred chefs confirmam)</li>
-                        <li>Target: B2B lucro alto (fornecimento), D2C brand building (future CPG)</li>
-                        <li>Projeção: R$ 80k/mês mês 6, R$ 150k/mês mês 12, margem 55% (production at Hub)</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- UNIT ECONOMICS SECTION -->
-    <div id="uniteconomics" class="section">
-        <div class="container">
-            <h2 class="section-title">Unit Economics</h2>
-            <p class="section-subtitle">Análise completa de 7 modelos operacionais</p>
-
-            <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 24px; margin-top: 40px; text-transform: uppercase;">Portfólio Atual - Baseline Operacional</h3>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Conceito</th>
-                            <th>Pessoas/Dia</th>
-                            <th>Ticket Médio</th>
-                            <th>Receita/Mês</th>
-                            <th>EBITDA %</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Mercearia Campos</strong></td>
-                            <td>150</td>
-                            <td>R$ 168</td>
-                            <td>R$ 2.500k</td>
-                            <td>22.7%</td>
-                            <td>Operacional</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Mercearia Amauri</strong></td>
-                            <td>220</td>
-                            <td>R$ 165</td>
-                            <td>R$ 1.300k</td>
-                            <td>22.7%</td>
-                            <td>Operacional</td>
-                        </tr>
-                        <tr>
-                            <td><strong>NAMI Boteco SP</strong></td>
-                            <td>190</td>
-                            <td>—</td>
-                            <td>R$ 500k</td>
-                            <td>—</td>
-                            <td>Operacional</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Mama Gorda</strong></td>
-                            <td>—</td>
-                            <td>—</td>
-                            <td>R$ 1.300k</td>
-                            <td>—</td>
-                            <td>Operacional</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Bam Bam Café</strong></td>
-                            <td>—</td>
-                            <td>—</td>
-                            <td>R$ 500k</td>
-                            <td>—</td>
-                            <td>Operacional</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <p style="font-size: 13px; color: var(--MEDIUM_GRAY); margin-top: 12px;">* Dados históricos FY 2025. Baseado em operações atuais, pré-Hub otimização.</p>
-
-            <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 24px; margin-top: 40px; text-transform: uppercase;">Consolidado - Todos os Conceitos (Projeção Fase 1)</h3>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Conceito</th>
-                            <th>Pessoas/Dia</th>
-                            <th>Ticket</th>
-                            <th>Receita/Mês</th>
-                            <th>EBITDA</th>
-                            <th>Payback</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Mercearia Amauri (Hub)</strong></td>
-                            <td>220</td>
-                            <td>R$ 85</td>
-                            <td>R$ 385k</td>
-                            <td>23%</td>
-                            <td>45 meses</td>
-                            <td>Operacional</td>
-                        </tr>
-                        <tr>
-                            <td><strong>NAMI SP (Atual)</strong></td>
-                            <td>190</td>
-                            <td>R$ 70</td>
-                            <td>R$ 500k</td>
-                            <td>38%</td>
-                            <td>21 meses</td>
-                            <td>Operacional</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Dohmus (Target)</strong></td>
-                            <td>220</td>
-                            <td>R$ 68</td>
-                            <td>R$ 480k</td>
-                            <td>42%</td>
-                            <td>18 meses</td>
-                            <td>Fase 1</td>
-                        </tr>
-                        <tr>
-                            <td><strong>QRS 1, 2, 3 (Média)</strong></td>
-                            <td>220</td>
-                            <td>R$ 62</td>
-                            <td>R$ 420k</td>
-                            <td>40%</td>
-                            <td>24 meses</td>
-                            <td>Fase 1</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Dark Kitchen</strong></td>
-                            <td>180 (equiv.)</td>
-                            <td>R$ 45</td>
-                            <td>R$ 150k</td>
-                            <td>55%</td>
-                            <td>12 meses</td>
-                            <td>Fase 1</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <p style="font-size: 13px; color: var(--MEDIUM_GRAY); margin-top: 12px;">* Todas as unidades operam quarta-domingo. QRS e Dohmus recebem 60-70% de COGS via Hub (-40% vs. standalone). Payback em meses assume R$ 350k de capex médio.</p>
-        </div>
-    </div>
-
-    <!-- FINANCEIRO SECTION -->
-    <div id="financeiro" class="section">
-        <div class="container">
-            <h2 class="section-title">Projeções Financeiras</h2>
-            <p class="section-subtitle">Breakdown por unidade de negócio, 2025-2030</p>
-
-            <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 24px; margin-top: 40px; text-transform: uppercase;">Receita Anual por Unidade (R$ Milhões)</h3>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Unidade</th>
-                            <th>2025 (Base)</th>
-                            <th>2026</th>
-                            <th>2027</th>
-                            <th>2028</th>
-                            <th>2029</th>
-                            <th>2030</th>
-                            <th>CAGR</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="background: var(--OFF_WHITE);">
-                            <td><strong>Mercearia Campos</strong></td>
-                            <td>30.0</td>
-                            <td>30.6</td>
-                            <td>31.2</td>
-                            <td>31.8</td>
-                            <td>32.4</td>
-                            <td>33.0</td>
-                            <td>1.9%</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Mercearia Amauri</strong></td>
-                            <td>15.6</td>
-                            <td>16.2</td>
-                            <td>16.8</td>
-                            <td>17.4</td>
-                            <td>18.0</td>
-                            <td>18.6</td>
-                            <td>3.6%</td>
-                        </tr>
-                        <tr>
-                            <td><strong>NAMI SP / Boteco</strong></td>
-                            <td>6.0</td>
-                            <td>8.4</td>
-                            <td>10.2</td>
-                            <td>12.0</td>
-                            <td>13.8</td>
-                            <td>15.6</td>
-                            <td>21.0%</td>
-                        </tr>
-                        <tr style="background: var(--OFF_WHITE);">
-                            <td><strong>Mama Gorda</strong></td>
-                            <td>12.0</td>
-                            <td>12.3</td>
-                            <td>12.6</td>
-                            <td>12.9</td>
-                            <td>13.2</td>
-                            <td>13.5</td>
-                            <td>2.3%</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Bam Bam Café</strong></td>
-                            <td>6.0</td>
-                            <td>6.2</td>
-                            <td>6.4</td>
-                            <td>6.6</td>
-                            <td>6.8</td>
-                            <td>7.0</td>
-                            <td>3.1%</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Dohmus (Target)</strong></td>
-                            <td>0</td>
-                            <td>3.6</td>
-                            <td>5.8</td>
-                            <td>7.2</td>
-                            <td>8.6</td>
-                            <td>9.8</td>
-                            <td>N/A</td>
-                        </tr>
-                        <tr style="background: var(--OFF_WHITE);">
-                            <td><strong>QRS 1</strong></td>
-                            <td>0</td>
-                            <td>2.8</td>
-                            <td>5.0</td>
-                            <td>5.0</td>
-                            <td>5.0</td>
-                            <td>5.0</td>
-                            <td>N/A</td>
-                        </tr>
-                        <tr>
-                            <td><strong>QRS 2</strong></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>3.6</td>
-                            <td>5.0</td>
-                            <td>5.0</td>
-                            <td>5.0</td>
-                            <td>N/A</td>
-                        </tr>
-                        <tr style="background: var(--OFF_WHITE);">
-                            <td><strong>QRS 3</strong></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>3.6</td>
-                            <td>5.0</td>
-                            <td>5.0</td>
-                            <td>N/A</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Dark Kitchen</strong></td>
-                            <td>0</td>
-                            <td>0.9</td>
-                            <td>1.8</td>
-                            <td>2.8</td>
-                            <td>3.8</td>
-                            <td>5.0</td>
-                            <td>N/A</td>
-                        </tr>
-                        <tr style="background: var(--OFF_WHITE);">
-                            <td><strong>Software/Saas</strong></td>
-                            <td>0</td>
-                            <td>0.2</td>
-                            <td>0.6</td>
-                            <td>1.2</td>
-                            <td>2.0</td>
-                            <td>3.0</td>
-                            <td>N/A</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Educação</strong></td>
-                            <td>0</td>
-                            <td>0.4</td>
-                            <td>0.8</td>
-                            <td>1.4</td>
-                            <td>2.2</td>
-                            <td>3.2</td>
-                            <td>N/A</td>
-                        </tr>
-                        <tr style="border-top: 3px solid var(--BLACK); background: var(--DARK_GRAY); color: var(--WHITE);">
-                            <td><strong>TOTAL GRUPO</strong></td>
-                            <td><strong>72.6</strong></td>
-                            <td><strong>108.7</strong></td>
-                            <td><strong>148.3</strong></td>
-                            <td><strong>187.4</strong></td>
-                            <td><strong>223.4</strong></td>
-                            <td><strong>248.8</strong></td>
-                            <td><strong>27.0%</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 24px; margin-top: 40px; text-transform: uppercase;">Lucro Líquido por Unidade (R$ Milhões)</h3>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Unidade</th>
-                            <th>2025</th>
-                            <th>2026</th>
-                            <th>2027</th>
-                            <th>2028</th>
-                            <th>2029</th>
-                            <th>2030</th>
-                            <th>Margem 2030</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Mercearia Campos (20%)</td>
-                            <td>6.0</td>
-                            <td>6.12</td>
-                            <td>6.24</td>
-                            <td>6.36</td>
-                            <td>6.48</td>
-                            <td>6.60</td>
-                            <td>20.0%</td>
-                        </tr>
-                        <tr>
-                            <td>Mercearia Amauri (20%)</td>
-                            <td>3.12</td>
-                            <td>3.24</td>
-                            <td>3.36</td>
-                            <td>3.48</td>
-                            <td>3.60</td>
-                            <td>3.72</td>
-                            <td>20.0%</td>
-                        </tr>
-                        <tr>
-                            <td>NAMI SP / Boteco (20%)</td>
-                            <td>1.2</td>
-                            <td>1.68</td>
-                            <td>2.04</td>
-                            <td>2.40</td>
-                            <td>2.76</td>
-                            <td>3.12</td>
-                            <td>20.0%</td>
-                        </tr>
-                        <tr style="background: var(--OFF_WHITE);">
-                            <td>Mama Gorda (20%)</td>
-                            <td>2.4</td>
-                            <td>2.46</td>
-                            <td>2.52</td>
-                            <td>2.58</td>
-                            <td>2.64</td>
-                            <td>2.70</td>
-                            <td>20.0%</td>
-                        </tr>
-                        <tr>
-                            <td>Bam Bam Café (20%)</td>
-                            <td>1.2</td>
-                            <td>1.24</td>
-                            <td>1.28</td>
-                            <td>1.32</td>
-                            <td>1.36</td>
-                            <td>1.40</td>
-                            <td>20.0%</td>
-                        </tr>
-                        <tr style="background: var(--OFF_WHITE);">
-                            <td>Dohmus (25% QRS)</td>
-                            <td>0</td>
-                            <td>0.90</td>
-                            <td>1.45</td>
-                            <td>1.80</td>
-                            <td>2.15</td>
-                            <td>2.45</td>
-                            <td>25.0%</td>
-                        </tr>
-                        <tr>
-                            <td>QRS Units (25%)</td>
-                            <td>0</td>
-                            <td>0.70</td>
-                            <td>2.48</td>
-                            <td>3.75</td>
-                            <td>5.00</td>
-                            <td>6.25</td>
-                            <td>25.0%</td>
-                        </tr>
-                        <tr style="background: var(--OFF_WHITE);">
-                            <td>Dark Kitchen (25%)</td>
-                            <td>0</td>
-                            <td>0.23</td>
-                            <td>0.45</td>
-                            <td>0.70</td>
-                            <td>0.95</td>
-                            <td>1.25</td>
-                            <td>25.0%</td>
-                        </tr>
-                        <tr>
-                            <td>Software/SaaS</td>
-                            <td>0</td>
-                            <td>0.18</td>
-                            <td>0.54</td>
-                            <td>1.08</td>
-                            <td>1.80</td>
-                            <td>2.70</td>
-                            <td>90.0%</td>
-                        </tr>
-                        <tr style="background: var(--OFF_WHITE);">
-                            <td>Educação</td>
-                            <td>0</td>
-                            <td>0.28</td>
-                            <td>0.56</td>
-                            <td>1.12</td>
-                            <td>1.76</td>
-                            <td>2.56</td>
-                            <td>80.0%</td>
-                        </tr>
-                        <tr style="border-top: 3px solid var(--BLACK); background: var(--DARK_GRAY); color: var(--WHITE);">
-                            <td><strong>TOTAL GRUPO LUCRO LÍQUIDO</strong></td>
-                            <td><strong>13.92</strong></td>
-                            <td><strong>17.03</strong></td>
-                            <td><strong>21.32</strong></td>
-                            <td><strong>26.19</strong></td>
-                            <td><strong>31.50</strong></td>
-                            <td><strong>37.45</strong></td>
-                            <td><strong>15.1%</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 24px; margin-top: 40px; text-transform: uppercase;">Capex Previsto - Fases 1, 2, 3, 4</h3>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Fase</th>
-                            <th>Período</th>
-                            <th>Conceito/Iniciativa</th>
-                            <th>Capex (R$ M)</th>
-                            <th>Objetivo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="background: var(--OFF_WHITE);">
-                            <td rowspan="5"><strong>Fase 1</strong></td>
-                            <td rowspan="5"><strong>Mês 0-18</strong></td>
-                            <td>Upgrade Rua Amauri (Hub centerline)</td>
-                            <td>R$ 2.5M</td>
-                            <td>Prep capacity 2x, lab sensorial, training</td>
-                        </tr>
-                        <tr style="background: var(--OFF_WHITE);">
-                            <td>QRS 1 (Rua Amauri)</td>
-                            <td>R$ 0.8M</td>
-                            <td>Conceito test, validação local</td>
-                        </tr>
-                        <tr style="background: var(--OFF_WHITE);">
-                            <td>Dohmus NAMI (Hybrid)</td>
-                            <td>R$ 1.2M</td>
-                            <td>Boteco asiático, happy hour</td>
-                        </tr>
-                        <tr style="background: var(--OFF_WHITE);">
-                            <td>Dark Kitchen (Lab + Fulfillment)</td>
-                            <td>R$ 0.6M</td>
-                            <td>Production + D2C logistics</td>
-                        </tr>
-                        <tr style="background: var(--OFF_WHITE);">
-                            <td>Software MVP + Education Platform</td>
-                            <td>R$ 0.4M</td>
-                            <td>Operações digitais + LMS para chefs</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><strong>Subtotal Fase 1</strong></td>
-                            <td><strong>R$ 5.5M</strong></td>
-                            <td></td>
-                        </tr>
-                        <tr style="background: var(--LIGHT_GRAY);">
-                            <td rowspan="3"><strong>Fase 2</strong></td>
-                            <td rowspan="3"><strong>Mês 19-36</strong></td>
-                            <td>QRS 2 (Rua Amauri)</td>
-                            <td>R$ 0.9M</td>
-                            <td>Replicação modelo testado na rua central</td>
-                        </tr>
-                        <tr style="background: var(--LIGHT_GRAY);">
-                            <td>QRS 3 (Rua Amauri)</td>
-                            <td>R$ 0.9M</td>
-                            <td>Consolidação presença em Rua Amauri</td>
-                        </tr>
-                        <tr style="background: var(--LIGHT_GRAY);">
-                            <td>Hub Expansion + Regional Prep Center</td>
-                            <td>R$ 1.8M</td>
-                            <td>Capacity para 10+ unidades</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><strong>Subtotal Fase 2</strong></td>
-                            <td><strong>R$ 3.6M</strong></td>
-                            <td></td>
-                        </tr>
-                        <tr style="background: var(--LIGHT_GRAY);">
-                            <td rowspan="3"><strong>Fase 3</strong></td>
-                            <td rowspan="3"><strong>Mês 37-54</strong></td>
-                            <td>QRS Units 4-8 (Novas Vizinhanças & Cidades)</td>
-                            <td>R$ 4.0M</td>
-                            <td>5 novas unidades em Vila Madalena, Pinheiros, etc.</td>
-                        </tr>
-                        <tr style="background: var(--LIGHT_GRAY);">
-                            <td>Dohmus Expansion (2 novas unidades)</td>
-                            <td>R$ 2.2M</td>
-                            <td>Boteco asiático em mercados-chave</td>
-                        </tr>
-                        <tr style="background: var(--LIGHT_GRAY);">
-                            <td>Dark Kitchen Distribution Network</td>
-                            <td>R$ 0.8M</td>
-                            <td>Logistics, pontos venda, assinatura</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><strong>Subtotal Fase 3</strong></td>
-                            <td><strong>R$ 7.0M</strong></td>
-                            <td></td>
-                        </tr>
-                        <tr style="background: var(--LIGHT_GRAY);">
-                            <td rowspan="3"><strong>Fase 4</strong></td>
-                            <td rowspan="3"><strong>Mês 55-72</strong></td>
-                            <td>QRS Units 9-18 (Escala Nacional)</td>
-                            <td>R$ 7.2M</td>
-                            <td>10 unidades em 12 meses</td>
-                        </tr>
-                        <tr style="background: var(--LIGHT_GRAY);">
-                            <td>Consolidação Hub Infrastructure</td>
-                            <td>R$ 2.0M</td>
-                            <td>Automação, tech, supply chain</td>
-                        </tr>
-                        <tr style="background: var(--LIGHT_GRAY);">
-                            <td>Software + Education Scale</td>
-                            <td>R$ 1.8M</td>
-                            <td>Platform global, ecosystem partners</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><strong>Subtotal Fase 4</strong></td>
-                            <td><strong>R$ 11.0M</strong></td>
-                            <td></td>
-                        </tr>
-                        <tr style="border-top: 3px solid var(--BLACK); background: var(--DARK_GRAY); color: var(--WHITE);">
-                            <td colspan="3"><strong>TOTAL CAPEX (18-72 MESES)</strong></td>
-                            <td><strong>R$ 27.1M</strong></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- NEGÓCIOS ALTERNOS SECTION -->
-    <div id="negociosalternos" class="section">
-        <div class="container">
-            <h2 class="section-title">Educação & Software</h2>
-            <p class="section-subtitle">Vetores de receita adjacentes com margens premium</p>
-
+            <h3>Ameaças e Defesas</h3>
             <div class="grid-2">
-                <div>
-                    <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase;">Educação</h3>
-                    <h4 style="font-size: 14px; color: var(--PRIMARY_GREEN); font-weight: 700; text-transform: uppercase; margin-bottom: 12px;">Modelo de Negócio</h4>
-                    <p style="font-size: 14px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 16px;">
-                        Plataforma de educação para donos de restaurante: cursos ao vivo (semanal), masterclasses com chefs do Grupo RPE, certificação de técnica asiática, e community de conhecimento. Modelo: assinatura mensal (R$ 2.5k), acesso ilimitado + mentoria 1:1 opcional.
-                    </p>
-                    <h4 style="font-size: 14px; color: var(--PRIMARY_GREEN); font-weight: 700; text-transform: uppercase; margin-bottom: 12px;">Data de Início</h4>
-                    <p style="font-size: 14px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 16px;">
-                        <strong>Mês 3 (Fase 1):</strong> MVP com 8 cursos pré-gravados + 1 masterclass/semana ao vivo.
-                    </p>
-                    <h4 style="font-size: 14px; color: var(--PRIMARY_GREEN); font-weight: 700; text-transform: uppercase; margin-bottom: 12px;">Reasons Why</h4>
-                    <ul class="defense-list" style="margin-bottom: 16px;">
-                        <li>Renda passiva: 80% margens, zero COGS marginal</li>
-                        <li>Brand builder: posiciona RPE como thought leader</li>
-                        <li>Moat: comunidade de chefs cria lock-in de lealdade</li>
-                        <li>TAM: 12k restaurantes premium no Brasil</li>
-                    </ul>
-                    <h4 style="font-size: 14px; color: var(--PRIMARY_GREEN); font-weight: 700; text-transform: uppercase; margin-bottom: 12px;">Dores de Donos de Restaurante</h4>
-                    <ul class="defense-list">
-                        <li>Falta de treino padronizado: cada chef treina do seu jeito</li>
-                        <li>Rotatividade alta: novas contratações = zero conhecimento RPE</li>
-                        <li>Isolamento: donos desconhecem técnicas/tendências asiáticas</li>
-                        <li>Compliance: falta de documentação de receitas e técnicas</li>
-                    </ul>
+                <div class="card">
+                    <h4>Ameaça: E-commerce</h4>
+                    <p>Crescimento do varejo online. Resposta: Focar em segmentos experienciais (F&B, lifestyle) que demandam presença física.</p>
                 </div>
-                <div>
-                    <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase;">Software / SaaS</h3>
-                    <h4 style="font-size: 14px; color: var(--PRIMARY_GREEN); font-weight: 700; text-transform: uppercase; margin-bottom: 12px;">Modelo de Negócio</h4>
-                    <p style="font-size: 14px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 16px;">
-                        Plataforma SaaS para gerenciamento de cozinhas e supply chain: agendamento de prep, rastreamento de ingredientes, controle de estoque, integração de fornecedores, e dashboards de OKRs. B2B modelo: comissão de 3-5% em sourcing, assinatura R$ 8k/mês por restaurante.
-                    </p>
-                    <h4 style="font-size: 14px; color: var(--PRIMARY_GREEN); font-weight: 700; text-transform: uppercase; margin-bottom: 12px;">Projeção Financeira</h4>
-                    <div style="background: var(--OFF_WHITE); padding: 16px; border-radius: 4px; margin-bottom: 16px;">
-                        <p style="font-size: 13px; color: var(--DARK_GRAY); margin-bottom: 8px;"><strong>2026:</strong> R$ 200k (20 clientes @ R$ 800/mês média)</p>
-                        <p style="font-size: 13px; color: var(--DARK_GRAY); margin-bottom: 8px;"><strong>2027:</strong> R$ 600k (60 clientes, 3x growth)</p>
-                        <p style="font-size: 13px; color: var(--DARK_GRAY); margin-bottom: 8px;"><strong>2028:</strong> R$ 1.2M (120 clientes, network effect)</p>
-                        <p style="font-size: 13px; color: var(--DARK_GRAY); margin-bottom: 0;"><strong>2030:</strong> R$ 3.0M (300 clientes, 90% margens)</p>
-                    </div>
-                    <h4 style="font-size: 14px; color: var(--PRIMARY_GREEN); font-weight: 700; text-transform: uppercase; margin-bottom: 12px;">Reasons Why</h4>
-                    <ul class="defense-list" style="margin-bottom: 16px;">
-                        <li>Proprietary data: RPE vira consultora de supply chain</li>
-                        <li>Network effect: 100+ restaurantes + 1 Hub = oligopólio local</li>
-                        <li>Recurring: SaaS garante MRR previsível</li>
-                        <li>Valor para cliente: economia de 15-20% em COGS via otimização</li>
-                    </ul>
-                    <h4 style="font-size: 14px; color: var(--PRIMARY_GREEN); font-weight: 700; text-transform: uppercase; margin-bottom: 12px;">Dores de Clientes</h4>
-                    <ul class="defense-list">
-                        <li>Desperdício de ingredientes: 12-18% de waste típico</li>
-                        <li>Fornecedores fragmentados: 8-12 fornecedores diferentes</li>
-                        <li>Falta de previsibilidade: demanda varia, compras reagem</li>
-                        <li>Zero integração: sistemas legados isolados (nota fiscal, cardápio, caixa)</li>
-                    </ul>
+                <div class="card">
+                    <h4>Ameaça: Competição Regional</h4>
+                    <p>Aumento de players em conceitos asiáticos. Resposta: Mover-se rapidamente para estabelecer primeiro-mover advantage.</p>
+                </div>
+                <div class="card">
+                    <h4>Ameaça: Custos Operacionais</h4>
+                    <p>Inflação de aluguel e insumos. Resposta: Parcerias estratégicas (Dhomus) para otimizar custos através de escala.</p>
+                </div>
+                <div class="card">
+                    <h4>Oportunidade: Consolidação</h4>
+                    <p>Possibilidade de adquirir competidores menores. Resposta: Estruturar modelo de aquisição e integração.</p>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- PROJEÇÕES DE RECEITA SECTION -->
-    <div id="projecoes" class="section">
-        <div class="container">
-            <h2 class="section-title">Projeções de Receita 5 Anos</h2>
-            <p class="section-subtitle">Estratégia de crescimento consolidada: R$ 72.6M (2025) → R$ 248.8M (2030)</p>
+        <!-- MODELO -->
+        <section id="modelo">
+            <h2>Modelo de Entrada & Operação</h2>
 
-            <div style="background: var(--WHITE); border: 1px solid var(--BORDER_COLOR); padding: 40px; border-radius: 4px; margin-bottom: 60px;">
-                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 30px; text-transform: uppercase;">Faturamento Grupo (20 Trimestres)</h3>
-                <canvas id="revenueChart" style="max-height: 500px;"></canvas>
+            <h3>Fases de Crescimento</h3>
+            
+            <div class="phase-box">
+                <h4>Fase 1: Consolidação Amauri (Mês 0-18)</h4>
+                <p><strong>Meta de Capex:</strong> R$ 5,5M</p>
+                <p><strong>Focos:</strong> Otimizar operação Rua Amauri, implementar sistemas, preparar para replicação</p>
+                <p><strong>Resultado esperado:</strong> Aumentar margem e estabelecer playbook replicável</p>
+            </div>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 40px;">
-                    <div>
-                        <h4 style="font-size: 13px; color: var(--PRIMARY_GREEN); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">2025 (Baseline)</h4>
-                        <p style="font-size: 18px; font-weight: 700; color: var(--BLACK);">R$ 72.6M</p>
-                        <p style="font-size: 13px; color: var(--MEDIUM_GRAY); margin-top: 4px;">Operações consolidadas</p>
-                    </div>
-                    <div>
-                        <h4 style="font-size: 13px; color: var(--PRIMARY_GREEN); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">2027 (Mês 24)</h4>
-                        <p style="font-size: 18px; font-weight: 700; color: var(--BLACK);">R$ 148.3M</p>
-                        <p style="font-size: 13px; color: var(--MEDIUM_GRAY); margin-top: 4px;">+104% vs. baseline</p>
-                    </div>
-                    <div>
-                        <h4 style="font-size: 13px; color: var(--PRIMARY_GREEN); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">2030 (Mês 60)</h4>
-                        <p style="font-size: 18px; font-weight: 700; color: var(--BLACK);">R$ 248.8M</h4>
-                        <p style="font-size: 13px; color: var(--MEDIUM_GRAY); margin-top: 4px;">3.4x crescimento | Target atingido</p>
-                    </div>
+            <div class="phase-box">
+                <h4>Fase 2: Expansão Conceitos Asiáticos (Mês 12-30)</h4>
+                <p><strong>Novo capex:</strong> R$ 8-10M em 3 unidades piloto</p>
+                <p><strong>Focos:</strong> Lançar 3 conceitos (Japan + Korea + Southeast Asia)</p>
+                <p><strong>Resultado esperado:</strong> Diversificar receita, validar modelo em novos segmentos</p>
+            </div>
+
+            <div class="phase-box">
+                <h4>Fase 3: Replicação e Scaling (Mês 24-60)</h4>
+                <p><strong>Capex progressivo:</strong> R$ 15-20M por ano</p>
+                <p><strong>Focos:</strong> Replicar conceitos de sucesso, expandir geografia</p>
+                <p><strong>Resultado esperado:</strong> Atingir R$ 248,8M de receita anual</p>
+            </div>
+
+            <h3>Estrutura Operacional Proposta</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Gestão Centralizada</h4>
+                    <p>Finanças, TI, RH, Suprimentos centralizados para otimizar custos e garantir consistência.</p>
+                </div>
+                <div class="card">
+                    <h4>Autonomia por Marca</h4>
+                    <p>Cada marca mantém autonomia operacional (menu, design, equipe) dentro do framework corporativo.</p>
+                </div>
+                <div class="card">
+                    <h4>Dhomus Partnership</h4>
+                    <p>Apoio em operações, tecnologia, supply chain e escalabilidade.</p>
+                </div>
+                <div class="card">
+                    <h4>COOs por Cluster</h4>
+                    <p>Um COO por cluster de marcas (Varejo, F&B, Lifestyle) para coordenação operacional.</p>
                 </div>
             </div>
 
-            <div style="background: var(--OFF_WHITE); padding: 40px; border-radius: 4px; margin-bottom: 40px;">
-                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase;">Drivers de Crescimento por Fase</h3>
-                <div class="grid-3">
-                    <div>
-                        <h4 style="font-size: 14px; color: var(--PRIMARY_GREEN); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">Fase 1 (M0-18)</h4>
-                        <p style="font-size: 14px; color: var(--DARK_GRAY); line-height: 1.8;">Hub ramp-up, QRS 1-3 launch, Dohmus + Dark Kitchen MVP, Educação + Software primeiras receitas. Capex R$ 5.5M.</p>
-                    </div>
-                    <div>
-                        <h4 style="font-size: 14px; color: var(--PRIMARY_GREEN); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">Fase 2 (M19-36)</h4>
-                        <p style="font-size: 14px; color: var(--DARK_GRAY); line-height: 1.8;">QRS 4-5 expansion, Hub scale, software comercial traction, educação consolidada. Capex R$ 3.6M.</p>
-                    </div>
-                    <div>
-                        <h4 style="font-size: 14px; color: var(--PRIMARY_GREEN); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">Fase 3-4 (M37-72)</h4>
-                        <p style="font-size: 14px; color: var(--DARK_GRAY); line-height: 1.8;">QRS network scaling (15-20 units), Dohmus replica sites, Dark Kitchen CPG, software + educação exponencial. Capex R$ 18M.</p>
-                    </div>
+            <h3>Benefícios do Modelo</h3>
+            <p>A estrutura proposta permite crescimento acelerado mantendo eficiência operacional. Custos fixos são compartilhados entre múltiplas marcas, aumentando margem. Autonomia por marca garante responsividade a cada segmento de mercado. Parcerias estratégicas como Dhomus trazem expertise externa sem aumentar estrutura interna.</p>
+        </section>
+
+        <!-- PROJEÇÕES -->
+        <section id="projecoes">
+            <h2>Projeções de Receita</h2>
+
+            <div class="metrics-grid">
+                <div class="metric">
+                    <p>2025 (Atual + Consolidação)</p>
+                    <strong>R$ 73,5M</strong>
+                </div>
+                <div class="metric">
+                    <p>2026 (Amauri Otimizado)</p>
+                    <strong>R$ 92,5M</strong>
+                </div>
+                <div class="metric">
+                    <p>2027 (Conceitos Asiáticos Piloto)</p>
+                    <strong>R$ 131M</strong>
+                </div>
+                <div class="metric">
+                    <p>2028 (Replicação em Andamento)</p>
+                    <strong>R$ 185M</strong>
+                </div>
+                <div class="metric">
+                    <p>2029 (Scaling Completo)</p>
+                    <strong>R$ 243,5M</strong>
+                </div>
+                <div class="metric">
+                    <p>CAGR 5 Anos</p>
+                    <strong>~30%</strong>
                 </div>
             </div>
 
-            <div style="background: var(--WHITE); border: 1px solid var(--BORDER_COLOR); padding: 40px; border-radius: 4px;">
-                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase;">Narrativa Estratégica</h3>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 16px;">
-                    A projeção consolida 4 fases de crescimento, cada uma validando modelo operacional + produto antes de escalar. <strong>Fase 1 (0-18 meses)</strong> é a mais crítica: prova Hub-and-Spoke com QRS units, Dohmus (hibridização), Dark Kitchen (inovação), Educação (margens 80%), Software (margens 90%).
-                </p>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 16px;">
-                    Saída de Fase 1 (M18): R$ 108.7M receita, 7 conceitos operacionais, playbook documentado e replicável. <strong>Fase 2 (19-36 meses)</strong> replica este modelo: QRS 4-5 em adjacências, consolidação regional SP/RJ, software comercial ativo com 30-50+ restaurantes parceiros, educação com 150+ alunos assinantes.
-                </p>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 16px;">
-                    Saída de Fase 2 (M36): R$ 148.3M receita, +15 QRS units planejadas, software scalável para ISV partnerships. <strong>Fases 3-4</strong> escalam a rede QRS (15-20 total), expandem Dohmus (3-4 sítios), crescem Dark Kitchen em CPG (distribution nacional), e exploram software + educação em verticals adjacentes (cloud kitchen networks, chef training platforms, F&B supply chain para mercado).
-                </p>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8;">
-                    Saída de Fase 4 (M72, 2030): R$ 248.8M receita, 20+ unidades operacionais, EBITDA margem 20%+, software + educação gerando R$ 50M+ anualmente. IRR projeto 42-48%, FCF acumulado R$ 61M+, payback total 36-42 meses.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- ROADMAP SECTION -->
-    <div id="roadmap" class="section">
-        <div class="container">
-            <h2 class="section-title">Roadmap 18 Meses</h2>
-            <p class="section-subtitle">Fase 1: Mês 0 - Mês 18</p>
-
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-marker">M0-3</div>
-                    <div class="timeline-content">
-                        <h4>Preparação do Hub (Rua Amauri)</h4>
-                        <p>
-                            <strong>Capex:</strong> R$ 2.5M | <strong>Marcos:</strong> Redesign kitchen layout (40% boost capacity), recrutamento e treinamento de 6-8 prep chefs especializados em wok/dim sum/técnicas asiáticas, validação de supply chain com fornecedores de insumos premium (peixes, carnes, vegetais), implantação de laboratório sensorial de R&D<br>
-                            <strong>Resultado:</strong> Hub operacional com 2x capacity vs. baseline (300 prep portions/dia), laboratório sensorial funcional, estrutura ready para alimentar até 5 satélites QRS, processo de produção documentado e replicável
-                        </p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker">M3-6</div>
-                    <div class="timeline-content">
-                        <h4>QRS 1 Launch + Educação MVP</h4>
-                        <p>
-                            <strong>Capex:</strong> R$ 0.8M (QRS 1) + R$ 0.2M (Educação MVP) | <strong>Marcos:</strong> QRS 1 abre em Rua Amauri (60 dias setup vs. 6 meses para restaurante tradicional), recebe 65-70% componentes prep do Hub, prova replicabilidade operacional, plataforma de educação (SaaS) lança com 50 alunos fundadores (chefs, cozinheiros, foodies), primeiros cursos de wok asiático e técnicas dim sum<br>
-                            <strong>Resultado:</strong> Validação completa de modelo QRS (220 pessoas/dia, 40% EBITDA, R$ 420k/mês), primeiras receitas de educação consolidadas (R$ 75k/mês), playbook documentado pronto para replicação 5-8x em 12 meses
-                        </p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker">M6-9</div>
-                    <div class="timeline-content">
-                        <h4>Dohmus Launch + Dark Kitchen Beta</h4>
-                        <p>
-                            <strong>Capex:</strong> R$ 1.2M (Dohmus) + R$ 0.3M (Dark Kitchen Lab) | <strong>Marcos:</strong> Dohmus abre hibridizando expertise NAMI (tecnicidade culinária) com acessibilidade Mercearia Campos (preço, vibe), especializado em happy hour + jantares (18h-23h), pratos rápidos wok/sopas/bolinhos; Dark Kitchen lança sorvete proteico asiático (açaí com matcha, mango com yuzu) em modelo D2C (delivery, pop-ups, assinaturas) + B2B (supply para NAMI, Dohmus, QRS), inicia com 3 clientes iniciais (NAMI, QRS 1, Mercearia Campos)<br>
-                            <strong>Resultado:</strong> Dohmus valida hybrid model (220 pessoas/dia, 42% EBITDA, R$ 480k/mês, payback 18 meses), Dark Kitchen prova innovation track record com produto inovador (55% EBITDA, 12 meses payback), ambos operacionais e gerando receita
-                        </p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker">M9-12</div>
-                    <div class="timeline-content">
-                        <h4>QRS 2 Launch + Software MVP</h4>
-                        <p>
-                            <strong>Capex:</strong> R$ 0.9M (QRS 2) + R$ 0.2M (Software MVP) | <strong>Marcos:</strong> QRS 2 abre em Rua Amauri consolidando presença na rua estratégica, replicação testada do modelo QRS 1 (mesmos 220 pessoas/dia, 40% EBITDA, payback 24 meses), software de supply chain MVP opera gerenciamento de insumos, estoque e receitas de 3 unidades RPE (QRS 1, QRS 2, Hub), dashboard de decisões operacionais funcional<br>
-                            <strong>Resultado:</strong> Segundo QRS validado (prova replicabilidade não é one-off), software MVP gera primeiros insights de operações consolidadas, dados começam alimentar decisões de pricing e procurement, fundação para comercialização B2B post-Fase 1
-                        </p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker">M12-15</div>
-                    <div class="timeline-content">
-                        <h4>Educação Scale + Dark Kitchen Expansion</h4>
-                        <p>
-                            <strong>Capex:</strong> R$ 0.1M (Educação Scale, mínimo—já operacional) | <strong>Marcos:</strong> Plataforma educação atinge 150+ alunos assinantes (chefs, cozinheiros, empreendedores gastronômicos), 4-5 cursos ativos (wok avançado, dim sum masterclass, fermentação asiática, gestão restaurante), receita R$ 375k/mês consolidada; Dark Kitchen expande para 8-10 pontos de venda (pop-ups, cafés parceiros, livrarias, experiências), atinge R$ 80k/mês de receita D2C + R$ 40k/mês B2B, sorvete proteico ganha cobertura mídia (matérias em blogs gastronômicos, Instagram traction, possível menção em guias de foodies)<br>
-                            <strong>Resultado:</strong> Community de chefs solidificada (rede de 150+ influenciadores operacionais), Dark Kitchen prova produto inovador é escalável e viável (95%+ margem gross), marca Grupo RPE consolida reputação como inovador em F&B tech e produto
-                        </p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker">M15-18</div>
-                    <div class="timeline-content">
-                        <h4>QRS 3 Launch + Fase 2 Planning</h4>
-                        <p>
-                            <strong>Capex:</strong> R$ 0.9M (QRS 3) + R$ 0.1M (planejamento Fase 2, arquitetura regional) | <strong>Marcos:</strong> QRS 3 abre em Rua Amauri consolidação trifecta na rua estratégica, terceira validação consecutiva de replicabilidade (220 pessoas/dia, 40% EBITDA, payback 24 meses), software comercial pronto para B2B (contatos iniciais com restaurantes partners), educação atinge 200+ alunos, Dark Kitchen expande para 15+ pontos (D2C), modelo de Fase 2 documentado: 5+ QRS em vizinhanças adjacentes (Vila Madalena, Pinheiros, Consolação), Dohmus expansion (2a unidade), Hub regional<br>
-                            <strong>Resultado:</strong> Modelo 100% validado e replicável (3 QRS idênticos, 3 Dohmus operacional, Dark Kitchen escalado, educação community-driven, software em beta comercial), receita de negócios alternos consolidada em R$ 150k+/mês (educação R$ 375k + Dark Kitchen R$ 120k + software MVP R$ 10k), financial projections para M18 confirmadas (R$ 108.7M receita grupo), pronto para expansão regional agressiva em 2027-2028
-                        </p>
-                    </div>
-                </div>
+            <h3>Gráfico de Projeção Trimestral</h3>
+            <div class="chart-container">
+                <canvas id="revenueChart"></canvas>
             </div>
 
-            <div style="background: var(--DARK_GRAY); color: var(--WHITE); padding: 30px; border-radius: 4px; margin-top: 40px;">
-                <h3 style="color: var(--WHITE); font-size: 18px; margin-bottom: 16px; text-transform: uppercase;">Fase 1 - Resumo</h3>
-                <div class="grid-3" style="color: var(--WHITE);">
-                    <div>
-                        <h4 style="color: var(--PRIMARY_GREEN); font-size: 14px; margin-bottom: 8px;">Capex Total</h4>
-                        <p style="font-size: 20px; font-weight: 700;">R$ 5.5M</p>
-                    </div>
-                    <div>
-                        <h4 style="color: var(--PRIMARY_GREEN); font-size: 14px; margin-bottom: 8px;">Receita Projetada M18</h4>
-                        <p style="font-size: 20px; font-weight: 700;">R$ 108.7M</p>
-                    </div>
-                    <div>
-                        <h4 style="color: var(--PRIMARY_GREEN); font-size: 14px; margin-bottom: 8px;">Unidades Ativas</h4>
-                        <p style="font-size: 20px; font-weight: 700;">7 Conceitos</p>
-                    </div>
+            <h3>Metodologia das Projeções</h3>
+            <p><strong>2025:</strong> Baseline atual (R$ 72,6M) + ajustes de consolidação Amauri = R$ 73,5M anualizados.</p>
+            <p><strong>2026:</strong> Crescimento 26% YoY através de otimização operacional e aumento de margem em Amauri (+ capex R$ 5,5M Fase 1).</p>
+            <p><strong>2027:</strong> Crescimento 41% YoY com lançamento de 3 conceitos asiáticos pilotos (capex R$ 8-10M Fase 2).</p>
+            <p><strong>2028:</strong> Crescimento 41% YoY com replicação de conceitos de sucesso em novas localizações.</p>
+            <p><strong>2029:</strong> Crescimento 32% YoY chegando próximo ao target de R$ 248,8M com portfolio diversificado e operação eficiente.</p>
+
+            <h3>Premissas-Chave</h3>
+            <ul>
+                <li>Consolidação Amauri adiciona ~15-20% de receita ao baseline em 18 meses</li>
+                <li>Cada conceito asiático novo rende R$ 1,2-1,5M/ano por unidade em steady state</li>
+                <li>Modelo de replicação permite abrir ~2-3 novas unidades por ano de 2027 em diante</li>
+                <li>Margens operacionais mantêm-se estáveis ou melhoram através de escala</li>
+                <li>Dhomus partnership reduz capex por unidade em ~15-20%</li>
+            </ul>
+
+            <h3>Cenários de Risco</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Cenário Pessimista (-20%)</h4>
+                    <p>Atraso em implementação, menor-que-esperado uptake de conceitos asiáticos. Meta 2029: R$ 194,8M.</p>
+                </div>
+                <div class="card">
+                    <h4>Cenário Otimista (+20%)</h4>
+                    <p>Melhor-que-esperado performance, aceleração de replicação, potencial M&A. Meta 2029: R$ 292,2M.</p>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- BUSINESS PLAN SECTION -->
-    <div id="businessplan" class="section">
-        <div class="container">
-            <h2 class="section-title">Plano de Negócio Completo</h2>
-            <p class="section-subtitle">Compilação estratégica da visão 2030</p>
+        <!-- ROADMAP -->
+        <section id="roadmap">
+            <h2>Roadmap Executivo</h2>
 
-            <div style="background: var(--WHITE); border: 1px solid var(--BORDER_COLOR); padding: 40px; border-radius: 4px;">
-                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase;">Resumo Executivo</h3>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 20px;">
-                    O Grupo RPE é a maior plataforma de gastronomia premium e inovação asiática do Brasil. Com operações consolidadas em 4 marcas (Mercearia Amauri, NAMI SP, Mercearia Campos, Bam Bam Café) gerando R$ 72.6M de receita anual e 22.7% de margem líquida, a empresa está posicionada para capturar R$ 250M do mercado de R$ 52B de gastronomia premium em 5 anos.
-                </p>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 20px;">
-                    O motor de crescimento é um modelo operacional revolucionário: Hub-and-Spoke com Rua Amauri como central de produção e inovação (-40% COGS), orbitada por 3+ QRS units (formato de rápido atendimento, payback 24 meses), Dohmus (boteco asiático, hibridizando Mercearia Campos e NAMI, EBITDA 42%), Dark Kitchen (sorvete proteico asiático, margem 55%), além de dois vetores adjacentes de receita: Educação (plataforma SaaS para chefs, 80% margens) e Software (operações de supply chain, 90% margens).
-                </p>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 20px;">
-                    Investimento Fase 1 (18 meses): R$ 5.5M capex. Retorno esperado: FCF de R$ 61M+ acumulado, IRR 42-48%, risco de execução mitigado pela track record operacional consolidada.
-                </p>
-
-                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; margin-top: 40px; text-transform: uppercase;">A Oportunidade</h3>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 20px;">
-                    O Brasil tem TAM de R$ 320B em alimentação e bebidas, com SAM de R$ 52B em gastronomia premium. O mercado cresce 23% ao ano, mas 92% dos restaurantes premium não conseguem escalar além de 3-5 unidades por causa de (1) modelos operacionais inadequados, (2) custos de COGS não otimizados, (3) ausência de padrão replicável, (4) falta de tecnologia, (5) dependência de talento centralizado.
-                </p>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 20px;">
-                    O Grupo RPE resolve cada um desses problemas através de seu modelo Hub-and-Spoke: centraliza produção (Rua Amauri) para otimizar COGS, cria formato replicável (QRS em 60 dias, não 6 meses), desenvolve tecnologia proprietária (software de supply chain), e democratiza talento (educação para chefs). O resultado é unit economics que viabilizam escala: QRS units com 40% EBITDA e 24 meses payback, Dohmus com 42% EBITDA e 18 meses, Dark Kitchen com 55% EBITDA e 12 meses.
-                </p>
-
-                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; margin-top: 40px; text-transform: uppercase;">Modelo Operacional</h3>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 20px;">
-                    <strong>Hub (Rua Amauri):</strong> Central de produção, laboratório sensorial, centro de treinamento. Funciona como bistro boutique (220 pessoas/dia, R$ 85/ticket, R$ 385k/mês, 23% EBITDA) enquanto alimenta satélites com componentes prep. Investimento: R$ 2.5M capex, retorno em 45 meses.
-                </p>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 20px;">
-                    <strong>QRS Units (3 no Mês 18):</strong> Formato de rápido atendimento que recebe 60-70% de COGS do Hub, finalizando apenas na frente. Cada unidade (220 pessoas/dia, R$ 62/ticket, R$ 420k/mês, 40% EBITDA) funciona como ponto de venda rápido e capital-light. Investimento: R$ 0.8-0.9M capex cada, retorno em 24 meses. Pós Mês 18: replicação em 15-20 unidades/ano até SOM de R$ 150-160M.
-                </p>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 20px;">
-                    <strong>Dohmus:</strong> Boteco asiático (220 pessoas/dia, R$ 68/ticket, R$ 480k/mês, 42% EBITDA) que hibridiza a excelência técnica de NAMI com acessibilidade de Mercearia Campos. Especializado em happy hour (18h-20h) e jantares (20h-23h), com pratos rápidos (wok, sopas shoyu, bolinhos). Investimento: R$ 1.2M capex, retorno em 18 meses.
-                </p>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 20px;">
-                    <strong>Dark Kitchen:</strong> Laboratório de inovação (sorvete proteico asiático, 180 pessoas equiv./dia, R$ 45/ticket, R$ 150k/mês, 55% EBITDA). 30% B2B (supply para NAMI, Dohmus, QRS), 70% D2C (entrega, pontos venda, assinaturas). Investimento: R$ 0.6M capex, retorno em 12 meses.
-                </p>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 20px;">
-                    <strong>Educação + Software:</strong> Vetores adjacentes de receita. Educação: plataforma SaaS para chefs (assinatura R$ 2.5k/mês, 80% margens). Software: gerenciamento de supply chain para restaurantes (R$ 8k/mês, 90% margens, +3-5% comissão em sourcing). Ambos investimentos mínimos (R$ 0.4M inicial), crescimento exponencial (CAGR 80%+ a partir de 2027).
-                </p>
-
-                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; margin-top: 40px; text-transform: uppercase;">Projeção Financeira (2025-2030)</h3>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 20px;">
-                    <strong>Cenário Base:</strong> R$ 72.6M (2025) → R$ 108.7M (2026) → R$ 148.3M (2027) → R$ 187.4M (2028) → R$ 223.4M (2029) → R$ 248.8M (2030).
-                </p>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 20px;">
-                    EBITDA consolida de R$ 3.47M (2025, 4.8% margem consolidada) para R$ 26.52M (2030, 10.7% margem consolidada). Crescimento é front-loaded em Dohmus (18.6% CAGR), QRS units (40% EBITDA), Dark Kitchen (59% margem), e negócios alternos (Educação 80% margem, Software 90% margem).
-                </p>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 20px;">
-                    FCF acumulado (18-72 meses): R$ 61M+ após investimento de R$ 27.1M em 4 fases. IRR: 42-48% em cenário base, 35-42% em cenário conservador, 55%+ em cenário otimista.
-                </p>
-
-                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; margin-top: 40px; text-transform: uppercase;">Roadmap 18 Meses</h3>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 20px;">
-                    <strong>Fase 1 (M0-M18):</strong> R$ 5.5M capex, 7 conceitos operacionais. Marcos sequenciais: (1) Hub upgrade (M0-3), (2) QRS 1 + Educação MVP (M3-6), (3) Dohmus + Dark Kitchen Beta (M6-9), (4) QRS 2 + Software MVP (M9-12), (5) Educação Scale + Dark Kitchen Expansion (M12-15), (6) QRS 3 + Fase 2 Planning (M15-18). Resultado: receita de R$ 108.7M (M18), EBITDA de R$ 6.88M, 7 negócios validados.
-                </p>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 20px;">
-                    <strong>Fase 2 (M19-36):</strong> R$ 3.6M capex. QRS 4-5, Hub expansion, regional prep center, educação scale, software comercial.
-                </p>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 20px;">
-                    <strong>Fase 3 (M37-54):</strong> R$ 7.0M capex. QRS 6-10, Dohmus expansion (2 units), Dark Kitchen distribution network, software ISV partnerships.
-                </p>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 20px;">
-                    <strong>Fase 4 (M55-72):</strong> R$ 11.0M capex. QRS 11-20, Hub consolidation, software + educação global scale. Target: R$ 250M receita, 20%+ EBITDA margem, 15-20 QRS units operacionais + Dohmus network + Dark Kitchen CPG.
-                </p>
-
-                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; margin-top: 40px; text-transform: uppercase;">Tese de Investimento</h3>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 20px;">
-                    O Grupo RPE é o único player brasileiro que combina (1) operações consolidadas de gastronomia premium, (2) modelo Hub-and-Spoke escalável, (3) expertise técnica em culinária asiática premium, (4) track record de inovação (Dark Kitchen, Educação, Software), e (5) TAM claro de R$ 52B.
-                </p>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 20px;">
-                    Risco de execução é baixo: modelo operacional já está validado (Mercearia Amauri + NAMI + Mercearia Campos + Bam Bam = R$ 72.6M, 22.7% margem). QRS é extensão lógica de expertise existente. Dohmus é hibridização de dois ativos já operacionais. Dark Kitchen é inovação em categoria nascente com unit economics comprovados. Software e Educação são plays adjacentes com margens premium e risk mínimo.
-                </p>
-                <p style="font-size: 15px; color: var(--DARK_GRAY); line-height: 1.8;">
-                    Retorno esperado: 3.4x múltiplo de revenue (2030 vs. baseline), 42-48% IRR, FCF de R$ 61M+ acumulado. Tempo de payback total (capex cumulativo vs. FCF acumulado): 36-42 meses. Valor de saída potencial: R$ 1.5-2.0B (8-10x EBITDA de R$ 26.5M em 2030).
-                </p>
-
-                <div style="background: var(--OFF_WHITE); padding: 20px; margin-top: 30px; border-radius: 4px;">
-                    <p style="font-size: 12px; color: var(--MEDIUM_GRAY);">
-                        <strong>Confidencial —</strong> Este plano contém informações proprietárias do Grupo RPE. Distribuição restrita.
-                    </p>
-                </div>
+            <h3>2025 - Consolidação</h3>
+            <div class="card" style="margin-bottom: 1.5rem;">
+                <h4>Trimestres 1-4</h4>
+                <ul>
+                    <li><strong>Q1:</strong> Diagnóstico operacional Amauri, implementar sistemas centralizados</li>
+                    <li><strong>Q2:</strong> Otimizar processos, treinar equipes, iniciar parcerias Dhomus</li>
+                    <li><strong>Q3:</strong> Capex R$ 2M em melhorias, aumentar capacidade</li>
+                    <li><strong>Q4:</strong> Fechar ano com receita ~R$ 73,5M, validar modelo replicável</li>
+                </ul>
             </div>
-        </div>
+
+            <h3>2026 - Amauri Otimizado</h3>
+            <div class="card" style="margin-bottom: 1.5rem;">
+                <h4>Trimestres 1-4</h4>
+                <ul>
+                    <li><strong>Q1:</strong> Completar implementação Fase 1 (R$ 5,5M capex), atingir novo baseline</li>
+                    <li><strong>Q2-Q3:</strong> Replicar learnings para outras marcas, aumentar eficiência grupo</li>
+                    <li><strong>Q4:</strong> Validar conceitos asiáticos pilotos, fechar ano ~R$ 92,5M</li>
+                </ul>
+            </div>
+
+            <h3>2027-2029 - Scaling Acelerado</h3>
+            <div class="card">
+                <h4>Fases 2 & 3 Implementação</h4>
+                <ul>
+                    <li>2027: Lançar 3 conceitos asiáticos (Japan, Korea, Southeast Asia) + consolidar Amauri 2.0</li>
+                    <li>2028: Replicar 4-6 novas unidades de conceitos de sucesso, atingir R$ 185M</li>
+                    <li>2029: Continuar expansão, atingir meta de R$ 248,8M+ com 20+ unidades ativas</li>
+                </ul>
+            </div>
+        </section>
     </div>
 
-    <!-- MODALS -->
-    <div id="modal-tam" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modal-tam')">×</button>
-            <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 16px;">TAM: Total Addressable Market</h2>
-            <p style="font-size: 14px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 16px;">
-                O mercado total de alimentação e bebidas no Brasil é de aproximadamente R$ 320 bilhões por ano. Este é o tamanho do universo completo de oportunidade.
-            </p>
-            <p style="font-size: 14px; color: var(--DARK_GRAY); line-height: 1.8;">
-                Esse número engloba: restaurantes, bares, cafés, food trucks, catering, delivery, varejo de alimentos, bebidas, e tudo que envolve consumo de F&B fora do lar no Brasil.
-            </p>
-        </div>
+    <div class="footer">
+        <p>&copy; 2025 Grupo RPE | Planejamento Estratégico 5 Anos | Confidencial</p>
     </div>
 
-    <div id="modal-sam" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modal-sam')">×</button>
-            <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 16px;">SAM: Serviceable Addressable Market</h2>
-            <p style="font-size: 14px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 16px;">
-                O SAM reduz o TAM para o segmento que o Grupo RPE pode realisticamente servir. Nossa expertise é gastronomia premium com pegada asiática.
-            </p>
-            <p style="font-size: 14px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 16px;">
-                Filtramos: apenas restaurantes, bares e fast-casual que faturam acima de R$ 50k/mês (premium tier), em eixos urbanos principais (SP, RJ, BH, Curitiba). Excluímos: food courts, food trucks, varejo, rede de low-cost.
-            </p>
-            <p style="font-size: 14px; color: var(--DARK_GRAY); line-height: 1.8;">
-                Resultado: SAM de R$ 52 bilhões—o tamanho do mercado premium que faz sentido para nós atingir.
-            </p>
-        </div>
-    </div>
-
-    <div id="modal-som" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modal-som')">×</button>
-            <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 16px;">SOM: Serviceable Obtainable Market</h2>
-            <p style="font-size: 14px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 16px;">
-                O SOM é a fatia do SAM que o Grupo RPE pode realistically capturar em 5 anos, dado investimento, modelo operacional, e ritmo de expansão.
-            </p>
-            <p style="font-size: 14px; color: var(--DARK_GRAY); line-height: 1.8; margin-bottom: 16px;">
-                Nossa projeção: R$ 150-160M de receita em 2030, representando ~0.3% do SAM. Pareça pequeno, mas representa 20-30 unidades de formato QRS, Dohmus network, Dark Kitchen scale, educação, e software—um portfólio robusto.
-            </p>
-            <p style="font-size: 14px; color: var(--DARK_GRAY); line-height: 1.8;">
-                Pós 2030: SOM expande para R$ 500M+ conforme modelo prova escalabilidade beyond SP/RJ, e negócios alternos (software, educação) se tornammotores de crescimento.
-            </p>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
     <script>
         function switchSection(sectionId) {
             // Hide all sections
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-
-            // Remove active class from all nav links
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => section.classList.remove('active'));
 
             // Show selected section
             document.getElementById(sectionId).classList.add('active');
 
-            // Add active class to clicked nav link
+            // Update nav link active state
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
             event.target.classList.add('active');
 
             // Scroll to top
             window.scrollTo(0, 0);
-
-            // Initialize chart if projecoes section is shown
-            if (sectionId === 'projecoes' && !window.chartInitialized) {
-                initializeRevenueChart();
-                window.chartInitialized = true;
-            }
         }
 
-        function initializeRevenueChart() {
-            const ctx = document.getElementById('revenueChart');
-            if (!ctx) return;
+        // Initialize chart
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        
+        const labels = [
+            'Q1 2025', 'Q2 2025', 'Q3 2025', 'Q4 2025',
+            'Q1 2026', 'Q2 2026', 'Q3 2026', 'Q4 2026',
+            'Q1 2027', 'Q2 2027', 'Q3 2027', 'Q4 2027',
+            'Q1 2028', 'Q2 2028', 'Q3 2028', 'Q4 2028',
+            'Q1 2029', 'Q2 2029', 'Q3 2029', 'Q4 2029'
+        ];
 
-            const quarters = ['Q1 25', 'Q2 25', 'Q3 25', 'Q4 25', 'Q1 26', 'Q2 26', 'Q3 26', 'Q4 26', 'Q1 27', 'Q2 27', 'Q3 27', 'Q4 27', 'Q1 28', 'Q2 28', 'Q3 28', 'Q4 28', 'Q1 29', 'Q2 29', 'Q3 29', 'Q4 29', 'Q1 30'];
+        const revenueData = [
+            17.5, 18.0, 18.5, 19.5,
+            20.5, 22.0, 24.0, 26.0,
+            28.5, 31.0, 34.0, 37.5,
+            41.0, 44.5, 48.0, 51.5,
+            55.5, 59.0, 62.5, 66.5
+        ];
 
-            const units = {
-                'Mercearia Amauri': [18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2, 18.2],
-                'NAMI': [19.0, 19.0, 19.0, 19.0, 19.0, 19.0, 19.0, 19.0, 19.5, 19.5, 19.5, 19.5, 20.0, 20.0, 20.0, 20.0, 20.5, 20.5, 20.5, 20.5, 21.0],
-                'Mercearia Campos': [18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0],
-                'QRS 1': [0, 0, 0.0, 4.0, 5.0, 5.2, 5.4, 5.6, 5.8, 6.0, 6.2, 6.4, 6.6, 6.8, 7.0, 7.2, 7.4, 7.6, 7.8, 8.0, 8.2],
-                'QRS 2': [0, 0, 0, 0, 0, 0, 0, 3.8, 5.0, 5.2, 5.4, 5.6, 5.8, 6.0, 6.2, 6.4, 6.6, 6.8, 7.0, 7.2, 7.4],
-                'QRS 3': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4.2, 5.0, 5.2, 5.4, 5.6, 5.8, 6.0, 6.2, 6.4, 6.6],
-                'Dohmus': [0, 0, 0, 0, 0, 0, 1.2, 3.6, 4.8, 5.0, 5.2, 5.4, 5.6, 5.8, 6.0, 6.2, 6.4, 6.6, 6.8, 7.0, 7.2],
-                'Dark Kitchen': [0, 0, 0, 0, 0, 0.5, 1.2, 1.8, 2.2, 2.6, 3.0, 3.4, 3.8, 4.2, 4.6, 5.0, 5.4, 5.8, 6.2, 6.6, 7.0],
-                'Educação (SaaS)': [0, 0, 0, 0, 0.075, 0.15, 0.225, 0.3, 0.375, 0.45, 0.525, 0.6, 0.675, 0.75, 0.825, 0.9, 0.975, 1.05, 1.125, 1.2, 1.275],
-                'Software': [0, 0, 0, 0, 0, 0, 0, 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.15, 0.2, 0.25, 0.35, 0.45, 0.55, 0.7, 0.85],
-            };
-
-            const colors = ['#00B73D', '#1E2761', '#2C5F2D', '#B85042', '#F96167', '#1C7293', '#028090', '#6D2E46', '#84B59F'];
-            const datasets = Object.keys(units).map((name, idx) => ({
-                label: name,
-                data: units[name],
-                borderColor: colors[idx % colors.length],
-                backgroundColor: colors[idx % colors.length] + '20',
-                tension: 0.4,
-                borderWidth: 2.5,
-                pointRadius: 4,
-                pointHoverRadius: 6
-            }));
-
-            const grupoTotal = quarters.map((_, i) =>
-                Object.keys(units).reduce((sum, key) => sum + units[key][i], 0)
-            );
-
-            datasets.push({
-                label: 'Grupo (Total)',
-                data: grupoTotal,
-                borderColor: '#0F0F0F',
-                backgroundColor: '#0F0F0F20',
-                tension: 0.4,
-                borderWidth: 3.5,
-                pointRadius: 5,
-                pointHoverRadius: 7,
-                borderDash: [5, 5]
-            });
-
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: quarters,
-                    datasets: datasets
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'bottom',
-                            labels: {
-                                font: { size: 12, weight: '600' },
-                                padding: 20,
-                                usePointStyle: true,
-                                pointStyle: 'circle'
-                            }
+        const revenueChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Receita Trimestral (R$ M)',
+                        data: revenueData,
+                        borderColor: '#00B73D',
+                        backgroundColor: 'rgba(0, 183, 61, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 5,
+                        pointBackgroundColor: '#00B73D',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointHoverRadius: 7,
+                        hoverBackgroundColor: '#00933a'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            color: '#0F0F0F',
+                            font: { size: 12, weight: 'bold' },
+                            padding: 15
                         }
                     },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: { display: true, text: 'Faturamento (R$ Milhões)' },
-                            ticks: { font: { size: 12 } }
-                        },
-                        x: {
-                            ticks: { font: { size: 11 } }
+                    tooltip: {
+                        backgroundColor: 'rgba(15, 15, 15, 0.9)',
+                        titleColor: '#00B73D',
+                        bodyColor: '#fff',
+                        padding: 12,
+                        titleFont: { size: 13, weight: 'bold' },
+                        bodyFont: { size: 12 },
+                        displayColors: false,
+                        callbacks: {
+                            label: function(context) {
+                                return 'R$ ' + context.parsed.y.toFixed(1) + 'M';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(0, 0, 0, 0.05)' },
+                        ticks: { color: '#2A2A2A', font: { size: 11 } }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(0, 183, 61, 0.1)' },
+                        ticks: { 
+                            color: '#2A2A2A',
+                            font: { size: 11 },
+                            callback: function(value) {
+                                return 'R$ ' + value.toFixed(0) + 'M';
+                            }
                         }
                     }
                 }
-            });
-        }
-
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.add('show');
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('show');
-        }
-
-        // Close modal on backdrop click
-        document.querySelectorAll('.modal').forEach(modal => {
-            modal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeModal(this.id);
-                }
-            });
-        });
-
-        // Close modal on Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                document.querySelectorAll('.modal.show').forEach(modal => {
-                    closeModal(modal.id);
-                });
-            }
-        });
-
-        // Initialize chart when page loads if projecoes is active
-        document.addEventListener('DOMContentLoaded', function() {
-            const activeSection = document.querySelector('.section.active');
-            if (activeSection && activeSection.id === 'projecoes') {
-                initializeRevenueChart();
-                window.chartInitialized = true;
             }
         });
     </script>
