@@ -3,99 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planejamento Estratégico 5 Anos - Grupo RPE</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js"></script>
+    <title>Planejamento Estratégico — Grupo RPE 2025-2030</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
     <style>
+        :root {
+            --PRIMARY_GREEN: #00B73D;
+            --BLACK: #0F0F0F;
+            --OFF_WHITE: #F5F4F0;
+            --DARK_GRAY: #1A1A1A;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --PRIMARY_GREEN: #00B73D;
-            --BLACK: #0F0F0F;
-            --OFF_WHITE: #F5F4F0;
-            --DARK_GRAY: #1A1A1A;
-            --LIGHT_GRAY: #E8E8E8;
-            --TEXT_DARK: #2A2A2A;
-        }
-
         body {
-            font-family: 'DM Sans', Arial, sans-serif;
-            color: var(--TEXT_DARK);
+            font-family: 'DM Sans', sans-serif;
             background-color: var(--OFF_WHITE);
+            color: var(--BLACK);
             line-height: 1.6;
         }
 
-        /* NAVIGATION FIXED - MENU ALINHADO */
+        header {
+            background-color: var(--BLACK);
+            color: var(--OFF_WHITE);
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border-bottom: 3px solid var(--PRIMARY_GREEN);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+
         nav {
             background-color: var(--BLACK);
             padding: 0.8rem 1.5rem;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-bottom: 1px solid var(--DARK_GRAY);
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 0.75rem;
+            gap: 0.5rem;
             flex-wrap: wrap;
             align-items: center;
-            justify-content: flex-start;
+            max-width: 100%;
         }
 
         .nav-link {
             color: var(--OFF_WHITE);
-            text-decoration: none;
-            padding: 0.5rem 0.85rem;
+            padding: 0.4rem 0.8rem;
             white-space: nowrap;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            font-size: 0.75rem;
+            text-decoration: none;
             cursor: pointer;
-            border-radius: 4px;
-            display: inline-block;
+            border-radius: 2px;
+            transition: background-color 0.3s;
+            background-color: var(--DARK_GRAY);
         }
 
-        .nav-link:hover {
-            background-color: var(--PRIMARY_GREEN);
-            color: var(--BLACK);
-            transform: scale(1.05);
-        }
-
+        .nav-link:hover,
         .nav-link.active {
             background-color: var(--PRIMARY_GREEN);
             color: var(--BLACK);
         }
 
-        header {
-            background: linear-gradient(135deg, var(--BLACK) 0%, var(--DARK_GRAY) 100%);
-            color: var(--OFF_WHITE);
-            padding: 4rem 2rem;
-            text-align: center;
-        }
-
-        header h1 {
-            font-family: 'Anton', Arial, sans-serif;
-            font-size: 2.8rem;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-            letter-spacing: 2px;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            color: var(--PRIMARY_GREEN);
-            font-weight: 300;
-        }
-
-        .container {
+        main {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 3rem 2rem;
+            padding: 2rem 1.5rem;
         }
 
         section {
@@ -104,7 +94,7 @@
 
         section.active {
             display: block;
-            animation: fadeIn 0.3s ease-in;
+            animation: fadeIn 0.3s;
         }
 
         @keyframes fadeIn {
@@ -113,348 +103,214 @@
         }
 
         h2 {
-            font-family: 'Anton', Arial, sans-serif;
             font-size: 2rem;
-            text-transform: uppercase;
-            color: var(--BLACK);
             margin-bottom: 1.5rem;
-            border-bottom: 3px solid var(--PRIMARY_GREEN);
+            color: var(--BLACK);
+            border-bottom: 2px solid var(--PRIMARY_GREEN);
             padding-bottom: 0.5rem;
         }
 
         h3 {
-            font-family: 'Anton', Arial, sans-serif;
             font-size: 1.4rem;
-            text-transform: uppercase;
-            color: var(--PRIMARY_GREEN);
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             margin-bottom: 1rem;
+            color: var(--PRIMARY_GREEN);
         }
 
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
-            align-items: start;
+            margin-bottom: 2rem;
         }
 
         .grid-3 {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .card {
-            background: white;
-            border: 1px solid var(--LIGHT_GRAY);
+            background-color: white;
             padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-radius: 4px;
+            border-left: 4px solid var(--PRIMARY_GREEN);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
         }
 
         .card h4 {
-            color: var(--PRIMARY_GREEN);
-            font-size: 1.1rem;
             margin-bottom: 0.8rem;
+            color: var(--BLACK);
+            font-size: 1.1rem;
+        }
+
+        .card p {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            background-color: white;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+
+        table th {
+            background-color: var(--BLACK);
+            color: var(--OFF_WHITE);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        table tr:last-child td {
+            border-bottom: none;
+            background-color: #f9f9f9;
             font-weight: 600;
         }
 
-        .metric {
-            background: var(--OFF_WHITE);
+        table tr:hover td {
+            background-color: #f5f5f5;
+        }
+
+        .highlight {
+            background-color: #fffbea;
             padding: 1.5rem;
             border-left: 4px solid var(--PRIMARY_GREEN);
-            margin: 1rem 0;
-            border-radius: 4px;
+            margin-bottom: 2rem;
+            border-radius: 2px;
         }
 
-        .metric strong {
-            color: var(--PRIMARY_GREEN);
-            font-size: 1.4rem;
-        }
-
-        .metric p {
-            color: var(--TEXT_DARK);
-            font-size: 0.95rem;
-            margin-top: 0.3rem;
-        }
-
-        p {
-            text-align: left;
-            margin-bottom: 1rem;
-            color: var(--TEXT_DARK);
-        }
-
-        ul, ol {
-            margin-left: 2rem;
-            margin-bottom: 1rem;
-            text-align: left;
-        }
-
-        li {
+        .highlight h4 {
             margin-bottom: 0.5rem;
-            color: var(--TEXT_DARK);
-        }
-
-        .phase-box {
-            background: linear-gradient(135deg, var(--PRIMARY_GREEN) 0%, #00933a 100%);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-        }
-
-        .phase-box h4 {
-            color: white;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-        }
-
-        .phase-box p {
-            color: white;
-            font-size: 0.95rem;
-            margin: 0.3rem 0;
+            color: var(--BLACK);
         }
 
         .chart-container {
             position: relative;
-            height: 450px;
-            margin: 2rem 0;
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            border: 1px solid var(--LIGHT_GRAY);
+            height: 400px;
+            margin-bottom: 2rem;
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
         }
 
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin: 2rem 0;
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
         }
 
-        /* TABLE STYLING */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            margin: 2rem 0;
+        .timeline-item {
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+            border-left: 2px solid var(--PRIMARY_GREEN);
+            position: relative;
         }
 
-        thead {
-            background-color: var(--BLACK);
-            color: var(--OFF_WHITE);
-        }
-
-        th {
-            padding: 1rem;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-        }
-
-        td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--LIGHT_GRAY);
-            color: var(--TEXT_DARK);
-        }
-
-        tbody tr:hover {
-            background-color: var(--OFF_WHITE);
-        }
-
-        tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-        .concept-example {
-            background: white;
-            border: 2px solid var(--PRIMARY_GREEN);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            display: grid;
-            grid-template-columns: 200px 1fr;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .concept-image {
-            width: 200px;
-            height: 200px;
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background-color: var(--PRIMARY_GREEN);
             border-radius: 50%;
-            overflow: hidden;
-            border: 4px solid var(--PRIMARY_GREEN);
         }
 
-        .concept-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .concept-info h4 {
-            font-size: 1.3rem;
-            color: var(--PRIMARY_GREEN);
+        .timeline-item h4 {
             margin-bottom: 0.5rem;
-            font-weight: bold;
+            color: var(--BLACK);
+            font-weight: 600;
         }
 
-        .concept-info p {
-            margin: 0.5rem 0;
-            color: var(--TEXT_DARK);
+        .timeline-item p {
+            color: #666;
+            font-size: 0.95rem;
         }
 
-        .concept-stats {
-            display: flex;
-            gap: 2rem;
-            margin-top: 1rem;
-        }
-
-        .concept-stat {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .concept-stat strong {
-            color: var(--PRIMARY_GREEN);
-            font-size: 1.1rem;
-        }
-
-        .concept-stat small {
-            color: #999;
-            font-size: 0.85rem;
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.8rem;
-            }
-
-            .grid-2,
-            .grid-3 {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .container {
-                padding: 2rem 1rem;
-            }
-
-            .chart-container {
-                height: 300px;
-                padding: 1rem;
-            }
-
-            .metrics-grid {
-                grid-template-columns: 1fr;
-            }
-
-            nav ul {
-                gap: 0.5rem;
-            }
-
-            .nav-link {
-                padding: 0.4rem 0.65rem;
-                font-size: 0.8rem;
-            }
-
-            .concept-example {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .concept-image {
-                width: 150px;
-                height: 150px;
-                margin: 0 auto;
-            }
-
-            table {
-                font-size: 0.9rem;
-            }
-
-            th, td {
-                padding: 0.75rem;
-            }
-        }
-
-        .footer {
+        footer {
             background-color: var(--BLACK);
             color: var(--OFF_WHITE);
             text-align: center;
             padding: 2rem;
             margin-top: 3rem;
+            border-top: 1px solid var(--DARK_GRAY);
+        }
+
+        footer p {
             font-size: 0.9rem;
         }
 
-        .highlight {
-            color: var(--PRIMARY_GREEN);
-            font-weight: bold;
-        }
+        @media (max-width: 768px) {
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
 
-        strong {
-            color: var(--PRIMARY_GREEN);
-            font-weight: 600;
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            nav ul {
+                gap: 0.3rem;
+            }
+
+            .nav-link {
+                font-size: 0.65rem;
+                padding: 0.35rem 0.6rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+    <header>
+        <h1>Planejamento Estratégico</h1>
+        <p>Grupo RPE — Visão 2025-2030</p>
+    </header>
+
     <nav>
         <ul>
-            <li><a href="#" onclick="switchSection('baseline')" class="nav-link active">BASELINE</a></li>
-            <li><a href="#" onclick="switchSection('visao')" class="nav-link">VISÃO</a></li>
-            <li><a href="#" onclick="switchSection('mercados')" class="nav-link">MERCADOS</a></li>
-            <li><a href="#" onclick="switchSection('conceitos')" class="nav-link">CONCEITOS</a></li>
-            <li><a href="#" onclick="switchSection('modelo')" class="nav-link">MODELO</a></li>
-            <li><a href="#" onclick="switchSection('projecoes')" class="nav-link">PROJEÇÕES</a></li>
-            <li><a href="#" onclick="switchSection('roadmap')" class="nav-link">ROADMAP</a></li>
+            <li><a class="nav-link active" onclick="switchSection('baseline')">Baseline</a></li>
+            <li><a class="nav-link" onclick="switchSection('visao')">Visão 5 Anos</a></li>
+            <li><a class="nav-link" onclick="switchSection('mercados')">Mercados</a></li>
+            <li><a class="nav-link" onclick="switchSection('conceitos')">Conceitos</a></li>
+            <li><a class="nav-link" onclick="switchSection('modelo')">Modelo</a></li>
+            <li><a class="nav-link" onclick="switchSection('projecoes')">Projeções</a></li>
+            <li><a class="nav-link" onclick="switchSection('roadmap')">Roadmap</a></li>
         </ul>
     </nav>
 
-    <header>
-        <h1>Planejamento Estratégico</h1>
-        <p>Grupo RPE | 5 Anos | Meta: R$ 248,8M</p>
-    </header>
-
-    <div class="container">
-        <!-- BASELINE -->
+    <main>
+        <!-- SEÇÃO 1: BASELINE -->
         <section id="baseline" class="active">
-            <h2>Baseline Financeiro</h2>
-            
-            <div class="metrics-grid">
-                <div class="metric">
-                    <p>Receita Anual Atual</p>
-                    <strong>R$ 72,6M</strong>
-                </div>
-                <div class="metric">
-                    <p>Margem Líquida</p>
-                    <strong>22,7%</strong>
-                </div>
-                <div class="metric">
-                    <p>Operação</p>
-                    <strong>30 anos</strong>
-                </div>
-                <div class="metric">
-                    <p>Número de Unidades</p>
-                    <strong>6</strong>
-                </div>
-            </div>
+            <h2>Baseline Financeiro (2025)</h2>
 
-            <h3>Portfolio Atual por Marca</h3>
+            <h3>Portfolio Atual</h3>
             <table>
                 <thead>
                     <tr>
-                        <th>MARCA</th>
-                        <th>CONCEITO</th>
-                        <th>UNIDADES</th>
-                        <th>TICKET MÉDIO</th>
-                        <th>RECEITA/MÊS</th>
+                        <th>Marca</th>
+                        <th>Conceito</th>
+                        <th>Unidades</th>
+                        <th>Ticket Médio</th>
+                        <th>Receita/Mês</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -493,457 +349,443 @@
                         <td>—</td>
                         <td>R$ 500k</td>
                     </tr>
-                    <tr style="background-color: var(--OFF_WHITE); font-weight: bold;">
-                        <td colspan="4" style="text-align: right;">TOTAL MENSAL</td>
-                        <td>R$ 6.100k</td>
+                    <tr>
+                        <td colspan="4"><strong>TOTAL MENSAL</strong></td>
+                        <td><strong>R$ 6.100k</strong></td>
                     </tr>
                 </tbody>
             </table>
 
-            <h3>Estrutura Operacional</h3>
-            <p>O Grupo RPE opera 6 unidades distribuídas em 5 marcas, gerando receita combinada de R$ 72,6M anuais. A diversificação de conceitos (Bistro, Fine Dining, Boteco, Gastronomia, Coffee) reduz concentração de risco. Cada marca opera de forma independente mantendo eficiência na estrutura compartilhada (finanças, RH, suprimentos).</p>
-        </section>
-
-        <!-- VISÃO -->
-        <section id="visao">
-            <h2>Visão 5 Anos</h2>
-
-            <div class="metrics-grid">
-                <div class="metric">
-                    <p>Receita Meta</p>
-                    <strong>R$ 248,8M</strong>
-                </div>
-                <div class="metric">
-                    <p>Crescimento</p>
-                    <strong>3,43x</strong>
-                </div>
-                <div class="metric">
-                    <p>CAGR Esperado</p>
-                    <strong>~30%</strong>
-                </div>
-                <div class="metric">
-                    <p>Horizonte</p>
-                    <strong>5 Anos</strong>
-                </div>
-            </div>
-
-            <h3>Direção Estratégica</h3>
-            <p>Transformar o Grupo RPE de operação consolidada em player de crescimento acelerado. Usar Rua Amauri como âncora de expansion, lançar 3 conceitos asiáticos diferenciados, e replicar modelos de sucesso em nova geografia.</p>
-
-            <h3>Pilares de Crescimento</h3>
             <div class="grid-2">
                 <div class="card">
-                    <h4>Consolidação Amauri</h4>
-                    <p>Otimizar operação Rua Amauri, aumentar captura de mercado local, estabelecer playbook replicável.</p>
+                    <h4>Receita Anualizada</h4>
+                    <p style="font-size: 1.8rem; color: var(--PRIMARY_GREEN); font-weight: 700;">R$ 73,2M</p>
+                    <p style="color: #999; font-size: 0.85rem; margin-top: 0.5rem;">6.100k × 12 meses</p>
                 </div>
                 <div class="card">
-                    <h4>Conceitos Asiáticos</h4>
-                    <p>Trazer 3 novos conceitos validados (Japan, Korea, Southeast Asia) para diversificar receita.</p>
+                    <h4>Margem Operacional</h4>
+                    <p style="font-size: 1.8rem; color: var(--PRIMARY_GREEN); font-weight: 700;">22,7%</p>
+                    <p style="color: #999; font-size: 0.85rem; margin-top: 0.5rem;">Margem Líquida Média</p>
+                </div>
+            </div>
+
+            <h3>Composição de Receita</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Marca</th>
+                        <th>Receita/Mês</th>
+                        <th>% do Total</th>
+                        <th>Margem LL Est.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mercearia Amauri</td>
+                        <td>R$ 1.300k</td>
+                        <td>21,3%</td>
+                        <td>28,5%</td>
+                    </tr>
+                    <tr>
+                        <td>NAMI</td>
+                        <td>R$ 500k</td>
+                        <td>8,2%</td>
+                        <td>18,0%</td>
+                    </tr>
+                    <tr>
+                        <td>Mercearia Campos</td>
+                        <td>R$ 2.500k</td>
+                        <td>41,0%</td>
+                        <td>22,0%</td>
+                    </tr>
+                    <tr>
+                        <td>Mama Gorda</td>
+                        <td>R$ 1.300k</td>
+                        <td>21,3%</td>
+                        <td>24,5%</td>
+                    </tr>
+                    <tr>
+                        <td>Bam Bam Café</td>
+                        <td>R$ 500k</td>
+                        <td>8,2%</td>
+                        <td>20,0%</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><strong>TOTAL</strong></td>
+                        <td><strong>100%</strong></td>
+                        <td><strong>22,7%</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SEÇÃO 2: VISÃO 5 ANOS -->
+        <section id="visao">
+            <h2>Visão 5 Anos (2025-2030)</h2>
+
+            <div class="highlight">
+                <h4>Meta Consolidada</h4>
+                <p><strong>R$ 248,8M</strong> em receita anualizada até final de 2030, com 15 marcas operando em modelo de rede</p>
+            </div>
+
+            <h3>Estratégia de Crescimento</h3>
+            <div class="grid-3">
+                <div class="card">
+                    <h4>2025-2026</h4>
+                    <p><strong>Consolidação</strong> — Otimização das 5 marcas existentes, expansão Mercearia Campos para 4 unidades, entrada de 2-3 novos conceitos</p>
                 </div>
                 <div class="card">
-                    <h4>Parcerias Estratégicas</h4>
-                    <p>Dhomus como apoio em operações, tecnologia, supply chain e escalabilidade.</p>
+                    <h4>2027-2028</h4>
+                    <p><strong>Aceleração</strong> — Rede de 9-10 marcas, modelo de franquias testado, expansão em 2-3 novas regiões</p>
                 </div>
                 <div class="card">
-                    <h4>Eficiência Operacional</h4>
-                    <p>Sistemas centralizados, redução de custos, aumento de margens através de escala.</p>
+                    <h4>2029-2030</h4>
+                    <p><strong>Escala</strong> — 15 marcas/conceitos, modelo replicável, presença em 4-5 capitais brasileiras</p>
+                </div>
+            </div>
+
+            <h3>Focos de Crescimento</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Receita por Unidade</h4>
+                    <p>Aumentar ticket médio via curadorias, merchandise e experiências (R$ 165 → R$ 220+)</p>
+                </div>
+                <div class="card">
+                    <h4>Expansão de Unidades</h4>
+                    <p>Crescimento orgânico + franquias. Mercearia Campos como piloto (2 → 4 unidades em 18m)</p>
+                </div>
+                <div class="card">
+                    <h4>Novos Conceitos</h4>
+                    <p>Entrada de 3+ conceitos estratégicos até 2027, testados em Rua Amauri antes de expansão</p>
+                </div>
+                <div class="card">
+                    <h4>Operação de Rede</h4>
+                    <p>Centralizar supply, marketing, RH. Reduzir custo unit em 8-12% via alavancagem</p>
                 </div>
             </div>
         </section>
 
-        <!-- MERCADOS -->
+        <!-- SEÇÃO 3: MERCADOS -->
         <section id="mercados">
             <h2>Análise de Mercados</h2>
 
-            <h3>Oportunidades Identificadas</h3>
-            <div class="grid-3">
+            <h3>Contexto Gastronômico 2025</h3>
+            <div class="grid-2">
                 <div class="card">
-                    <h4>Varejo Tradicional</h4>
-                    <p>Consolidação e otimização. Potencial de aumento de margem através de escala e eficiência operacional.</p>
+                    <h4>Tendência 1: Conceitos Verticalizados</h4>
+                    <p>Consumidor busca especialização. Katsu sando, ramen autêntico, bistrôs de bairro ganham tração. Oportunidade: multiplicar marcas focadas em nichos</p>
                 </div>
                 <div class="card">
-                    <h4>F&B Diferenciado</h4>
-                    <p>Crescimento de conceitos lifestyle em mercado urbano. Demanda por experiências únicas e autênticas.</p>
+                    <h4>Tendência 2: Experiência + Comunidade</h4>
+                    <p>Espaço gastronômico agora é ponto social. Rua Amauri consolidou-se como destino. Oportunidade: expandir cluster gastronômico estratégico</p>
                 </div>
                 <div class="card">
-                    <h4>Asiático em Expansão</h4>
-                    <p>Mercado de culinária asiática em alta demanda. Katsu, ramen, bibimbap com crescimento acelerado.</p>
+                    <h4>Tendência 3: Modelos Replicáveis</h4>
+                    <p>Franquias de QSR e casual dining crescem 15% a.a. Operações enxutas, processos definidos. Oportunidade: estruturar Mercearia Campos como piloto de replicação</p>
+                </div>
+                <div class="card">
+                    <h4>Tendência 4: Premium & Acessível</h4>
+                    <p>Polarização: alta-renda quer experiências curadas; classe média quer qualidade. Oportunidade: portfolio com posicionamentos complementares</p>
                 </div>
             </div>
 
-            <h3>Contexto de Mercado</h3>
-            <p>Mercado de varejo e F&B urbano está em transformação. Consumidores buscam marcas autênticas, conceitos diferenciados, experiências de qualidade. Grupos com múltiplas marcas conseguem oferecer essa diversidade enquanto mantêm eficiência operacional. Exemplos de sucesso: conceitos asiáticos consolidados crescem 20-40% ao ano em São Paulo.</p>
+            <h3>Posicionamento Competitivo</h3>
+            <p style="margin-bottom: 1.5rem;">Grupo RPE diferencia-se por:</p>
+            <ul style="margin-left: 2rem; margin-bottom: 2rem; line-height: 2;">
+                <li><strong>Curadorias proprietárias</strong> — Seleção de produtos, bebidas e pratos que refletem identidade local</li>
+                <li><strong>Operação integrada</strong> — Supply chain compartilhado, RH centralizado, redução de custos operacionais</li>
+                <li><strong>Cluster da Rua Amauri</strong> — Sinergia entre marcas; consumidor move-se entre espaços, aumentando ticket total</li>
+                <li><strong>Gestão familiar + profissionalismo</strong> — Legado de qualidade com estrutura escalável</li>
+            </ul>
         </section>
 
-        <!-- CONCEITOS -->
+        <!-- SEÇÃO 4: CONCEITOS (NOVO) -->
         <section id="conceitos">
-            <h2>Conceitos em Foco</h2>
+            <h2>Exemplos de Conceitos Inspiradores</h2>
 
-            <h3>Estratégia de Conceitos Asiáticos</h3>
-            <p>Os conceitos asiáticos representam a maior oportunidade de crescimento nos próximos 5 anos. São categorias de alto-crescimento, alto-ticket, e construem marca forte em público urbano. Vamos lançar 3 conceitos validados internacionalmente: Katsu (Japan), Bibimbap (Korea), e Pho/Banh (Southeast Asia).</p>
+            <p style="margin-bottom: 2rem; color: #666;">Análise de casos de sucesso que demonstram viabilidade de verticalizações complementares ao portfolio RPE.</p>
 
-            <h3>Exemplos de Sucesso</h3>
-
-            <div class="concept-example">
-                <div class="concept-image">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect fill='%230F0F0F' width='200' height='200'/%3E%3Ctext x='50%25' y='50%25' font-size='48' font-weight='bold' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3ESAIKŌ%3C/text%3E%3Ccircle cx='100' cy='100' r='95' fill='none' stroke='%2300B73D' stroke-width='8'/%3E%3C/svg%3E" alt="SAIKŌ - Katsu Sando">
+            <div class="grid-2">
+                <div class="card">
+                    <h4>SAIKŌ — Katsu Sando</h4>
+                    <p style="margin-bottom: 1rem;">Especialização em sandubão de carne empanada (katsu), servido com caldo dashi. Localizado em região de alto fluxo, operação 100% replicável.</p>
+                    <p><strong>Seguidores Instagram:</strong> 40.5k</p>
+                    <p><strong>Modelo:</strong> Fila desde a abertura, alta rotatividade, ticket médio R$ 65-85</p>
+                    <p style="margin-top: 1rem; color: #999; font-size: 0.85rem;"><strong>Relevância para RPE:</strong> Demonstra viabilidade de conceitos de nicho com operação simples e margens elevadas. Candidato a expansão em modelo de rede.</p>
                 </div>
-                <div class="concept-info">
-                    <h4>SAIKŌ Katsu Sando Shop</h4>
-                    <p><strong>Conceito:</strong> Autêntico Katsu Sando Japonês</p>
-                    <p><strong>Localização:</strong> Rua Amauri 30, Jardim Europa - SP</p>
-                    <p><strong>Operação:</strong> Ter-Sábado, 19h-22h30</p>
-                    <p>Exemplo de conceito asiático consolidado com forte presença em redes sociais (40,5 mil seguidores) e operação disciplinada. Modelo replicável com ticket médio premium e alto-valor agregado.</p>
-                    <div class="concept-stats">
-                        <div class="concept-stat">
-                            <strong>40,5 mil</strong>
-                            <small>seguidores Instagram</small>
-                        </div>
-                        <div class="concept-stat">
-                            <strong>112</strong>
-                            <small>posts ativos</small>
-                        </div>
-                    </div>
+
+                <div class="card">
+                    <h4>Nori Vaz — Ramen Coreano</h4>
+                    <p style="margin-bottom: 1rem;">Especialização em ramen coreano (ramyeon), ambiente descontraído, não aceita reservas (high-touch). Comunidade leal.</p>
+                    <p><strong>Seguidores Instagram:</strong> 21.1k</p>
+                    <p><strong>Modelo:</strong> Fila regulada, operação rápida, ticket médio R$ 50-70, venda de bebidas incrementa ticket</p>
+                    <p style="margin-top: 1rem; color: #999; font-size: 0.85rem;"><strong>Relevância para RPE:</strong> Prova que conceitos asiáticos com autenticidade atraem público lecionado. Oportunidade de parcerias ou aquisições de marcas similares com operação já validada.</p>
                 </div>
             </div>
 
-            <div class="concept-example">
-                <div class="concept-image">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect fill='%23F5D4A0' width='200' height='200'/%3E%3Ctext x='50%25' y='50%25' font-size='48' font-weight='bold' fill='%23FF6600' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3ENORI%3C/text%3E%3Ctext x='50%25' y='120' font-size='32' font-weight='bold' fill='%23FF6600' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3EVAZ%3C/text%3E%3Ccircle cx='100' cy='100' r='95' fill='none' stroke='%23FF6600' stroke-width='8'/%3E%3C/svg%3E" alt="Nori Vaz">
-                </div>
-                <div class="concept-info">
-                    <h4>Nori Vaz - Ramen &amp; Vaz</h4>
-                    <p><strong>Conceito:</strong> Ramen Coreano Contemporâneo</p>
-                    <p><strong>Operação:</strong> Terça-Domingo, 19h-23h+</p>
-                    <p><strong>Dinâmica:</strong> Sem reserva, primeiro-a-chegar-primeiro-a-ser-atendido</p>
-                    <p>Exemplo de conceito alto-demanda onde fila é parte da identidade. Alto-ticket, forte presença social (21,1 mil seguidores) com operação lean. Modelo ideal para replicação em multiplos pontos com formato compacto.</p>
-                    <div class="concept-stats">
-                        <div class="concept-stat">
-                            <strong>21,1 mil</strong>
-                            <small>seguidores Instagram</small>
-                        </div>
-                        <div class="concept-stat">
-                            <strong>28</strong>
-                            <small>posts ativos</small>
-                        </div>
-                    </div>
-                </div>
+            <h3>Insight Estratégico</h3>
+            <div class="highlight">
+                <p>Ambos os conceitos compartilham: <strong>(i)</strong> especialização vertical (não menu amplo), <strong>(ii)</strong> operação escalável, <strong>(iii)</strong> comunidade engajada em redes sociais, <strong>(iv)</strong> margens saudáveis via volume. Modelo replicável para Grupo RPE: identificar nichos validados e estruturar marcas proprietárias ou aquisições estratégicas.</p>
             </div>
-
-            <h3>Por que Esses Conceitos?</h3>
-            <ul>
-                <li><strong>Validação de Mercado:</strong> Ambos demonstram demanda real com filas e forte presença social</li>
-                <li><strong>Ticket Premium:</strong> Ramen e Katsu operam em faixa de R$ 40-70 por prato, superior ao varejo tradicional</li>
-                <li><strong>Replicabilidade:</strong> Operação lean, menu focado, sistemas simples permitem replicação rápida</li>
-                <li><strong>Brand Strength:</strong> Conceitos asiáticos constroem marca forte em público urbano jovem</li>
-                <li><strong>Escalabilidade:</strong> Não requerem espaço grande, ideal para pontos secundários com alto fluxo</li>
-            </ul>
-
-            <h3>Estratégia de Lançamento RPE</h3>
-            <p>Vamos lançar 3 conceitos similares entre 2027-2028: <strong>SAIKŌ (Katsu Japan)</strong>, <strong>BIBIM (Bibimbap Korea)</strong>, e <strong>PHŌ (Pho Southeast Asia)</strong>. Cada conceito será pilotado em 1 locação premium, validado operacionalmente, e então replicado em 3-5 pontos adicionais até 2029. Meta: 12-15 unidades de conceitos asiáticos operando até final de 2029.</p>
         </section>
 
-        <!-- MODELO -->
+        <!-- SEÇÃO 5: MODELO -->
         <section id="modelo">
-            <h2>Modelo de Operação</h2>
+            <h2>Modelo de Entrada & Operação</h2>
 
-            <h3>Fases de Crescimento</h3>
-            
-            <div class="phase-box">
-                <h4>Fase 1: Consolidação Amauri (Mês 0-18)</h4>
-                <p><strong>Capex:</strong> R$ 5,5M</p>
-                <p><strong>Focos:</strong> Otimizar operação, implementar sistemas, preparar para replicação</p>
-                <p><strong>Meta:</strong> +20% em receita, -15% em custos operacionais</p>
+            <h3>Fase 1: Consolidação & Teste (2025-Q2 2026)</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Ações Imediatas</h4>
+                    <ul style="margin-left: 1rem; line-height: 1.8;">
+                        <li>Otimizar ticket médio em 5 marcas atuais (curation, menu, pairing)</li>
+                        <li>Expandir Mercearia Campos: 2 → 4 unidades (capital + interior)</li>
+                        <li>Estruturar operação central (supply, marketing, RH)</li>
+                        <li>Investimento: ~R$ 2,5M capex</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Resultados Esperados (Q2 2026)</h4>
+                    <ul style="margin-left: 1rem; line-height: 1.8;">
+                        <li>Receita: ~R$ 92,5M anualizados (+26% vs 2025)</li>
+                        <li>Margem LL: 24-25% (melhoria via escala)</li>
+                        <li>Base para replicação: 1ª marca pronta para franquias</li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="phase-box">
-                <h4>Fase 2: Conceitos Asiáticos Piloto (Mês 12-30)</h4>
-                <p><strong>Capex:</strong> R$ 8-10M (3 pilotos)</p>
-                <p><strong>Focos:</strong> Lançar SAIKŌ, BIBIM, PHŌ pilotos, validar modelos</p>
-                <p><strong>Meta:</strong> Atingir unit economics positivas em 18 meses</p>
+            <h3>Fase 2: Expansão Estruturada (2026 H2 - 2027)</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Novos Conceitos</h4>
+                    <ul style="margin-left: 1rem; line-height: 1.8;">
+                        <li>2-3 marcas complementares (ex: ramen, cevicheria, pizza artesanal)</li>
+                        <li>Primeiro teste em Rua Amauri ou proximidades</li>
+                        <li>Validação: 12-18 meses antes de franquia</li>
+                        <li>Capex: ~R$ 1,5-2M por novo conceito</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Modelo de Franquia (Campos)</h4>
+                    <ul style="margin-left: 1rem; line-height: 1.8;">
+                        <li>Franquia semi-aberta: Mercearia Campos em novas regiões</li>
+                        <li>Franqueador retém supply central</li>
+                        <li>Taxa de franquia: 10% faturamento</li>
+                        <li>Meta: 3-5 novas unidades até 2028</li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="phase-box">
-                <h4>Fase 3: Replicação e Scaling (Mês 24-60)</h4>
-                <p><strong>Capex:</strong> R$ 15-20M/ano</p>
-                <p><strong>Focos:</strong> Replicar conceitos de sucesso, expandir portfólio</p>
-                <p><strong>Meta:</strong> Atingir R$ 248,8M de receita anual</p>
+            <h3>Fase 3: Escala Nacional (2028-2030)</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Portfolio de Marcas</h4>
+                    <p>15 marcas/conceitos operando, com 25-35 unidades distribuídas:</p>
+                    <ul style="margin-left: 1rem; line-height: 1.8; font-size: 0.9rem;">
+                        <li>5 marcas originais (consolidadas)</li>
+                        <li>5 novos conceitos (2026-2027)</li>
+                        <li>5 conceitos escalados (2028-2030)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Operação de Rede</h4>
+                    <p>Estrutura holding para gerenciar múltiplas marcas:</p>
+                    <ul style="margin-left: 1rem; line-height: 1.8; font-size: 0.9rem;">
+                        <li>Supply chain centralizado</li>
+                        <li>Marketing em comum</li>
+                        <li>Inteligência de dados compartilhada</li>
+                        <li>Redução de custo unitário em 10-12%</li>
+                    </ul>
+                </div>
             </div>
-
-            <h3>Unit Economics Esperadas (2029)</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>CONCEITO</th>
-                        <th>TICKET MÉDIO</th>
-                        <th>REFEIÇÕES/DIA</th>
-                        <th>RECEITA/MÊS</th>
-                        <th>MARGEM LL %</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Mercearia Amauri</strong></td>
-                        <td>R$ 165</td>
-                        <td>180-200</td>
-                        <td>R$ 1.650-1.800k</td>
-                        <td>24%</td>
-                    </tr>
-                    <tr>
-                        <td><strong>SAIKŌ (Katsu)</strong></td>
-                        <td>R$ 65</td>
-                        <td>150-180</td>
-                        <td>R$ 1.200-1.500k</td>
-                        <td>26%</td>
-                    </tr>
-                    <tr>
-                        <td><strong>BIBIM (Bibimbap)</strong></td>
-                        <td>R$ 55</td>
-                        <td>200-250</td>
-                        <td>R$ 1.400-1.700k</td>
-                        <td>25%</td>
-                    </tr>
-                    <tr>
-                        <td><strong>PHŌ (Pho)</strong></td>
-                        <td>R$ 45</td>
-                        <td>250-300</td>
-                        <td>R$ 1.300-1.600k</td>
-                        <td>23%</td>
-                    </tr>
-                </tbody>
-            </table>
         </section>
 
-        <!-- PROJEÇÕES -->
+        <!-- SEÇÃO 6: PROJEÇÕES -->
         <section id="projecoes">
-            <h2>Projeções de Receita</h2>
+            <h2>Projeções de Receita (2025-2030)</h2>
 
-            <div class="metrics-grid">
-                <div class="metric">
-                    <p>2025 (Baseline)</p>
-                    <strong>R$ 73,5M</strong>
-                </div>
-                <div class="metric">
-                    <p>2026 (Consolidação)</p>
-                    <strong>R$ 92,5M</strong>
-                </div>
-                <div class="metric">
-                    <p>2027 (Pilotos Asiáticos)</p>
-                    <strong>R$ 131M</strong>
-                </div>
-                <div class="metric">
-                    <p>2028 (Replicação)</p>
-                    <strong>R$ 185M</strong>
-                </div>
-                <div class="metric">
-                    <p>2029 (Scaling)</p>
-                    <strong>R$ 243,5M</strong>
-                </div>
-                <div class="metric">
-                    <p>CAGR 5 Anos</p>
-                    <strong>~30%</strong>
-                </div>
-            </div>
-
-            <h3>Gráfico de Faturamento por Marca (20 Trimestres)</h3>
+            <h3>Receita por Trimestre (R$ Milhões)</h3>
             <div class="chart-container">
-                <canvas id="revenueChart"></canvas>
+                <canvas id="chartProjecoes"></canvas>
             </div>
 
-            <h3>Breakdown Trimestral</h3>
+            <h3>Decomposição Anual</h3>
             <table>
                 <thead>
                     <tr>
-                        <th>TRIMESTRE</th>
-                        <th>Mercearia Amauri</th>
-                        <th>NAMI</th>
-                        <th>Mercearia Campos</th>
-                        <th>Mama Gorda</th>
-                        <th>Bam Bam Café</th>
-                        <th>Novos Conceitos</th>
-                        <th>TOTAL</th>
+                        <th>Período</th>
+                        <th>Receita Trimestral</th>
+                        <th>Receita Anual</th>
+                        <th>Crescimento YoY</th>
+                        <th>Nº Unidades (est.)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>Q1 2025</strong></td>
-                        <td>R$ 3,9M</td>
-                        <td>R$ 1,5M</td>
-                        <td>R$ 7,5M</td>
-                        <td>R$ 3,9M</td>
-                        <td>R$ 1,5M</td>
-                        <td>—</td>
-                        <td><strong>R$ 18,3M</strong></td>
+                        <td><strong>2025</strong></td>
+                        <td>R$ 18,3M</td>
+                        <td>R$ 73,2M</td>
+                        <td>Baseline</td>
+                        <td>5</td>
                     </tr>
                     <tr>
-                        <td><strong>Q4 2025</strong></td>
-                        <td>R$ 4,2M</td>
-                        <td>R$ 1,5M</td>
-                        <td>R$ 7,5M</td>
-                        <td>R$ 3,9M</td>
-                        <td>R$ 1,5M</td>
-                        <td>—</td>
-                        <td><strong>R$ 18,6M</strong></td>
+                        <td><strong>2026</strong></td>
+                        <td>R$ 23,1M</td>
+                        <td>R$ 92,5M</td>
+                        <td>+26,3%</td>
+                        <td>7</td>
                     </tr>
                     <tr>
-                        <td><strong>Q1 2026</strong></td>
-                        <td>R$ 4,8M</td>
-                        <td>R$ 1,8M</td>
-                        <td>R$ 7,5M</td>
-                        <td>R$ 3,9M</td>
-                        <td>R$ 1,5M</td>
-                        <td>—</td>
-                        <td><strong>R$ 19,5M</strong></td>
+                        <td><strong>2027</strong></td>
+                        <td>R$ 32,75M</td>
+                        <td>R$ 131,0M</td>
+                        <td>+41,6%</td>
+                        <td>10</td>
                     </tr>
                     <tr>
-                        <td><strong>Q4 2026</strong></td>
-                        <td>R$ 6,0M</td>
-                        <td>R$ 2,2M</td>
-                        <td>R$ 7,5M</td>
-                        <td>R$ 3,9M</td>
-                        <td>R$ 1,5M</td>
-                        <td>—</td>
-                        <td><strong>R$ 21,1M</strong></td>
+                        <td><strong>2028</strong></td>
+                        <td>R$ 46,25M</td>
+                        <td>R$ 185,0M</td>
+                        <td>+41,2%</td>
+                        <td>15</td>
                     </tr>
                     <tr>
-                        <td><strong>Q1 2027</strong></td>
-                        <td>R$ 6,6M</td>
-                        <td>R$ 2,5M</td>
-                        <td>R$ 7,5M</td>
-                        <td>R$ 3,9M</td>
-                        <td>R$ 1,5M</td>
-                        <td>R$ 2,0M</td>
-                        <td><strong>R$ 24,0M</strong></td>
+                        <td><strong>2029</strong></td>
+                        <td>R$ 60,9M</td>
+                        <td>R$ 243,5M</td>
+                        <td>+31,6%</td>
+                        <td>20</td>
                     </tr>
                     <tr>
-                        <td><strong>Q4 2027</strong></td>
-                        <td>R$ 8,1M</td>
-                        <td>R$ 3,1M</td>
-                        <td>R$ 7,5M</td>
-                        <td>R$ 3,9M</td>
-                        <td>R$ 1,5M</td>
-                        <td>R$ 3,5M</td>
-                        <td><strong>R$ 27,6M</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Q1 2028</strong></td>
-                        <td>R$ 9,2M</td>
-                        <td>R$ 3,5M</td>
-                        <td>R$ 7,5M</td>
-                        <td>R$ 3,9M</td>
-                        <td>R$ 1,5M</td>
-                        <td>R$ 5,2M</td>
-                        <td><strong>R$ 30,8M</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Q4 2028</strong></td>
-                        <td>R$ 11,2M</td>
-                        <td>R$ 4,2M</td>
-                        <td>R$ 7,5M</td>
-                        <td>R$ 3,9M</td>
-                        <td>R$ 1,5M</td>
-                        <td>R$ 7,8M</td>
-                        <td><strong>R$ 36,1M</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Q1 2029</strong></td>
-                        <td>R$ 12,5M</td>
-                        <td>R$ 4,8M</td>
-                        <td>R$ 7,5M</td>
-                        <td>R$ 3,9M</td>
-                        <td>R$ 1,5M</td>
-                        <td>R$ 9,5M</td>
-                        <td><strong>R$ 39,7M</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Q4 2029</strong></td>
-                        <td>R$ 14,2M</td>
-                        <td>R$ 5,5M</td>
-                        <td>R$ 7,5M</td>
-                        <td>R$ 3,9M</td>
-                        <td>R$ 1,5M</td>
-                        <td>R$ 12,0M</td>
-                        <td><strong>R$ 44,6M</strong></td>
+                        <td><strong>2030 (Estimado)</strong></td>
+                        <td>R$ 62,0M</td>
+                        <td>R$ 248,8M</td>
+                        <td>+2,2%</td>
+                        <td>22</td>
                     </tr>
                 </tbody>
             </table>
 
-            <h3>Premissas-Chave</h3>
-            <ul>
-                <li><strong>Consolidação Amauri:</strong> Cresce ~25% ao ano através de otimização operacional e aumento de demanda</li>
-                <li><strong>Marcas Maduras (Campos, Mama Gorda, Bam Bam):</strong> Mantêm receita estável ou crescimento modesto (~2-3% aa)</li>
-                <li><strong>NAMI:</strong> Cresce progressivamente com expansão de oferta (R$ 500k/mês → R$ 1,8M/trimestre até 2029)</li>
-                <li><strong>Novos Conceitos Asiáticos:</strong> Começam Q1 2027 com pilotos, chegam a R$ 3M/trimestre até 2029 (12-15 unidades)</li>
-                <li><strong>Margens Operacionais:</strong> Mantêm-se estáveis 23-26% LL através de escala e eficiência</li>
-            </ul>
+            <h3>Assunções</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Crescimento Orgânico (Marcas Atuais)</h4>
+                    <ul style="margin-left: 1rem; line-height: 1.8; font-size: 0.9rem;">
+                        <li>Aumento de ticket: 3-5% a.a.</li>
+                        <li>Melhoria operacional: 2-3% a.a.</li>
+                        <li>Crescimento base: ~5-8% a.a.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Crescimento por Expansão</h4>
+                    <ul style="margin-left: 1rem; line-height: 1.8; font-size: 0.9rem;">
+                        <li>Mercearia Campos: 2 → 4 unidades (2026)</li>
+                        <li>Novos conceitos: 2-3 a cada 18m</li>
+                        <li>Margem por nova unidade: 20-24%</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <h4>Nota</h4>
+                <p>Projeção conservadora. Assume crescimento disciplinado com foco em operação saudável, não alavancagem agressiva. Margem LL mantida acima de 22% em todo período.</p>
+            </div>
         </section>
 
-        <!-- ROADMAP -->
+        <!-- SEÇÃO 7: ROADMAP -->
         <section id="roadmap">
-            <h2>Roadmap Executivo</h2>
+            <h2>Roadmap Executivo (2025-2030)</h2>
 
-            <h3>2025 - Consolidação Amauri</h3>
-            <div class="card" style="margin-bottom: 1.5rem;">
-                <h4>Trimestres 1-4</h4>
-                <ul>
-                    <li><strong>Q1:</strong> Diagnóstico completo Amauri, implantação de sistemas</li>
-                    <li><strong>Q2:</strong> Otimizar processos operacionais, treinar equipes</li>
-                    <li><strong>Q3:</strong> Capex R$ 2,5M em melhorias, aumentar capacidade</li>
-                    <li><strong>Q4:</strong> Fechar ano com R$ 73,5M, validar playbook replicável</li>
-                </ul>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>H1 2025</h4>
+                    <p>Estruturação operacional central. Optimização de ticket em 5 marcas atuais. Início planejamento expansão Campos.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>H2 2025</h4>
+                    <p>Expansão Mercearia Campos iniciada (2 novas unidades). Scouting de 2º conceito complementar (ramen/especializado).</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>H1 2026</h4>
+                    <p>Mercearia Campos com 4 unidades operando. 1º novo conceito lançado em Rua Amauri (validação de modelo). Receita projeta R$ 92,5M anualizados.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>H2 2026</h4>
+                    <p>Estrutura de franquia de Campos finalizada. 2º novo conceito lançado. Scouting de 3º conceito. Operação pronta para aceleração 2027.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>2027</h4>
+                    <p>Aceleração: 9-10 marcas operando. Primeira franquia de Campos em nova região. 3º conceito lançado. Receita target: R$ 131M.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>2028</h4>
+                    <p>Escala: 15+ marcas operando. Franquias de Campos em 3+ regiões. Modelo holding implementado. Receita target: R$ 185M.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>2029-2030</h4>
+                    <p>Consolidação nacional: 20-22 unidades distribuídas em 4-5 capitais. Margem LL 23-24%. Receita target: R$ 248,8M. Preparação para próxima fase (IPO ou strategic investor).</p>
+                </div>
             </div>
 
-            <h3>2026 - Otimização Portfolio Atual</h3>
-            <div class="card" style="margin-bottom: 1.5rem;">
-                <h4>Trimestres 1-4</h4>
-                <ul>
-                    <li><strong>Q1-Q2:</strong> Completar Fase 1 Amauri (R$ 5,5M capex total), validar resultados</li>
-                    <li><strong>Q2-Q3:</strong> Replicar learnings para outras marcas, aumentar eficiência grupo</li>
-                    <li><strong>Q4:</strong> Preparar lançamento de conceitos asiáticos, fechar ano R$ 92,5M</li>
-                </ul>
-            </div>
+            <h3>Investimentos Acumulados</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Período</th>
+                        <th>Capex Estimado</th>
+                        <th>Tipo</th>
+                        <th>Impacto Receita</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>2025-2026</strong></td>
+                        <td>R$ 2,5M - 3,5M</td>
+                        <td>Expansão Campos + novo conceito</td>
+                        <td>+R$ 19,3M</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2026-2027</strong></td>
+                        <td>R$ 3,0M - 4,0M</td>
+                        <td>2º e 3º conceitos + infraestrutura</td>
+                        <td>+R$ 38,5M</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2027-2028</strong></td>
+                        <td>R$ 4,0M - 5,0M</td>
+                        <td>Escala, franquias Campos, novos conceitos</td>
+                        <td>+R$ 54,0M</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2028-2030</strong></td>
+                        <td>R$ 5,0M - 6,0M/ano</td>
+                        <td>Consolidação, manutenção</td>
+                        <td>+R$ 63,8M</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><strong>TOTAL 2025-2030</strong></td>
+                        <td><strong>~R$ 25-27M</strong></td>
+                        <td><strong>+R$ 175,6M</strong></td>
+                    </tr>
+                </tbody>
+            </table>
 
-            <h3>2027 - Lançamento Conceitos Asiáticos</h3>
-            <div class="card" style="margin-bottom: 1.5rem;">
-                <h4>Trimestres 1-4</h4>
-                <ul>
-                    <li><strong>Q1:</strong> Lançar SAIKŌ (Katsu Piloto) + BIBIM (Bibimbap Piloto)</li>
-                    <li><strong>Q2:</strong> Lançar PHŌ (Pho Piloto), validar all 3 pilotos</li>
-                    <li><strong>Q3-Q4:</strong> Consolidar operação pilotos, preparar replicação 2028</li>
-                    <li><strong>Meta Ano:</strong> R$ 131M, pilotos operacionais</li>
-                </ul>
-            </div>
-
-            <h3>2028 - Replicação Conceitos</h3>
-            <div class="card" style="margin-bottom: 1.5rem;">
-                <h4>Trimestres 1-4</h4>
-                <ul>
-                    <li><strong>Q1-Q2:</strong> Abrir 2-3 unidades de cada conceito (6-9 novas unidades total)</li>
-                    <li><strong>Q3-Q4:</strong> Consolidar operação expandida, atingir R$ 185M ao final do ano</li>
-                </ul>
-            </div>
-
-            <h3>2029 - Scaling Completo</h3>
-            <div class="card">
-                <h4>Trimestres 1-4</h4>
-                <ul>
-                    <li><strong>Q1-Q2:</strong> Continuar replicação (3-4 unidades adicionais)</li>
-                    <li><strong>Q3-Q4:</strong> Portfolio com 15-18 unidades de conceitos asiáticos + 6 unidades tradicionais</li>
-                    <li><strong>Meta Ano:</strong> Atingir R$ 243,5M, próximo ao target de R$ 248,8M</li>
-                </ul>
+            <div class="highlight">
+                <h4>ROI Esperado</h4>
+                <p>Investimento total de R$ 25-27M gera aumento de receita de R$ 175,6M em 5 anos. ROI de <strong>6,5x</strong> (ou 49% CAGR). Payback em 2-3 anos.</p>
             </div>
         </section>
-    </div>
+    </main>
 
-    <div class="footer">
-        <p>&copy; 2025 Grupo RPE | Planejamento Estratégico 5 Anos | Confidencial</p>
-    </div>
+    <footer>
+        <p>&copy; 2025 Grupo RPE. Planejamento Estratégico 2025-2030.</p>
+        <p>Confidencial — Uso Interno Exclusivamente</p>
+    </footer>
 
     <script>
         function switchSection(sectionId) {
             const sections = document.querySelectorAll('section');
             sections.forEach(section => section.classList.remove('active'));
-
             document.getElementById(sectionId).classList.add('active');
 
             const navLinks = document.querySelectorAll('.nav-link');
@@ -953,117 +795,40 @@
             window.scrollTo(0, 0);
         }
 
-        // Chart Data - 9 Series que somam aos trimestres corretos
-        const ctx = document.getElementById('revenueChart').getContext('2d');
-        
-        const labels = [
-            'Q1 25', 'Q2 25', 'Q3 25', 'Q4 25',
-            'Q1 26', 'Q2 26', 'Q3 26', 'Q4 26',
-            'Q1 27', 'Q2 27', 'Q3 27', 'Q4 27',
-            'Q1 28', 'Q2 28', 'Q3 28', 'Q4 28',
-            'Q1 29', 'Q2 29', 'Q3 29', 'Q4 29'
-        ];
-
-        const datasets = [
-            {
-                label: 'Mercearia Amauri',
-                data: [3.9, 3.9, 3.9, 4.2, 4.8, 5.4, 5.7, 6.0, 6.6, 7.2, 7.8, 8.1, 9.2, 10.2, 10.7, 11.2, 12.5, 13.4, 13.8, 14.2],
-                borderColor: '#00B73D',
-                backgroundColor: 'rgba(0, 183, 61, 0.1)',
-                borderWidth: 2,
-                fill: false,
-                tension: 0.3,
-                pointRadius: 3
-            },
-            {
-                label: 'NAMI',
-                data: [1.5, 1.5, 1.5, 1.5, 1.8, 1.9, 2.0, 2.2, 2.5, 2.8, 3.0, 3.1, 3.5, 3.8, 4.0, 4.2, 4.8, 5.1, 5.3, 5.5],
-                borderColor: '#0F0F0F',
-                backgroundColor: 'rgba(15, 15, 15, 0.05)',
-                borderWidth: 2,
-                fill: false,
-                tension: 0.3,
-                pointRadius: 3
-            },
-            {
-                label: 'Mercearia Campos',
-                data: [7.5, 7.5, 7.5, 7.5, 7.5, 7.5, 7.5, 7.5, 7.5, 7.5, 7.5, 7.5, 7.5, 7.5, 7.5, 7.5, 7.5, 7.5, 7.5, 7.5],
-                borderColor: '#999999',
-                backgroundColor: 'rgba(153, 153, 153, 0.05)',
-                borderWidth: 2,
-                fill: false,
-                tension: 0.3,
-                pointRadius: 3
-            },
-            {
-                label: 'Mama Gorda',
-                data: [3.9, 3.9, 3.9, 3.9, 3.9, 3.9, 3.9, 3.9, 3.9, 3.9, 3.9, 3.9, 3.9, 3.9, 3.9, 3.9, 3.9, 3.9, 3.9, 3.9],
-                borderColor: '#FF6B35',
-                backgroundColor: 'rgba(255, 107, 53, 0.05)',
-                borderWidth: 2,
-                fill: false,
-                tension: 0.3,
-                pointRadius: 3
-            },
-            {
-                label: 'Bam Bam Café',
-                data: [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
-                borderColor: '#8B4513',
-                backgroundColor: 'rgba(139, 69, 19, 0.05)',
-                borderWidth: 2,
-                fill: false,
-                tension: 0.3,
-                pointRadius: 3
-            },
-            {
-                label: 'SAIKŌ (Katsu)',
-                data: [0, 0, 0, 0, 0, 0, 0, 0, 2.0, 2.2, 2.4, 3.5, 5.2, 5.8, 6.2, 7.8, 9.5, 10.1, 10.5, 12.0],
-                borderColor: '#E74C3C',
-                backgroundColor: 'rgba(231, 76, 60, 0.1)',
-                borderWidth: 2,
-                fill: false,
-                tension: 0.3,
-                pointRadius: 3
-            },
-            {
-                label: 'BIBIM (Bibimbap)',
-                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0.8, 1.0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                borderColor: '#F39C12',
-                backgroundColor: 'rgba(243, 156, 18, 0.1)',
-                borderWidth: 2,
-                fill: false,
-                tension: 0.3,
-                pointRadius: 3
-            },
-            {
-                label: 'PHŌ (Pho)',
-                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                borderColor: '#3498DB',
-                backgroundColor: 'rgba(52, 152, 219, 0.1)',
-                borderWidth: 2,
-                fill: false,
-                tension: 0.3,
-                pointRadius: 3
-            },
-            {
-                label: 'Grupo Total',
-                data: [18.3, 18.3, 18.3, 18.6, 19.5, 20.2, 20.6, 21.1, 24.0, 25.4, 26.7, 27.6, 30.8, 32.7, 34.4, 36.1, 39.7, 41.5, 42.5, 44.6],
-                borderColor: '#000000',
-                backgroundColor: 'rgba(0, 0, 0, 0)',
-                borderWidth: 3,
-                fill: false,
-                tension: 0.3,
-                pointRadius: 4,
-                pointBackgroundColor: '#000000',
-                borderDash: [5, 5]
-            }
-        ];
-
-        const revenueChart = new Chart(ctx, {
+        // Chart.js — Projeções de Receita (Trimestral, Recalculado)
+        const ctx = document.getElementById('chartProjecoes').getContext('2d');
+        const chartProjecoes = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: labels,
-                datasets: datasets
+                labels: [
+                    'Q1 25', 'Q2 25', 'Q3 25', 'Q4 25',
+                    'Q1 26', 'Q2 26', 'Q3 26', 'Q4 26',
+                    'Q1 27', 'Q2 27', 'Q3 27', 'Q4 27',
+                    'Q1 28', 'Q2 28', 'Q3 28', 'Q4 28',
+                    'Q1 29', 'Q2 29', 'Q3 29', 'Q4 29'
+                ],
+                datasets: [
+                    {
+                        label: 'Receita Total (R$ M)',
+                        data: [
+                            18.3, 18.3, 18.3, 18.3,
+                            23.1, 23.1, 23.1, 23.1,
+                            32.75, 32.75, 32.75, 32.75,
+                            46.25, 46.25, 46.25, 46.25,
+                            60.9, 60.9, 60.9, 60.9
+                        ],
+                        borderColor: '#00B73D',
+                        backgroundColor: 'rgba(0, 183, 61, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#00B73D',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointHoverRadius: 6
+                    }
+                ]
             },
             options: {
                 responsive: true,
@@ -1071,46 +836,41 @@
                 plugins: {
                     legend: {
                         display: true,
-                        position: 'bottom',
                         labels: {
                             color: '#0F0F0F',
-                            font: { size: 11, weight: '600' },
-                            padding: 12,
-                            usePointStyle: true
+                            font: { size: 12 }
                         }
                     },
                     tooltip: {
-                        backgroundColor: 'rgba(15, 15, 15, 0.95)',
-                        titleColor: '#00B73D',
-                        bodyColor: '#fff',
+                        backgroundColor: 'rgba(0,0,0,0.8)',
                         padding: 12,
-                        titleFont: { size: 12, weight: 'bold' },
-                        bodyFont: { size: 11 },
-                        displayColors: true,
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
                         borderColor: '#00B73D',
-                        borderWidth: 1
-                    }
-                },
-                scales: {
-                    x: {
-                        grid: { color: 'rgba(0, 0, 0, 0.05)', drawBorder: false },
-                        ticks: { color: '#666', font: { size: 10, weight: '500' } }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        grid: { color: 'rgba(0, 183, 61, 0.1)', drawBorder: false },
-                        ticks: {
-                            color: '#666',
-                            font: { size: 10 },
-                            callback: function(value) {
-                                return 'R$ ' + value.toFixed(0) + 'M';
+                        borderWidth: 1,
+                        callbacks: {
+                            label: function(context) {
+                                return 'R$ ' + context.parsed.y.toFixed(2) + 'M';
                             }
                         }
                     }
                 },
-                interaction: {
-                    mode: 'index',
-                    intersect: false
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 70,
+                        ticks: {
+                            callback: function(value) {
+                                return 'R$ ' + value + 'M';
+                            },
+                            color: '#666'
+                        },
+                        grid: { color: '#eee' }
+                    },
+                    x: {
+                        ticks: { color: '#666' },
+                        grid: { display: false }
+                    }
                 }
             }
         });
